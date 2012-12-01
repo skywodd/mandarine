@@ -8,6 +8,8 @@ We use the QtMobility framework from Qt and especialy the QtMultimediaKit to han
 
 ### Icons credits
 
+"Discovery" icons pack, by Hbons, under licence: Creative Commons (Attribution-Share Alike 3.0 Unported)
+Source: http://hbons.deviantart.com/art/Discovery-Icon-Theme-77399781
 
 ---
 

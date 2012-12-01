@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>about_dialog</class>
+ <widget class="QDialog" name="about_dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>A propos de Mandarine</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons/icons.qrc">
+    <normaloff>:/icons/orange.png</normaloff>:/icons/orange.png</iconset>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="about_label">
+       <property name="toolTip">
+        <string>A propos de Mandarine</string>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sollicitudin blandit nulla, ac ornare sem fringilla nec. Praesent eu neque tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In iaculis nulla vel nunc euismod cursus. Nullam pulvinar tempor eros. Donec vitae nisi lacus, ut laoreet lorem. Ut fringilla dolor sit amet dolor vehicula rhoncus. Etiam massa risus, mollis ut blandit vehicula, faucibus vitae velit. Nam quis metus non odio cursus pulvinar. Vestibulum id elit arcu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="action_close">
+       <property name="toolTip">
+        <string>Fermer </string>
+       </property>
+       <property name="text">
+        <string>Fermer</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="icons/icons.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>action_close</sender>
+   <signal>clicked()</signal>
+   <receiver>about_dialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

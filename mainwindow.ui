@@ -1,0 +1,1375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>984</width>
+    <height>522</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Mandarine </string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons/icons.qrc">
+    <normaloff>:/icons/orange.png</normaloff>:/icons/orange.png</iconset>
+  </property>
+  <widget class="QWidget" name="main_layout">
+   <layout class="QHBoxLayout" name="horizontalLayout_5">
+    <item>
+     <layout class="QVBoxLayout" name="ui_layout">
+      <item>
+       <layout class="QVBoxLayout" name="playlist_layout">
+        <item>
+         <layout class="QHBoxLayout" name="playlist_controls_layout">
+          <item>
+           <widget class="QPushButton" name="playlist_new_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/playlist/playlist/new.png</normaloff>:/playlist/playlist/new.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="playlist_load_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/playlist/playlist/open.png</normaloff>:/playlist/playlist/open.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="playlist_save_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/playlist/playlist/save.png</normaloff>:/playlist/playlist/save.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="playlist_search_input"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="playlist_search_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/generic/generic/search.png</normaloff>:/generic/generic/search.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListView" name="playlist_list"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="controls_layout">
+        <item>
+         <layout class="QHBoxLayout" name="play_controls_layout">
+          <item>
+           <widget class="QPushButton" name="controls_flush_playlist_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/playlist/playlist/flush.png</normaloff>:/playlist/playlist/flush.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="controls_previous_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/controls/controls/previous.png</normaloff>:/controls/controls/previous.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="controls_fast_rewind_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/controls/controls/fast_rewind.png</normaloff>:/controls/controls/fast_rewind.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="controls_play_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/controls/controls/play.png</normaloff>:/controls/controls/play.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="controls_stop_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/controls/controls/stop.png</normaloff>:/controls/controls/stop.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="controls_fast_forward_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/controls/controls/fast_forward.png</normaloff>:/controls/controls/fast_forward.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="controls_next_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/controls/controls/next.png</normaloff>:/controls/controls/next.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="fft_view" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>256</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="slider_controls_layout">
+          <item>
+           <widget class="QPushButton" name="controls_loop_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="controls_random_button">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons/icons.qrc">
+              <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="controls_current_time_label">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>00:00</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="controls_time_slider">
+            <property name="maximum">
+             <number>999</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="controls_total_time_label">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>00:00</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="controls_volume_slider">
+            <property name="minimumSize">
+             <size>
+              <width>128</width>
+              <height>19</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>128</width>
+              <height>19</height>
+             </size>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="controls_volume_label">
+            <property name="minimumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>33</width>
+              <height>29</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>000%</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="main_menu">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>984</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="music_menu">
+    <property name="title">
+     <string>Musique</string>
+    </property>
+    <addaction name="action_play"/>
+    <addaction name="action_stop"/>
+    <addaction name="action_fast_forward"/>
+    <addaction name="action_fast_rewind"/>
+    <addaction name="action_next_music"/>
+    <addaction name="action_previous_music"/>
+    <addaction name="separator"/>
+    <addaction name="action_mute"/>
+    <addaction name="separator"/>
+    <addaction name="action_exit"/>
+   </widget>
+   <widget class="QMenu" name="playlist_menu">
+    <property name="title">
+     <string>Liste de lecture</string>
+    </property>
+    <widget class="QMenu" name="random_play_menu">
+     <property name="title">
+      <string>Lecture aléatoire</string>
+     </property>
+     <property name="icon">
+      <iconset resource="icons/icons.qrc">
+       <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
+     </property>
+     <addaction name="action_random_disable"/>
+     <addaction name="action_random_playlist"/>
+     <addaction name="action_random_library"/>
+    </widget>
+    <widget class="QMenu" name="loop_play_menu">
+     <property name="title">
+      <string>Lecture en boucle</string>
+     </property>
+     <property name="icon">
+      <iconset resource="icons/icons.qrc">
+       <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
+     </property>
+     <addaction name="action_loop_disable"/>
+     <addaction name="action_loop_music"/>
+     <addaction name="action_loop_playlist"/>
+    </widget>
+    <addaction name="action_new_playlist"/>
+    <addaction name="action_open_playlist"/>
+    <addaction name="action_save_playlist"/>
+    <addaction name="separator"/>
+    <addaction name="loop_play_menu"/>
+    <addaction name="random_play_menu"/>
+    <addaction name="separator"/>
+    <addaction name="action_go_to_playing"/>
+    <addaction name="action_flush_playlist"/>
+    <addaction name="action_mix_playlist"/>
+   </widget>
+   <widget class="QMenu" name="tools_menu">
+    <property name="title">
+     <string>Outils </string>
+    </property>
+    <addaction name="action_show_equalizer"/>
+    <addaction name="action_enable_fft"/>
+    <addaction name="action_enable_cover"/>
+    <addaction name="separator"/>
+    <addaction name="action_refresh_database"/>
+    <addaction name="action_cleanup_database"/>
+    <addaction name="separator"/>
+    <addaction name="action_show_setup"/>
+    <addaction name="action_show_hardware"/>
+    <addaction name="action_show_formats"/>
+   </widget>
+   <widget class="QMenu" name="help_menu">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="action_show_help"/>
+    <addaction name="separator"/>
+    <addaction name="action_show_about"/>
+    <addaction name="action_show_aboutqt"/>
+   </widget>
+   <widget class="QMenu" name="library_menu">
+    <property name="title">
+     <string>Bibliothéque</string>
+    </property>
+    <addaction name="action_add_file"/>
+    <addaction name="action_add_directory"/>
+    <addaction name="action_add_network"/>
+   </widget>
+   <addaction name="music_menu"/>
+   <addaction name="library_menu"/>
+   <addaction name="playlist_menu"/>
+   <addaction name="tools_menu"/>
+   <addaction name="help_menu"/>
+  </widget>
+  <widget class="QStatusBar" name="main_status"/>
+  <widget class="QDockWidget" name="main_dock">
+   <property name="minimumSize">
+    <size>
+     <width>395</width>
+     <height>471</height>
+    </size>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Gestionnaire de musique</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dock_layout">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QTabWidget" name="dock_tab">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tab_library_explorer">
+        <attribute name="title">
+         <string>Bibliothéque</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <layout class="QVBoxLayout" name="library_layout">
+           <item>
+            <layout class="QHBoxLayout" name="library_search_layout">
+             <item>
+              <widget class="QLineEdit" name="library_search_input">
+               <property name="toolTip">
+                <string>Recherche dans la bibliothéque</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="library_search_button">
+               <property name="minimumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Rechercher</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons/icons.qrc">
+                 <normaloff>:/generic/generic/search.png</normaloff>:/generic/generic/search.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTreeView" name="library_explorer_tree">
+             <property name="toolTip">
+              <string>Bibliothéque musicale</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_file_explorer">
+        <attribute name="title">
+         <string>Fichiers</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <layout class="QVBoxLayout" name="file_explorer_layout">
+           <item>
+            <layout class="QHBoxLayout" name="file_controls_layout">
+             <item>
+              <widget class="QPushButton" name="file_explorer_previous">
+               <property name="minimumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Dossier précédent</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons/icons.qrc">
+                 <normaloff>:/file_explorer/file_explorer/previous.png</normaloff>:/file_explorer/file_explorer/previous.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="file_explorer_next">
+               <property name="minimumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Dossier suivant</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons/icons.qrc">
+                 <normaloff>:/file_explorer/file_explorer/next.png</normaloff>:/file_explorer/file_explorer/next.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="file_explorer_up">
+               <property name="minimumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Dossier parent</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons/icons.qrc">
+                 <normaloff>:/file_explorer/file_explorer/up.png</normaloff>:/file_explorer/file_explorer/up.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="file_explorer_home">
+               <property name="minimumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>33</width>
+                 <height>29</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Dossier home de l'utilisateur</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons/icons.qrc">
+                 <normaloff>:/file_explorer/file_explorer/home.png</normaloff>:/file_explorer/file_explorer/home.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="file_explorer_path">
+               <property name="toolTip">
+                <string>Chemin du dossier</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTreeView" name="file_explorer_tree">
+             <property name="toolTip">
+              <string>Explorateur de fichier</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_music_info">
+        <attribute name="title">
+         <string>Info morceau</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_17">
+         <item>
+          <layout class="QVBoxLayout" name="music_info_layout">
+           <item>
+            <widget class="QGroupBox" name="group_music_cover">
+             <property name="toolTip">
+              <string>Jaquette de l'album</string>
+             </property>
+             <property name="title">
+              <string>Cover</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <widget class="QLabel" name="music_info_cover">
+                <property name="toolTip">
+                 <string>Jaquette de l'album</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="icons/icons.qrc">:/other/other/img_missing.png</pixmap>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="group_music_info">
+             <property name="toolTip">
+              <string>Informations sur le morceau en cours</string>
+             </property>
+             <property name="title">
+              <string>Info</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_16">
+              <item>
+               <layout class="QVBoxLayout" name="music_info_fields_layout">
+                <item>
+                 <layout class="QHBoxLayout" name="music_info_title_layout">
+                  <item>
+                   <widget class="QLabel" name="label_title">
+                    <property name="toolTip">
+                     <string>Titre</string>
+                    </property>
+                    <property name="text">
+                     <string>Titre</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="music_info_title">
+                    <property name="toolTip">
+                     <string>Titre</string>
+                    </property>
+                    <property name="text">
+                     <string>-</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="music_info_author_layout">
+                  <item>
+                   <widget class="QLabel" name="label_author">
+                    <property name="toolTip">
+                     <string>Artiste</string>
+                    </property>
+                    <property name="text">
+                     <string>Artiste</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="music_info_author">
+                    <property name="toolTip">
+                     <string>Artiste</string>
+                    </property>
+                    <property name="text">
+                     <string>-</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="music_info_type_layout">
+                  <item>
+                   <widget class="QLabel" name="label_type">
+                    <property name="toolTip">
+                     <string>Genre musicale</string>
+                    </property>
+                    <property name="text">
+                     <string>Genre</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="music_info_type">
+                    <property name="toolTip">
+                     <string>Genre musicale</string>
+                    </property>
+                    <property name="text">
+                     <string>-</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="music_info_album_layout">
+                  <item>
+                   <widget class="QLabel" name="label_album">
+                    <property name="toolTip">
+                     <string>Album</string>
+                    </property>
+                    <property name="text">
+                     <string>Album</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="music_info_album">
+                    <property name="toolTip">
+                     <string>Album</string>
+                    </property>
+                    <property name="text">
+                     <string>-</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="music_info_year_layout">
+                  <item>
+                   <widget class="QLabel" name="label_year">
+                    <property name="toolTip">
+                     <string>Année de production</string>
+                    </property>
+                    <property name="text">
+                     <string>Année</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="music_info_year">
+                    <property name="toolTip">
+                     <string>Année de production</string>
+                    </property>
+                    <property name="text">
+                     <string>-</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="music_info_comment_layout">
+                  <item>
+                   <widget class="QLabel" name="label_2">
+                    <property name="text">
+                     <string>Commentaire</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="music_info_comment">
+                    <property name="text">
+                     <string>-</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_author_info">
+        <attribute name="title">
+         <string>Info artiste</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QWebView" name="author_info_web">
+           <property name="url">
+            <url>
+             <string>about:blank</string>
+            </url>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="action_show_about">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/aboutme.png</normaloff>:/generic/generic/aboutme.png</iconset>
+   </property>
+   <property name="text">
+    <string>A propos de Mandarine ...</string>
+   </property>
+  </action>
+  <action name="action_show_aboutqt">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/info.png</normaloff>:/generic/generic/info.png</iconset>
+   </property>
+   <property name="text">
+    <string>A propos de Qt ...</string>
+   </property>
+  </action>
+  <action name="action_open_file">
+   <property name="text">
+    <string>Ouvrir un fichier ...</string>
+   </property>
+  </action>
+  <action name="actionLire_un_CD_audio">
+   <property name="text">
+    <string>Ouvrir un dossier</string>
+   </property>
+  </action>
+  <action name="action_open_cd">
+   <property name="text">
+    <string>Ouvrir un CD audio ...</string>
+   </property>
+  </action>
+  <action name="action_play">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/play.png</normaloff>:/controls/controls/play.png</iconset>
+   </property>
+   <property name="text">
+    <string>Play / Pause</string>
+   </property>
+  </action>
+  <action name="action_stop">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/stop.png</normaloff>:/controls/controls/stop.png</iconset>
+   </property>
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </action>
+  <action name="action_fast_forward">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/fast_forward.png</normaloff>:/controls/controls/fast_forward.png</iconset>
+   </property>
+   <property name="text">
+    <string>Avance rapide</string>
+   </property>
+  </action>
+  <action name="action_fast_rewind">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/fast_rewind.png</normaloff>:/controls/controls/fast_rewind.png</iconset>
+   </property>
+   <property name="text">
+    <string>Retour rapide</string>
+   </property>
+  </action>
+  <action name="action_next_music">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/next.png</normaloff>:/controls/controls/next.png</iconset>
+   </property>
+   <property name="text">
+    <string>Morceau suivant</string>
+   </property>
+  </action>
+  <action name="action_previous_music">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/previous.png</normaloff>:/controls/controls/previous.png</iconset>
+   </property>
+   <property name="text">
+    <string>Morceau précédent</string>
+   </property>
+  </action>
+  <action name="action_mute">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/mute.png</normaloff>:/generic/generic/mute.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sourdine</string>
+   </property>
+  </action>
+  <action name="action_exit">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/exit.png</normaloff>:/generic/generic/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
+  <action name="action_add_file">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/playlist/playlist/add_file.png</normaloff>:/playlist/playlist/add_file.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ajouter un fichier ...</string>
+   </property>
+  </action>
+  <action name="action_add_directory">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/playlist/playlist/add_directory.png</normaloff>:/playlist/playlist/add_directory.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ajouter un dossier ...</string>
+   </property>
+  </action>
+  <action name="action_add_network">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/playlist/playlist/network.png</normaloff>:/playlist/playlist/network.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ajouter un flux ...</string>
+   </property>
+  </action>
+  <action name="action_new_playlist">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/playlist/playlist/new.png</normaloff>:/playlist/playlist/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Nouvelle playlist</string>
+   </property>
+  </action>
+  <action name="action_open_playlist">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/playlist/playlist/open.png</normaloff>:/playlist/playlist/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ouvrir une playlist ...</string>
+   </property>
+  </action>
+  <action name="action_save_playlist">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/playlist/playlist/save.png</normaloff>:/playlist/playlist/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Enregistrer la playlist ...</string>
+   </property>
+  </action>
+  <action name="action_go_to_playing">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/goto.png</normaloff>:/controls/controls/goto.png</iconset>
+   </property>
+   <property name="text">
+    <string>Aller au morceau en cours</string>
+   </property>
+  </action>
+  <action name="action_flush_playlist">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/playlist/playlist/flush.png</normaloff>:/playlist/playlist/flush.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vider la playlist</string>
+   </property>
+  </action>
+  <action name="action_mix_playlist">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/playlist/playlist/mix.png</normaloff>:/playlist/playlist/mix.png</iconset>
+   </property>
+   <property name="text">
+    <string>Mélanger la playlist</string>
+   </property>
+  </action>
+  <action name="action_show_equalizer">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/equalizer.png</normaloff>:/generic/generic/equalizer.png</iconset>
+   </property>
+   <property name="text">
+    <string>Equaliseur graphique ...</string>
+   </property>
+  </action>
+  <action name="action_enable_fft">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Affichage FFT</string>
+   </property>
+  </action>
+  <action name="action_enable_cover">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Affichage pochette</string>
+   </property>
+  </action>
+  <action name="action_show_covers_manager">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/other/other/manager.png</normaloff>:/other/other/manager.png</iconset>
+   </property>
+   <property name="text">
+    <string>Gestionnaire de pochette ...</string>
+   </property>
+  </action>
+  <action name="action_refresh_database">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/other/other/update.png</normaloff>:/other/other/update.png</iconset>
+   </property>
+   <property name="text">
+    <string>Mettre à jour la bdd ...</string>
+   </property>
+  </action>
+  <action name="action_cleanup_database">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/other/other/system.png</normaloff>:/other/other/system.png</iconset>
+   </property>
+   <property name="text">
+    <string>Maintenance de la bdd ...</string>
+   </property>
+  </action>
+  <action name="action_show_setup">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/setup.png</normaloff>:/generic/generic/setup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Préférences ...</string>
+   </property>
+  </action>
+  <action name="action_show_help">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/help.png</normaloff>:/generic/generic/help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Aide ...</string>
+   </property>
+  </action>
+  <action name="actionEaster_eggs">
+   <property name="text">
+    <string/>
+   </property>
+  </action>
+  <action name="action_random_disable">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/other/other/dot.png</normaloff>:/other/other/dot.png</iconset>
+   </property>
+   <property name="text">
+    <string>désactiver</string>
+   </property>
+  </action>
+  <action name="action_random_playlist">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
+   </property>
+   <property name="text">
+    <string>playlist en cours</string>
+   </property>
+  </action>
+  <action name="action_random_library">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
+   </property>
+   <property name="text">
+    <string>bibliothéque compléte</string>
+   </property>
+  </action>
+  <action name="action_loop_disable">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/other/other/dot.png</normaloff>:/other/other/dot.png</iconset>
+   </property>
+   <property name="text">
+    <string>désactivé</string>
+   </property>
+  </action>
+  <action name="action_loop_music">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
+   </property>
+   <property name="text">
+    <string>piste en cours</string>
+   </property>
+  </action>
+  <action name="action_loop_playlist">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
+   </property>
+   <property name="text">
+    <string>playlist compléte</string>
+   </property>
+  </action>
+  <action name="action_show_hardware">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/hardware.png</normaloff>:/generic/generic/hardware.png</iconset>
+   </property>
+   <property name="text">
+    <string>Interfaces audio ...</string>
+   </property>
+  </action>
+  <action name="action_show_formats">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/generic/generic/format.png</normaloff>:/generic/generic/format.png</iconset>
+   </property>
+   <property name="text">
+    <string>Formats supportés ...</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKit/QWebView</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="icons/icons.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>action_exit</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>627</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,60 @@
+<RCC>
+  <qresource prefix="controls">
+    <file>controls/goto.png</file>
+    <file>controls/fast_forward.png</file>
+    <file>controls/fast_rewind.png</file>
+    <file>controls/loop.png</file>
+    <file>controls/next.png</file>
+    <file>controls/pause.png</file>
+    <file>controls/play.png</file>
+    <file>controls/previous.png</file>
+    <file>controls/random.png</file>
+    <file>controls/stop.png</file>
+  </qresource>
+  <qresource prefix="file_explorer">
+    <file>file_explorer/home.png</file>
+    <file>file_explorer/next.png</file>
+    <file>file_explorer/previous.png</file>
+    <file>file_explorer/up.png</file>
+  </qresource>
+  <qresource prefix="generic">
+    <file>generic/aboutme.png</file>
+    <file>generic/equalizer.png</file>
+    <file>generic/exit.png</file>
+    <file>generic/format.png</file>
+    <file>generic/hardware.png</file>
+    <file>generic/help.png</file>
+    <file>generic/info.png</file>
+    <file>generic/mute.png</file>
+    <file>generic/search.png</file>
+    <file>generic/setup.png</file>
+    <file>generic/warning.png</file>
+  </qresource>
+  <qresource prefix="other">
+    <file>other/dot.png</file>
+    <file>other/add_favoris.png</file>
+    <file>other/favoris.png</file>
+    <file>other/img_loading.png</file>
+    <file>other/img_missing.png</file>
+    <file>other/manager.png</file>
+    <file>other/system.png</file>
+    <file>other/tips.png</file>
+    <file>other/update.png</file>
+  </qresource>
+  <qresource prefix="playlist">
+    <file>playlist/add.png</file>
+    <file>playlist/add_directory.png</file>
+    <file>playlist/add_file.png</file>
+    <file>playlist/cdrom.png</file>
+    <file>playlist/flush.png</file>
+    <file>playlist/mix.png</file>
+    <file>playlist/network.png</file>
+    <file>playlist/new.png</file>
+    <file>playlist/open.png</file>
+    <file>playlist/remove.png</file>
+    <file>playlist/save.png</file>
+  </qresource>
+  <qresource prefix="icons">
+    <file>orange.png</file>
+  </qresource>
+</RCC>
