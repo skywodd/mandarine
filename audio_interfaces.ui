@@ -31,7 +31,7 @@
       <widget class="QListWidget" name="interfaces_list">
        <property name="toolTip">
         <string>Double cliquez pour sélectionner un interface.
-La liste ce met à jour automatiquement en cas de modification hardware.</string>
+La liste se met à jour automatiquement en cas de modification matérielle.</string>
        </property>
       </widget>
      </item>

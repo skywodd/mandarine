@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Mise à jour de la base de donnée ...</string>
+   <string>Mise à jour de la base de donnée…</string>
   </property>
   <property name="windowIcon">
    <iconset resource="icons/icons.qrc">
@@ -23,7 +23,7 @@
      <item>
       <widget class="QLabel" name="prompt_label">
        <property name="text">
-        <string>Mise à jour de la base de donnée en cours ...</string>
+        <string>Mise à jour de la base de données en cours ...</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -33,7 +33,7 @@
      <item>
       <widget class="QLabel" name="wait_label">
        <property name="text">
-        <string>Cette fenétre ce fermera automatiquement une fois le traitement achevé.</string>
+        <string>Cette fenêtre ce fermera automatiquement une fois le traitement achevé.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

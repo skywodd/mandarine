@@ -30,7 +30,7 @@
      <item>
       <widget class="QListWidget" name="formats_list">
        <property name="toolTip">
-        <string>Liste des formats de fichier audio supportés par le lecteur.</string>
+        <string>Liste des formats de fichiers audio supportés par le lecteur.</string>
        </property>
       </widget>
      </item>

@@ -563,7 +563,7 @@
    </widget>
    <widget class="QMenu" name="library_menu">
     <property name="title">
-     <string>Bibliothéque</string>
+     <string>Bibliothèque</string>
     </property>
     <addaction name="action_add_file"/>
     <addaction name="action_add_directory"/>
@@ -604,7 +604,7 @@
        </property>
        <widget class="QWidget" name="tab_library_explorer">
         <attribute name="title">
-         <string>Bibliothéque</string>
+         <string>Bibliothèque</string>
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
@@ -614,7 +614,7 @@
              <item>
               <widget class="QLineEdit" name="library_search_input">
                <property name="toolTip">
-                <string>Recherche dans la bibliothéque</string>
+                <string>Recherche dans la Bibliothèque</string>
                </property>
               </widget>
              </item>
@@ -649,7 +649,7 @@
            <item>
             <widget class="QTreeView" name="library_explorer_tree">
              <property name="toolTip">
-              <string>Bibliothéque musicale</string>
+              <string>Bibliothèque musicale</string>
              </property>
             </widget>
            </item>
@@ -792,7 +792,7 @@
        </widget>
        <widget class="QWidget" name="tab_music_info">
         <attribute name="title">
-         <string>Info morceau</string>
+         <string>Infos morceau</string>
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_17">
          <item>
@@ -831,7 +831,7 @@
               <string>Informations sur le morceau en cours</string>
              </property>
              <property name="title">
-              <string>Info</string>
+              <string>Infos</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_16">
               <item>
@@ -985,7 +985,7 @@
        </widget>
        <widget class="QWidget" name="tab_author_info">
         <attribute name="title">
-         <string>Info artiste</string>
+         <string>Infos artiste</string>
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
@@ -1010,7 +1010,7 @@
      <normaloff>:/generic/generic/aboutme.png</normaloff>:/generic/generic/aboutme.png</iconset>
    </property>
    <property name="text">
-    <string>A propos de Mandarine ...</string>
+    <string>À propos de Mandarine…</string>
    </property>
   </action>
   <action name="action_show_aboutqt">
@@ -1019,12 +1019,12 @@
      <normaloff>:/generic/generic/info.png</normaloff>:/generic/generic/info.png</iconset>
    </property>
    <property name="text">
-    <string>A propos de Qt ...</string>
+    <string>À propos de Qt…</string>
    </property>
   </action>
   <action name="action_open_file">
    <property name="text">
-    <string>Ouvrir un fichier ...</string>
+    <string>Ouvrir un fichier…</string>
    </property>
   </action>
   <action name="actionLire_un_CD_audio">
@@ -1034,7 +1034,7 @@
   </action>
   <action name="action_open_cd">
    <property name="text">
-    <string>Ouvrir un CD audio ...</string>
+    <string>Ouvrir un CD audio…</string>
    </property>
   </action>
   <action name="action_play">
@@ -1043,7 +1043,7 @@
      <normaloff>:/controls/controls/play.png</normaloff>:/controls/controls/play.png</iconset>
    </property>
    <property name="text">
-    <string>Play / Pause</string>
+    <string>Lecture / Pause</string>
    </property>
   </action>
   <action name="action_stop">
@@ -1115,7 +1115,7 @@
      <normaloff>:/playlist/playlist/add_file.png</normaloff>:/playlist/playlist/add_file.png</iconset>
    </property>
    <property name="text">
-    <string>Ajouter un fichier ...</string>
+    <string>Ajouter un fichier…</string>
    </property>
   </action>
   <action name="action_add_directory">
@@ -1124,7 +1124,7 @@
      <normaloff>:/playlist/playlist/add_directory.png</normaloff>:/playlist/playlist/add_directory.png</iconset>
    </property>
    <property name="text">
-    <string>Ajouter un dossier ...</string>
+    <string>Ajouter un dossier…</string>
    </property>
   </action>
   <action name="action_add_network">
@@ -1133,7 +1133,7 @@
      <normaloff>:/playlist/playlist/network.png</normaloff>:/playlist/playlist/network.png</iconset>
    </property>
    <property name="text">
-    <string>Ajouter un flux ...</string>
+    <string>Ajouter un flux…</string>
    </property>
   </action>
   <action name="action_new_playlist">
@@ -1151,7 +1151,7 @@
      <normaloff>:/playlist/playlist/open.png</normaloff>:/playlist/playlist/open.png</iconset>
    </property>
    <property name="text">
-    <string>Ouvrir une playlist ...</string>
+    <string>Ouvrir une playlist…</string>
    </property>
   </action>
   <action name="action_save_playlist">
@@ -1160,7 +1160,7 @@
      <normaloff>:/playlist/playlist/save.png</normaloff>:/playlist/playlist/save.png</iconset>
    </property>
    <property name="text">
-    <string>Enregistrer la playlist ...</string>
+    <string>Enregistrer la playlist…</string>
    </property>
   </action>
   <action name="action_go_to_playing">
@@ -1196,7 +1196,7 @@
      <normaloff>:/generic/generic/equalizer.png</normaloff>:/generic/generic/equalizer.png</iconset>
    </property>
    <property name="text">
-    <string>Equaliseur graphique ...</string>
+    <string>Égaliseur graphique…</string>
    </property>
   </action>
   <action name="action_enable_fft">
@@ -1227,7 +1227,7 @@
      <normaloff>:/other/other/manager.png</normaloff>:/other/other/manager.png</iconset>
    </property>
    <property name="text">
-    <string>Gestionnaire de pochette ...</string>
+    <string>Gestionnaire de pochette…</string>
    </property>
   </action>
   <action name="action_refresh_database">
@@ -1236,7 +1236,7 @@
      <normaloff>:/other/other/update.png</normaloff>:/other/other/update.png</iconset>
    </property>
    <property name="text">
-    <string>Mettre à jour la bdd ...</string>
+    <string>Mettre à jour la base de données…</string>
    </property>
   </action>
   <action name="action_cleanup_database">
@@ -1245,7 +1245,7 @@
      <normaloff>:/other/other/system.png</normaloff>:/other/other/system.png</iconset>
    </property>
    <property name="text">
-    <string>Maintenance de la bdd ...</string>
+    <string>Maintenance de la base de données…</string>
    </property>
   </action>
   <action name="action_show_setup">
@@ -1254,7 +1254,7 @@
      <normaloff>:/generic/generic/setup.png</normaloff>:/generic/generic/setup.png</iconset>
    </property>
    <property name="text">
-    <string>Préférences ...</string>
+    <string>Préférences…</string>
    </property>
   </action>
   <action name="action_show_help">
@@ -1263,7 +1263,7 @@
      <normaloff>:/generic/generic/help.png</normaloff>:/generic/generic/help.png</iconset>
    </property>
    <property name="text">
-    <string>Aide ...</string>
+    <string>Aide…</string>
    </property>
   </action>
   <action name="actionEaster_eggs">
@@ -1277,7 +1277,7 @@
      <normaloff>:/other/other/dot.png</normaloff>:/other/other/dot.png</iconset>
    </property>
    <property name="text">
-    <string>désactiver</string>
+    <string>Désactiver</string>
    </property>
   </action>
   <action name="action_random_playlist">
@@ -1286,7 +1286,7 @@
      <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
    </property>
    <property name="text">
-    <string>playlist en cours</string>
+    <string>Liste de lecture en cours</string>
    </property>
   </action>
   <action name="action_random_library">
@@ -1295,7 +1295,7 @@
      <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
    </property>
    <property name="text">
-    <string>bibliothéque compléte</string>
+    <string>Bibliothèque complète</string>
    </property>
   </action>
   <action name="action_loop_disable">
@@ -1304,7 +1304,7 @@
      <normaloff>:/other/other/dot.png</normaloff>:/other/other/dot.png</iconset>
    </property>
    <property name="text">
-    <string>désactivé</string>
+    <string>Désactivé</string>
    </property>
   </action>
   <action name="action_loop_music">
@@ -1313,7 +1313,7 @@
      <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
    </property>
    <property name="text">
-    <string>piste en cours</string>
+    <string>Piste en cours</string>
    </property>
   </action>
   <action name="action_loop_playlist">
@@ -1322,7 +1322,7 @@
      <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
    </property>
    <property name="text">
-    <string>playlist compléte</string>
+    <string>Liste de lecture complète</string>
    </property>
   </action>
   <action name="action_show_hardware">
@@ -1331,7 +1331,7 @@
      <normaloff>:/generic/generic/hardware.png</normaloff>:/generic/generic/hardware.png</iconset>
    </property>
    <property name="text">
-    <string>Interfaces audio ...</string>
+    <string>Interfaces audio…</string>
    </property>
   </action>
   <action name="action_show_formats">
@@ -1340,7 +1340,7 @@
      <normaloff>:/generic/generic/format.png</normaloff>:/generic/generic/format.png</iconset>
    </property>
    <property name="text">
-    <string>Formats supportés ...</string>
+    <string>Formats supportés…</string>
    </property>
   </action>
  </widget>

@@ -23,7 +23,7 @@
      <item>
       <widget class="QLabel" name="prompt_label">
        <property name="text">
-        <string>Maintenance de la base de donnée en cours ...</string>
+        <string>Maintenance de la base de données en cours…</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -33,7 +33,7 @@
      <item>
       <widget class="QLabel" name="wait_label">
        <property name="text">
-        <string>Cette fenétre ce fermera automatiquement une fois le traitement achevé.</string>
+        <string>Cette fenêtre ce fermera automatiquement une fois le traitement achevé.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
