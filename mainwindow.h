@@ -34,7 +34,8 @@
 
 #include "ui_mainwindow.h"
 
-// TODO
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 
 /**
  * @brief The MainWindow class
@@ -48,8 +49,34 @@ public:
     virtual ~MainWindow();
     
 protected:
+    QMediaPlayer *player;
+    QMediaPlaylist *playlist;
 
 protected slots:
+    void play();
+    void pause();
+    void stop();
+    void next();
+    void previous();
+    void fastForward();
+    void fastRewind();
+    void mute();
+    void changeVolume(int volume);
+    void addFiles();
+    void addDirectory();
+    void addNetwork();
+    void newPlaylist();
+    void openPlaylist();
+    void savePlaylist();
+    void loopDisable();
+    void loopMusic();
+    void loopPlaylist();
+    void randomDisable();
+    void randomPlaylist();
+    void randomLibrary();
+    void flushPlaylist();
+    void mixPlaylist();
+    void enableFFT(bool enable);
     void show_about_dialog();
     void show_qtabout_dialog();
     void show_audio_interfaces_dialog();

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>984</width>
+    <width>994</width>
     <height>522</height>
    </rect>
   </property>
@@ -479,7 +479,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>984</width>
+     <width>994</width>
      <height>26</height>
     </rect>
    </property>
@@ -543,7 +543,6 @@
     </property>
     <addaction name="action_show_equalizer"/>
     <addaction name="action_enable_fft"/>
-    <addaction name="action_enable_cover"/>
     <addaction name="separator"/>
     <addaction name="action_refresh_database"/>
     <addaction name="action_cleanup_database"/>
@@ -579,7 +578,7 @@
   <widget class="QDockWidget" name="main_dock">
    <property name="minimumSize">
     <size>
-     <width>395</width>
+     <width>405</width>
      <height>471</height>
     </size>
    </property>
@@ -600,7 +599,7 @@
      <item>
       <widget class="QTabWidget" name="dock_tab">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab_library_explorer">
         <attribute name="title">
@@ -989,13 +988,7 @@
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QWebView" name="author_info_web">
-           <property name="url">
-            <url>
-             <string>about:blank</string>
-            </url>
-           </property>
-          </widget>
+          <widget class="QWidget" name="author_info_web" native="true"/>
          </item>
         </layout>
        </widget>
@@ -1020,21 +1013,6 @@
    </property>
    <property name="text">
     <string>À propos de Qt…</string>
-   </property>
-  </action>
-  <action name="action_open_file">
-   <property name="text">
-    <string>Ouvrir un fichier…</string>
-   </property>
-  </action>
-  <action name="actionLire_un_CD_audio">
-   <property name="text">
-    <string>Ouvrir un dossier</string>
-   </property>
-  </action>
-  <action name="action_open_cd">
-   <property name="text">
-    <string>Ouvrir un CD audio…</string>
    </property>
   </action>
   <action name="action_play">
@@ -1210,17 +1188,6 @@
     <string>Affichage FFT</string>
    </property>
   </action>
-  <action name="action_enable_cover">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Affichage pochette</string>
-   </property>
-  </action>
   <action name="action_show_covers_manager">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
@@ -1264,11 +1231,6 @@
    </property>
    <property name="text">
     <string>Aide…</string>
-   </property>
-  </action>
-  <action name="actionEaster_eggs">
-   <property name="text">
-    <string/>
    </property>
   </action>
   <action name="action_random_disable">
@@ -1344,13 +1306,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKit/QWebView</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="icons/icons.qrc"/>
  </resources>

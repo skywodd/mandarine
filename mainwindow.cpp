@@ -20,8 +20,7 @@
 #include "ui_about.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent)
-{
+    QMainWindow(parent) {
     // Setup Ui
     setupUi(this);
 
@@ -30,31 +29,126 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
-MainWindow::~MainWindow(void)
-{
+MainWindow::~MainWindow(void) {
     // TODO
 }
 
-void MainWindow::show_about_dialog()
-{
+void MainWindow::play() {
+
 }
 
-void MainWindow::show_qtabout_dialog()
-{
+void MainWindow::pause() {
+
 }
 
-void MainWindow::show_audio_interfaces_dialog()
-{
+void MainWindow::stop() {
+
 }
 
-void MainWindow::show_database_cleanup_dialog()
-{
+void MainWindow::next() {
+
 }
 
-void MainWindow::show_database_update_dialog()
-{
+void MainWindow::previous() {
+
 }
 
-void MainWindow::show_equalizer_dialog()
-{
+void MainWindow::fastForward() {
+
+}
+
+void MainWindow::fastRewind() {
+
+}
+
+void MainWindow::mute() {
+
+}
+
+void MainWindow::changeVolume(int volume) {
+
+}
+
+void MainWindow::addFiles() {
+
+}
+
+void MainWindow::addDirectory() {
+
+}
+
+void MainWindow::addNetwork() {
+
+}
+
+void MainWindow::newPlaylist() {
+
+}
+
+void MainWindow::openPlaylist() {
+
+}
+
+void MainWindow::savePlaylist() {
+
+}
+
+void MainWindow::loopDisable() {
+
+}
+
+void MainWindow::loopMusic() {
+
+}
+
+void MainWindow::loopPlaylist() {
+
+}
+
+void MainWindow::randomDisable() {
+
+}
+
+void MainWindow::randomPlaylist() {
+
+}
+
+void MainWindow::randomLibrary() {
+
+}
+
+void MainWindow::flushPlaylist() {
+
+}
+
+void MainWindow::mixPlaylist() {
+
+}
+
+void MainWindow::enableFFT(bool enable) {
+
+}
+
+void MainWindow::show_about_dialog() {
+
+}
+
+void MainWindow::show_qtabout_dialog() {
+
+}
+
+void MainWindow::show_audio_interfaces_dialog() {
+
+}
+
+void MainWindow::show_database_cleanup_dialog() {
+
+}
+
+void MainWindow::show_database_update_dialog() {
+
+}
+
+void MainWindow::show_equalizer_dialog() {
+
 }

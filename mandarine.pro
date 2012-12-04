@@ -20,8 +20,6 @@ HEADERS += \
 QT += \
     core \
     gui \
-    network \
     sql \
-    xml \
-    webkit
-
+    multimedia \
+    webkitwidgets
