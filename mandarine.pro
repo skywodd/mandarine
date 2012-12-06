@@ -1,6 +1,9 @@
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    aboutdialog.cpp \
+    audiointerfacesdialog.cpp \
+    audioformatsdialog.cpp
 
 FORMS += \
     about.ui \
@@ -15,7 +18,10 @@ RESOURCES += \
     icons/icons.qrc
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    aboutdialog.h \
+    audiointerfacesdialog.h \
+    audioformatsdialog.h
 
 QT += \
     core \

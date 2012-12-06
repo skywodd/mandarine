@@ -6,7 +6,7 @@
  * @see http://skyduino.wordpress.com/
  *
  * @section intro_sec Introduction
- * This class is designed to handle all features of the music player.\n
+ * TODO\n
  * \n
  * Please report bug to <skywodd at gmail.com>
  *
@@ -30,10 +30,9 @@
 
 /* Dependencies */
 #include <QMainWindow>
-#include <QWidget>
-
 #include "ui_mainwindow.h"
 
+/* MultimediaKit (Phonon killer) dependencies */
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 
@@ -62,27 +61,36 @@ protected slots:
     void fastRewind();
     void mute();
     void changeVolume(int volume);
+    void changeTimeSeek(int timeseek);
     void addFiles();
     void addDirectory();
     void addNetwork();
     void newPlaylist();
     void openPlaylist();
     void savePlaylist();
+    void showLoopMenu();
     void loopDisable();
     void loopMusic();
     void loopPlaylist();
+    void showRandomMenu();
     void randomDisable();
     void randomPlaylist();
     void randomLibrary();
+    void goToPlaying();
     void flushPlaylist();
     void mixPlaylist();
+    void searchPlaylist();
+    void searchLibrary();
     void enableFFT(bool enable);
-    void show_about_dialog();
-    void show_qtabout_dialog();
-    void show_audio_interfaces_dialog();
-    void show_database_cleanup_dialog();
-    void show_database_update_dialog();
-    void show_equalizer_dialog();
+    void showHelpDialog();
+    void showAboutDialog();
+    void showQtAboutDialog();
+    void showSetupDialog();
+    void showAudioInterfacesDialog();
+    void showSupportedFormatsDialog();
+    void showDatabaseCleanupDialog();
+    void showDatabaseUpdateDialog();
+    void showEqualizerDialog();
 };
 
 #endif // MAINWINDOW_H
