@@ -18,455 +18,57 @@
     <normaloff>:/icons/orange.png</normaloff>:/icons/orange.png</iconset>
   </property>
   <widget class="QWidget" name="main_layout">
-   <layout class="QHBoxLayout" name="horizontalLayout_5">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <layout class="QVBoxLayout" name="ui_layout">
+     <layout class="QVBoxLayout" name="main_ui_layout">
       <item>
-       <layout class="QVBoxLayout" name="playlist_layout">
-        <item>
-         <layout class="QHBoxLayout" name="playlist_controls_layout">
-          <item>
-           <widget class="QPushButton" name="playlist_new_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/playlist/playlist/new.png</normaloff>:/playlist/playlist/new.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="playlist_load_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/playlist/playlist/open.png</normaloff>:/playlist/playlist/open.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="playlist_save_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/playlist/playlist/save.png</normaloff>:/playlist/playlist/save.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="playlist_search_input"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="playlist_search_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/generic/generic/search.png</normaloff>:/generic/generic/search.png</iconset>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QListView" name="playlist_list"/>
-        </item>
-       </layout>
+       <widget class="PlaylistControls" name="playlist_controls" native="true"/>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="controls_layout">
+       <layout class="QVBoxLayout" name="controls_ui_layout">
         <item>
-         <layout class="QHBoxLayout" name="play_controls_layout">
-          <item>
-           <widget class="QPushButton" name="controls_flush_playlist_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/playlist/playlist/flush.png</normaloff>:/playlist/playlist/flush.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="Line" name="line">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="controls_previous_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/controls/controls/previous.png</normaloff>:/controls/controls/previous.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="controls_fast_rewind_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/controls/controls/fast_rewind.png</normaloff>:/controls/controls/fast_rewind.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="controls_play_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/controls/controls/play.png</normaloff>:/controls/controls/play.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="controls_stop_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/controls/controls/stop.png</normaloff>:/controls/controls/stop.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="controls_fast_forward_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/controls/controls/fast_forward.png</normaloff>:/controls/controls/fast_forward.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="controls_next_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/controls/controls/next.png</normaloff>:/controls/controls/next.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="Line" name="line_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QWidget" name="fft_view" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>256</width>
-              <height>32</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="PlayerControls" name="player_controls" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="slider_controls_layout">
-          <item>
-           <widget class="QPushButton" name="controls_loop_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="controls_random_button">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="icons/icons.qrc">
-              <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="Line" name="line_3">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="controls_current_time_label">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>00:00</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="controls_time_slider">
-            <property name="maximum">
-             <number>999</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="controls_total_time_label">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>00:00</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="Line" name="line_4">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="controls_volume_slider">
-            <property name="minimumSize">
-             <size>
-              <width>128</width>
-              <height>19</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>128</width>
-              <height>19</height>
-             </size>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="controls_volume_label">
-            <property name="minimumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>33</width>
-              <height>29</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>000%</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="PlayerSliders" name="player_slides" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -534,7 +136,6 @@
     <addaction name="random_play_menu"/>
     <addaction name="separator"/>
     <addaction name="action_go_to_playing"/>
-    <addaction name="action_flush_playlist"/>
     <addaction name="action_mix_playlist"/>
    </widget>
    <widget class="QMenu" name="tools_menu">
@@ -578,7 +179,7 @@
   <widget class="QDockWidget" name="main_dock">
    <property name="minimumSize">
     <size>
-     <width>405</width>
+     <width>407</width>
      <height>471</height>
     </size>
    </property>
@@ -599,7 +200,7 @@
      <item>
       <widget class="QTabWidget" name="dock_tab">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab_library_explorer">
         <attribute name="title">
@@ -607,52 +208,7 @@
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <layout class="QVBoxLayout" name="library_layout">
-           <item>
-            <layout class="QHBoxLayout" name="library_search_layout">
-             <item>
-              <widget class="QLineEdit" name="library_search_input">
-               <property name="toolTip">
-                <string>Recherche dans la Bibliothèque</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="library_search_button">
-               <property name="minimumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Rechercher</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="icons/icons.qrc">
-                 <normaloff>:/generic/generic/search.png</normaloff>:/generic/generic/search.png</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QTreeView" name="library_explorer_tree">
-             <property name="toolTip">
-              <string>Bibliothèque musicale</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="LibraryExplorer" name="library_explorer" native="true"/>
          </item>
         </layout>
        </widget>
@@ -662,130 +218,7 @@
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
          <item>
-          <layout class="QVBoxLayout" name="file_explorer_layout">
-           <item>
-            <layout class="QHBoxLayout" name="file_controls_layout">
-             <item>
-              <widget class="QPushButton" name="file_explorer_previous">
-               <property name="minimumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Dossier précédent</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="icons/icons.qrc">
-                 <normaloff>:/file_explorer/file_explorer/previous.png</normaloff>:/file_explorer/file_explorer/previous.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="file_explorer_next">
-               <property name="minimumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Dossier suivant</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="icons/icons.qrc">
-                 <normaloff>:/file_explorer/file_explorer/next.png</normaloff>:/file_explorer/file_explorer/next.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="file_explorer_up">
-               <property name="minimumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Dossier parent</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="icons/icons.qrc">
-                 <normaloff>:/file_explorer/file_explorer/up.png</normaloff>:/file_explorer/file_explorer/up.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="file_explorer_home">
-               <property name="minimumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>33</width>
-                 <height>29</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Dossier home de l'utilisateur</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="icons/icons.qrc">
-                 <normaloff>:/file_explorer/file_explorer/home.png</normaloff>:/file_explorer/file_explorer/home.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="file_explorer_path">
-               <property name="toolTip">
-                <string>Chemin du dossier</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QTreeView" name="file_explorer_tree">
-             <property name="toolTip">
-              <string>Explorateur de fichier</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="FileExplorer" name="file_explorer" native="true"/>
          </item>
         </layout>
        </widget>
@@ -795,190 +228,7 @@
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_17">
          <item>
-          <layout class="QVBoxLayout" name="music_info_layout">
-           <item>
-            <widget class="QGroupBox" name="group_music_cover">
-             <property name="toolTip">
-              <string>Jaquette de l'album</string>
-             </property>
-             <property name="title">
-              <string>Cover</string>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_10">
-              <item>
-               <widget class="QLabel" name="music_info_cover">
-                <property name="toolTip">
-                 <string>Jaquette de l'album</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="icons/icons.qrc">:/other/other/img_missing.png</pixmap>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="group_music_info">
-             <property name="toolTip">
-              <string>Informations sur le morceau en cours</string>
-             </property>
-             <property name="title">
-              <string>Infos</string>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_16">
-              <item>
-               <layout class="QVBoxLayout" name="music_info_fields_layout">
-                <item>
-                 <layout class="QHBoxLayout" name="music_info_title_layout">
-                  <item>
-                   <widget class="QLabel" name="label_title">
-                    <property name="toolTip">
-                     <string>Titre</string>
-                    </property>
-                    <property name="text">
-                     <string>Titre</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="music_info_title">
-                    <property name="toolTip">
-                     <string>Titre</string>
-                    </property>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="music_info_author_layout">
-                  <item>
-                   <widget class="QLabel" name="label_author">
-                    <property name="toolTip">
-                     <string>Artiste</string>
-                    </property>
-                    <property name="text">
-                     <string>Artiste</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="music_info_author">
-                    <property name="toolTip">
-                     <string>Artiste</string>
-                    </property>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="music_info_type_layout">
-                  <item>
-                   <widget class="QLabel" name="label_type">
-                    <property name="toolTip">
-                     <string>Genre musicale</string>
-                    </property>
-                    <property name="text">
-                     <string>Genre</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="music_info_type">
-                    <property name="toolTip">
-                     <string>Genre musicale</string>
-                    </property>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="music_info_album_layout">
-                  <item>
-                   <widget class="QLabel" name="label_album">
-                    <property name="toolTip">
-                     <string>Album</string>
-                    </property>
-                    <property name="text">
-                     <string>Album</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="music_info_album">
-                    <property name="toolTip">
-                     <string>Album</string>
-                    </property>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="music_info_year_layout">
-                  <item>
-                   <widget class="QLabel" name="label_year">
-                    <property name="toolTip">
-                     <string>Année de production</string>
-                    </property>
-                    <property name="text">
-                     <string>Année</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="music_info_year">
-                    <property name="toolTip">
-                     <string>Année de production</string>
-                    </property>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="music_info_comment_layout">
-                  <item>
-                   <widget class="QLabel" name="label_2">
-                    <property name="text">
-                     <string>Commentaire</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="music_info_comment">
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
+          <widget class="MetaExplorer" name="music_info" native="true"/>
          </item>
         </layout>
        </widget>
@@ -988,7 +238,7 @@
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QWidget" name="author_info_web" native="true"/>
+          <widget class="InfoExplorer" name="author_info" native="true"/>
          </item>
         </layout>
        </widget>
@@ -1184,6 +434,9 @@
    <property name="checked">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Affichage FFT</string>
    </property>
@@ -1288,6 +541,9 @@
    </property>
   </action>
   <action name="action_show_hardware">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="icons/icons.qrc">
      <normaloff>:/generic/generic/hardware.png</normaloff>:/generic/generic/hardware.png</iconset>
@@ -1306,6 +562,50 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LibraryExplorer</class>
+   <extends>QWidget</extends>
+   <header>libraryexplorer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FileExplorer</class>
+   <extends>QWidget</extends>
+   <header>fileexplorer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MetaExplorer</class>
+   <extends>QWidget</extends>
+   <header>metaexplorer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>InfoExplorer</class>
+   <extends>QWidget</extends>
+   <header>infoexplorer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PlayerControls</class>
+   <extends>QWidget</extends>
+   <header>playercontrols.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PlaylistControls</class>
+   <extends>QWidget</extends>
+   <header>playlistcontrols.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PlayerSliders</class>
+   <extends>QWidget</extends>
+   <header>playersliders.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="icons/icons.qrc"/>
  </resources>

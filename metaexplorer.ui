@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MetaExplorer</class>
+ <widget class="QWidget" name="MetaExplorer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="meta_explorer_layout">
+     <item>
+      <widget class="QGroupBox" name="meta_cover_group">
+       <property name="toolTip">
+        <string>Jaquette de l'album</string>
+       </property>
+       <property name="title">
+        <string>Cover</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <item>
+         <widget class="QLabel" name="meta_info_cover">
+          <property name="toolTip">
+           <string>Jaquette de l'album</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="icons/icons.qrc">:/other/other/img_missing.png</pixmap>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="meta_info_group">
+       <property name="toolTip">
+        <string>Informations sur le morceau en cours</string>
+       </property>
+       <property name="title">
+        <string>Infos</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_16">
+        <item>
+         <layout class="QVBoxLayout" name="meta_info_fields_layout">
+          <item>
+           <layout class="QHBoxLayout" name="meta_info_title_layout">
+            <item>
+             <widget class="QLabel" name="label_title">
+              <property name="toolTip">
+               <string>Titre</string>
+              </property>
+              <property name="text">
+               <string>Titre</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="meta_info_title">
+              <property name="toolTip">
+               <string>Titre</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="meta_info_author_layout">
+            <item>
+             <widget class="QLabel" name="label_author">
+              <property name="toolTip">
+               <string>Artiste</string>
+              </property>
+              <property name="text">
+               <string>Artiste</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="meta_info_author">
+              <property name="toolTip">
+               <string>Artiste</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="meta_info_type_layout">
+            <item>
+             <widget class="QLabel" name="label_type">
+              <property name="toolTip">
+               <string>Genre musicale</string>
+              </property>
+              <property name="text">
+               <string>Genre</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="meta_info_type">
+              <property name="toolTip">
+               <string>Genre musicale</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="meta_info_album_layout">
+            <item>
+             <widget class="QLabel" name="label_album">
+              <property name="toolTip">
+               <string>Album</string>
+              </property>
+              <property name="text">
+               <string>Album</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="meta_info_album">
+              <property name="toolTip">
+               <string>Album</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="meta_info_year_layout">
+            <item>
+             <widget class="QLabel" name="label_year">
+              <property name="toolTip">
+               <string>Année de production</string>
+              </property>
+              <property name="text">
+               <string>Année</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="meta_info_year">
+              <property name="toolTip">
+               <string>Année de production</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="meta_info_comment_layout">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Commentaire</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="meta_info_comment">
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="icons/icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

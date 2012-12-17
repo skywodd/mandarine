@@ -1,31 +1,57 @@
-SOURCES += \
-    main.cpp \
-    mainwindow.cpp \
-    aboutdialog.cpp \
-    audiointerfacesdialog.cpp \
-    audioformatsdialog.cpp
-
-FORMS += \
-    about.ui \
-    mainwindow.ui \
-    equalizer.ui \
-    database_update.ui \
-    database_cleanup.ui \
-    audio_interfaces.ui \
-    audio_formats.ui
-
-RESOURCES += \
-    icons/icons.qrc
-
-HEADERS += \
-    mainwindow.h \
-    aboutdialog.h \
-    audiointerfacesdialog.h \
-    audioformatsdialog.h
-
 QT += \
     core \
     gui \
     sql \
     multimedia \
-    webkitwidgets
+    webkitwidgets \
+    widgets
+
+TARGET = Mandarine
+
+TEMPLATE = app
+
+SOURCES += \
+    main.cpp \
+    mainwindow.cpp \
+    libraryexplorer.cpp \
+    fileexplorer.cpp \
+    metaexplorer.cpp \
+    infoexplorer.cpp \
+    playlistcontrols.cpp \
+    playercontrols.cpp \
+    playersliders.cpp \
+    aboutdialog.cpp \
+    audioformatsdialog.cpp \
+    audiointerfacesdialog.cpp \
+    equalizerdialog.cpp
+
+HEADERS  += \
+    mainwindow.h \
+    libraryexplorer.h \
+    fileexplorer.h \
+    metaexplorer.h \
+    infoexplorer.h \
+    playlistcontrols.h \
+    playercontrols.h \
+    playersliders.h \
+    aboutdialog.h \
+    audioformatsdialog.h \
+    audiointerfacesdialog.h \
+    equalizerdialog.h
+
+FORMS    += \
+    mainwindow.ui \
+    libraryexplorer.ui \
+    fileexplorer.ui \
+    metaexplorer.ui \
+    infoexplorer.ui \
+    playlistcontrols.ui \
+    playercontrols.ui \
+    playersliders.ui \
+    aboutdialog.ui \
+    equalizer.ui \
+    audioformatsdialog.ui \
+    audiointerfacesdialog.ui
+
+RESOURCES += \
+    icons/icons.qrc
