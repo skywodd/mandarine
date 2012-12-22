@@ -82,7 +82,7 @@
      <x>0</x>
      <y>0</y>
      <width>994</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="music_menu">
@@ -200,7 +200,7 @@
      <item>
       <widget class="QTabWidget" name="dock_tab">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab_library_explorer">
         <attribute name="title">
@@ -209,16 +209,6 @@
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
           <widget class="LibraryExplorer" name="library_explorer" native="true"/>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab_file_explorer">
-        <attribute name="title">
-         <string>Fichiers</string>
-        </attribute>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <item>
-          <widget class="FileExplorer" name="file_explorer" native="true"/>
          </item>
         </layout>
        </widget>
@@ -567,12 +557,6 @@
    <class>LibraryExplorer</class>
    <extends>QWidget</extends>
    <header>libraryexplorer.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>FileExplorer</class>
-   <extends>QWidget</extends>
-   <header>fileexplorer.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
