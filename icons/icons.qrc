@@ -13,9 +13,7 @@
         <file>search.png</file>
         <file>setup.png</file>
         <file>system.png</file>
-        <file>tips.png</file>
         <file>update.png</file>
-        <file>warning.png</file>
     </qresource>
     <qresource prefix="/controls">
         <file>next.png</file>
@@ -23,13 +21,14 @@
         <file>play.png</file>
         <file>previous.png</file>
         <file>stop.png</file>
+        <file>mode.png</file>
+        <file>clock.png</file>
     </qresource>
     <qresource prefix="/playlist">
         <file>add_directory.png</file>
         <file>add_file.png</file>
         <file>goto.png</file>
         <file>mix.png</file>
-        <file>network.png</file>
         <file>new.png</file>
         <file>open.png</file>
         <file>save.png</file>

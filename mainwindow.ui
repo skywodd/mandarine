@@ -82,7 +82,7 @@
      <x>0</x>
      <y>0</y>
      <width>994</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="music_menu">
@@ -107,8 +107,8 @@
       <string>Mode de lecture</string>
      </property>
      <property name="icon">
-      <iconset>
-       <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
+      <iconset resource="icons/icons.qrc">
+       <normaloff>:/controls/mode.png</normaloff>:/controls/mode.png</iconset>
      </property>
     </widget>
     <addaction name="action_new_playlist"/>

@@ -9,7 +9,7 @@ const int PlayerSliders::m_maximumSliderValue = 10000;
 
 PlayerSliders::PlayerSliders(QWidget *parent) :
     QWidget(parent), m_showTimeMode(TIME_TOTAL),
-    m_currentTimeValue(0), m_maximumTimeValue(50000),
+    m_currentTimeValue(0), m_maximumTimeValue(0),
     m_isMuted(false), m_isSeekable(true)
 {
     /* Setup UI */

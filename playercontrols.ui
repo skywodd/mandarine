@@ -35,7 +35,7 @@
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
-         <normaloff>:/controls/controls/previous.png</normaloff>:/controls/controls/previous.png</iconset>
+         <normaloff>:/controls/previous.png</normaloff>:/controls/previous.png</iconset>
        </property>
       </widget>
      </item>
@@ -58,7 +58,7 @@
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
-         <normaloff>:/controls/controls/play.png</normaloff>:/controls/controls/play.png</iconset>
+         <normaloff>:/controls/play.png</normaloff>:/controls/play.png</iconset>
        </property>
       </widget>
      </item>
@@ -81,7 +81,7 @@
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
-         <normaloff>:/controls/controls/stop.png</normaloff>:/controls/controls/stop.png</iconset>
+         <normaloff>:/controls/stop.png</normaloff>:/controls/stop.png</iconset>
        </property>
       </widget>
      </item>
@@ -104,7 +104,7 @@
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
-         <normaloff>:/controls/controls/next.png</normaloff>:/controls/controls/next.png</iconset>
+         <normaloff>:/controls/next.png</normaloff>:/controls/next.png</iconset>
        </property>
       </widget>
      </item>
@@ -127,7 +127,7 @@
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
-         <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
+         <normaloff>:/controls/clock.png</normaloff>:/controls/clock.png</iconset>
        </property>
       </widget>
      </item>
@@ -150,7 +150,7 @@
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
-         <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
+         <normaloff>:/controls/mode.png</normaloff>:/controls/mode.png</iconset>
        </property>
       </widget>
      </item>

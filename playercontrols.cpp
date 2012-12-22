@@ -1,7 +1,7 @@
 #include "playercontrols.h"
 
-const QString PlayerControls::m_iconPlay(":/controls/controls/play.png");
-const QString PlayerControls::m_iconPause(":/controls/controls/pause.png");
+const QString PlayerControls::m_iconPlay(":/controls/play.png");
+const QString PlayerControls::m_iconPause(":/controls/pause.png");
 
 PlayerControls::PlayerControls(QWidget *parent) :
     QWidget(parent), m_isplaying(false), m_loopMode(QMediaPlaylist::Sequential)
