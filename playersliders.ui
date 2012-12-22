@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>677</width>
-    <height>56</height>
+    <width>591</width>
+    <height>53</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,15 +30,33 @@
          <height>29</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Temps courant</string>
+       </property>
        <property name="text">
         <string>00:00</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::PlainText</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSlider" name="player_slides_time_slider">
-       <property name="maximum">
-        <number>999</number>
+      <widget class="QSlider" name="player_sliders_time_slider">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>19</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>19</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Déplacement temporel</string>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -46,52 +64,102 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="player_slides_total_time_label">
+      <widget class="QLabelClickable" name="player_sliders_total_time_label">
        <property name="minimumSize">
         <size>
-         <width>33</width>
+         <width>38</width>
          <height>29</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>33</width>
+         <width>38</width>
          <height>29</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Temps total / Temps restant</string>
        </property>
        <property name="text">
         <string>00:00</string>
        </property>
+       <property name="textFormat">
+        <enum>Qt::PlainText</enum>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="Line" name="line_1">
+      <widget class="Line" name="player_sliders_line">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSlider" name="player_slides_volume_slider">
+      <widget class="QPushButton" name="player_sliders_volume_mute">
        <property name="minimumSize">
         <size>
-         <width>128</width>
-         <height>19</height>
+         <width>33</width>
+         <height>29</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>128</width>
-         <height>19</height>
+         <width>33</width>
+         <height>29</height>
         </size>
        </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+       <property name="toolTip">
+        <string>Sourdine</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="icons/icons.qrc">
+         <normaloff>:/generic/generic/unmute.png</normaloff>:/generic/generic/unmute.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="player_slides_volume_label">
+      <widget class="QSlider" name="player_sliders_volume_slider">
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Volume</string>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="pageStep">
+        <number>5</number>
+       </property>
+       <property name="value">
+        <number>50</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::NoTicks</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="player_sliders_volume_label">
        <property name="minimumSize">
         <size>
          <width>33</width>
@@ -104,8 +172,14 @@
          <height>29</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Volume</string>
+       </property>
        <property name="text">
         <string>000%</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::PlainText</enum>
        </property>
       </widget>
      </item>
@@ -113,6 +187,15 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <customwidgets>
+  <customwidget>
+   <class>QLabelClickable</class>
+   <extends>QLabel</extends>
+   <header>qlabelclickable.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="icons/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

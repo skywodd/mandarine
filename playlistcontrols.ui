@@ -37,7 +37,7 @@
          </property>
          <property name="icon">
           <iconset resource="icons/icons.qrc">
-           <normaloff>:/playlist/playlist/new.png</normaloff>:/playlist/playlist/new.png</iconset>
+           <normaloff>:/playlist/new.png</normaloff>:/playlist/new.png</iconset>
          </property>
         </widget>
        </item>
@@ -60,7 +60,7 @@
          </property>
          <property name="icon">
           <iconset resource="icons/icons.qrc">
-           <normaloff>:/playlist/playlist/open.png</normaloff>:/playlist/playlist/open.png</iconset>
+           <normaloff>:/playlist/open.png</normaloff>:/playlist/open.png</iconset>
          </property>
         </widget>
        </item>
@@ -83,7 +83,7 @@
          </property>
          <property name="icon">
           <iconset resource="icons/icons.qrc">
-           <normaloff>:/playlist/playlist/save.png</normaloff>:/playlist/playlist/save.png</iconset>
+           <normaloff>:/playlist/save.png</normaloff>:/playlist/save.png</iconset>
          </property>
         </widget>
        </item>
@@ -109,7 +109,7 @@
          </property>
          <property name="icon">
           <iconset resource="icons/icons.qrc">
-           <normaloff>:/generic/generic/search.png</normaloff>:/generic/generic/search.png</iconset>
+           <normaloff>:/utility/search.png</normaloff>:/utility/search.png</iconset>
          </property>
         </widget>
        </item>

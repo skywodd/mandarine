@@ -47,14 +47,14 @@
          </property>
          <property name="icon">
           <iconset resource="icons/icons.qrc">
-           <normaloff>:/generic/generic/search.png</normaloff>:/generic/generic/search.png</iconset>
+           <normaloff>:/utility/search.png</normaloff>:/utility/search.png</iconset>
          </property>
         </widget>
        </item>
       </layout>
      </item>
      <item>
-      <widget class="QTreeView" name="library_explorer_tree">
+      <widget class="QListView" name="library_explorer_tree">
        <property name="toolTip">
         <string>Bibliothèque musicale</string>
        </property>

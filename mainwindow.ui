@@ -91,8 +91,6 @@
     </property>
     <addaction name="action_play"/>
     <addaction name="action_stop"/>
-    <addaction name="action_fast_forward"/>
-    <addaction name="action_fast_rewind"/>
     <addaction name="action_next_music"/>
     <addaction name="action_previous_music"/>
     <addaction name="separator"/>
@@ -104,36 +102,20 @@
     <property name="title">
      <string>Liste de lecture</string>
     </property>
-    <widget class="QMenu" name="random_play_menu">
-     <property name="title">
-      <string>Lecture aléatoire</string>
-     </property>
-     <property name="icon">
-      <iconset resource="icons/icons.qrc">
-       <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
-     </property>
-     <addaction name="action_random_disable"/>
-     <addaction name="action_random_playlist"/>
-     <addaction name="action_random_library"/>
-    </widget>
     <widget class="QMenu" name="loop_play_menu">
      <property name="title">
-      <string>Lecture en boucle</string>
+      <string>Mode de lecture</string>
      </property>
      <property name="icon">
-      <iconset resource="icons/icons.qrc">
+      <iconset>
        <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
      </property>
-     <addaction name="action_loop_disable"/>
-     <addaction name="action_loop_music"/>
-     <addaction name="action_loop_playlist"/>
     </widget>
     <addaction name="action_new_playlist"/>
     <addaction name="action_open_playlist"/>
     <addaction name="action_save_playlist"/>
     <addaction name="separator"/>
     <addaction name="loop_play_menu"/>
-    <addaction name="random_play_menu"/>
     <addaction name="separator"/>
     <addaction name="action_go_to_playing"/>
     <addaction name="action_mix_playlist"/>
@@ -142,15 +124,10 @@
     <property name="title">
      <string>Outils </string>
     </property>
-    <addaction name="action_show_equalizer"/>
-    <addaction name="action_enable_fft"/>
-    <addaction name="separator"/>
     <addaction name="action_refresh_database"/>
     <addaction name="action_cleanup_database"/>
     <addaction name="separator"/>
     <addaction name="action_show_setup"/>
-    <addaction name="action_show_hardware"/>
-    <addaction name="action_show_formats"/>
    </widget>
    <widget class="QMenu" name="help_menu">
     <property name="title">
@@ -167,7 +144,6 @@
     </property>
     <addaction name="action_add_file"/>
     <addaction name="action_add_directory"/>
-    <addaction name="action_add_network"/>
    </widget>
    <addaction name="music_menu"/>
    <addaction name="library_menu"/>
@@ -179,7 +155,7 @@
   <widget class="QDockWidget" name="main_dock">
    <property name="minimumSize">
     <size>
-     <width>407</width>
+     <width>333</width>
      <height>471</height>
     </size>
    </property>
@@ -240,7 +216,7 @@
   <action name="action_show_about">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/generic/generic/aboutme.png</normaloff>:/generic/generic/aboutme.png</iconset>
+     <normaloff>:/utility/aboutme.png</normaloff>:/utility/aboutme.png</iconset>
    </property>
    <property name="text">
     <string>À propos de Mandarine…</string>
@@ -249,7 +225,7 @@
   <action name="action_show_aboutqt">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/generic/generic/info.png</normaloff>:/generic/generic/info.png</iconset>
+     <normaloff>:/utility/aboutme.png</normaloff>:/utility/aboutme.png</iconset>
    </property>
    <property name="text">
     <string>À propos de Qt…</string>
@@ -258,7 +234,7 @@
   <action name="action_play">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/controls/controls/play.png</normaloff>:/controls/controls/play.png</iconset>
+     <normaloff>:/controls/play.png</normaloff>:/controls/play.png</iconset>
    </property>
    <property name="text">
     <string>Lecture / Pause</string>
@@ -267,7 +243,7 @@
   <action name="action_stop">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/controls/controls/stop.png</normaloff>:/controls/controls/stop.png</iconset>
+     <normaloff>:/controls/stop.png</normaloff>:/controls/stop.png</iconset>
    </property>
    <property name="text">
     <string>Stop</string>
@@ -275,7 +251,7 @@
   </action>
   <action name="action_fast_forward">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/controls/controls/fast_forward.png</normaloff>:/controls/controls/fast_forward.png</iconset>
    </property>
    <property name="text">
@@ -284,7 +260,7 @@
   </action>
   <action name="action_fast_rewind">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/controls/controls/fast_rewind.png</normaloff>:/controls/controls/fast_rewind.png</iconset>
    </property>
    <property name="text">
@@ -294,7 +270,7 @@
   <action name="action_next_music">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/controls/controls/next.png</normaloff>:/controls/controls/next.png</iconset>
+     <normaloff>:/controls/next.png</normaloff>:/controls/next.png</iconset>
    </property>
    <property name="text">
     <string>Morceau suivant</string>
@@ -303,7 +279,7 @@
   <action name="action_previous_music">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/controls/controls/previous.png</normaloff>:/controls/controls/previous.png</iconset>
+     <normaloff>:/controls/previous.png</normaloff>:/controls/previous.png</iconset>
    </property>
    <property name="text">
     <string>Morceau précédent</string>
@@ -312,7 +288,7 @@
   <action name="action_mute">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/generic/generic/mute.png</normaloff>:/generic/generic/mute.png</iconset>
+     <normaloff>:/sound/mute.png</normaloff>:/sound/mute.png</iconset>
    </property>
    <property name="text">
     <string>Sourdine</string>
@@ -321,7 +297,7 @@
   <action name="action_exit">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/generic/generic/exit.png</normaloff>:/generic/generic/exit.png</iconset>
+     <normaloff>:/utility/exit.png</normaloff>:/utility/exit.png</iconset>
    </property>
    <property name="text">
     <string>Quitter</string>
@@ -330,7 +306,7 @@
   <action name="action_add_file">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/playlist/playlist/add_file.png</normaloff>:/playlist/playlist/add_file.png</iconset>
+     <normaloff>:/playlist/add_file.png</normaloff>:/playlist/add_file.png</iconset>
    </property>
    <property name="text">
     <string>Ajouter un fichier…</string>
@@ -339,7 +315,7 @@
   <action name="action_add_directory">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/playlist/playlist/add_directory.png</normaloff>:/playlist/playlist/add_directory.png</iconset>
+     <normaloff>:/playlist/add_directory.png</normaloff>:/playlist/add_directory.png</iconset>
    </property>
    <property name="text">
     <string>Ajouter un dossier…</string>
@@ -347,7 +323,7 @@
   </action>
   <action name="action_add_network">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/playlist/playlist/network.png</normaloff>:/playlist/playlist/network.png</iconset>
    </property>
    <property name="text">
@@ -357,7 +333,7 @@
   <action name="action_new_playlist">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/playlist/playlist/new.png</normaloff>:/playlist/playlist/new.png</iconset>
+     <normaloff>:/playlist/new.png</normaloff>:/playlist/new.png</iconset>
    </property>
    <property name="text">
     <string>Nouvelle playlist</string>
@@ -366,7 +342,7 @@
   <action name="action_open_playlist">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/playlist/playlist/open.png</normaloff>:/playlist/playlist/open.png</iconset>
+     <normaloff>:/playlist/open.png</normaloff>:/playlist/open.png</iconset>
    </property>
    <property name="text">
     <string>Ouvrir une playlist…</string>
@@ -375,7 +351,7 @@
   <action name="action_save_playlist">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/playlist/playlist/save.png</normaloff>:/playlist/playlist/save.png</iconset>
+     <normaloff>:/playlist/save.png</normaloff>:/playlist/save.png</iconset>
    </property>
    <property name="text">
     <string>Enregistrer la playlist…</string>
@@ -384,7 +360,7 @@
   <action name="action_go_to_playing">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/controls/controls/goto.png</normaloff>:/controls/controls/goto.png</iconset>
+     <normaloff>:/playlist/goto.png</normaloff>:/playlist/goto.png</iconset>
    </property>
    <property name="text">
     <string>Aller au morceau en cours</string>
@@ -392,7 +368,7 @@
   </action>
   <action name="action_flush_playlist">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/playlist/playlist/flush.png</normaloff>:/playlist/playlist/flush.png</iconset>
    </property>
    <property name="text">
@@ -402,7 +378,7 @@
   <action name="action_mix_playlist">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/playlist/playlist/mix.png</normaloff>:/playlist/playlist/mix.png</iconset>
+     <normaloff>:/playlist/mix.png</normaloff>:/playlist/mix.png</iconset>
    </property>
    <property name="text">
     <string>Mélanger la playlist</string>
@@ -410,7 +386,7 @@
   </action>
   <action name="action_show_equalizer">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/generic/generic/equalizer.png</normaloff>:/generic/generic/equalizer.png</iconset>
    </property>
    <property name="text">
@@ -433,7 +409,7 @@
   </action>
   <action name="action_show_covers_manager">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/other/other/manager.png</normaloff>:/other/other/manager.png</iconset>
    </property>
    <property name="text">
@@ -443,7 +419,7 @@
   <action name="action_refresh_database">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/other/other/update.png</normaloff>:/other/other/update.png</iconset>
+     <normaloff>:/utility/update.png</normaloff>:/utility/update.png</iconset>
    </property>
    <property name="text">
     <string>Mettre à jour la base de données…</string>
@@ -452,7 +428,7 @@
   <action name="action_cleanup_database">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/other/other/system.png</normaloff>:/other/other/system.png</iconset>
+     <normaloff>:/utility/system.png</normaloff>:/utility/system.png</iconset>
    </property>
    <property name="text">
     <string>Maintenance de la base de données…</string>
@@ -461,7 +437,7 @@
   <action name="action_show_setup">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/generic/generic/setup.png</normaloff>:/generic/generic/setup.png</iconset>
+     <normaloff>:/utility/setup.png</normaloff>:/utility/setup.png</iconset>
    </property>
    <property name="text">
     <string>Préférences…</string>
@@ -470,7 +446,7 @@
   <action name="action_show_help">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
-     <normaloff>:/generic/generic/help.png</normaloff>:/generic/generic/help.png</iconset>
+     <normaloff>:/utility/help.png</normaloff>:/utility/help.png</iconset>
    </property>
    <property name="text">
     <string>Aide…</string>
@@ -478,7 +454,7 @@
   </action>
   <action name="action_random_disable">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/other/other/dot.png</normaloff>:/other/other/dot.png</iconset>
    </property>
    <property name="text">
@@ -487,7 +463,7 @@
   </action>
   <action name="action_random_playlist">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
    </property>
    <property name="text">
@@ -496,7 +472,7 @@
   </action>
   <action name="action_random_library">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
    </property>
    <property name="text">
@@ -505,7 +481,7 @@
   </action>
   <action name="action_loop_disable">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/other/other/dot.png</normaloff>:/other/other/dot.png</iconset>
    </property>
    <property name="text">
@@ -514,7 +490,7 @@
   </action>
   <action name="action_loop_music">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
    </property>
    <property name="text">
@@ -523,7 +499,7 @@
   </action>
   <action name="action_loop_playlist">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
    </property>
    <property name="text">
@@ -535,7 +511,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/generic/generic/hardware.png</normaloff>:/generic/generic/hardware.png</iconset>
    </property>
    <property name="text">
@@ -544,7 +520,7 @@
   </action>
   <action name="action_show_formats">
    <property name="icon">
-    <iconset resource="icons/icons.qrc">
+    <iconset>
      <normaloff>:/generic/generic/format.png</normaloff>:/generic/generic/format.png</iconset>
    </property>
    <property name="text">
