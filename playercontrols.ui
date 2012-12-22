@@ -40,29 +40,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="player_controls_fast_rewind">
-       <property name="minimumSize">
-        <size>
-         <width>33</width>
-         <height>29</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>33</width>
-         <height>29</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="icons/icons.qrc">
-         <normaloff>:/controls/controls/fast_rewind.png</normaloff>:/controls/controls/fast_rewind.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="player_controls_play">
        <property name="minimumSize">
         <size>
@@ -109,29 +86,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="player_controls_fast_forward">
-       <property name="minimumSize">
-        <size>
-         <width>33</width>
-         <height>29</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>33</width>
-         <height>29</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="icons/icons.qrc">
-         <normaloff>:/controls/controls/fast_forward.png</normaloff>:/controls/controls/fast_forward.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="player_controls_next">
        <property name="minimumSize">
         <size>
@@ -155,7 +109,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="player_controls_random">
+      <widget class="QPushButton" name="player_controls_speed">
        <property name="minimumSize">
         <size>
          <width>33</width>
@@ -178,7 +132,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="player_controls_loop">
+      <widget class="QPushButton" name="player_controls_play_mode">
        <property name="minimumSize">
         <size>
          <width>33</width>
