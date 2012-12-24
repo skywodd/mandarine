@@ -6,14 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>418</width>
+    <height>498</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="meta_explorer_layout">
      <item>
@@ -22,7 +19,7 @@
         <string>Jaquette de l'album</string>
        </property>
        <property name="title">
-        <string>Cover</string>
+        <string>Jaquette</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_10">
         <item>
@@ -33,8 +30,14 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
           <property name="pixmap">
            <pixmap resource="icons/icons.qrc">:/cover/img_missing.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -50,7 +53,7 @@
         <string>Informations sur le morceau en cours</string>
        </property>
        <property name="title">
-        <string>Infos</string>
+        <string>Informations</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_16">
         <item>
@@ -59,11 +62,26 @@
            <layout class="QHBoxLayout" name="meta_info_title_layout">
             <item>
              <widget class="QLabel" name="label_title">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
               <property name="toolTip">
                <string>Titre</string>
               </property>
               <property name="text">
                <string>Titre</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
               </property>
              </widget>
             </item>
@@ -75,53 +93,8 @@
               <property name="text">
                <string>-</string>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="meta_info_author_layout">
-            <item>
-             <widget class="QLabel" name="label_author">
-              <property name="toolTip">
-               <string>Artiste</string>
-              </property>
-              <property name="text">
-               <string>Artiste</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="meta_info_author">
-              <property name="toolTip">
-               <string>Artiste</string>
-              </property>
-              <property name="text">
-               <string>-</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="meta_info_type_layout">
-            <item>
-             <widget class="QLabel" name="label_type">
-              <property name="toolTip">
-               <string>Genre musicale</string>
-              </property>
-              <property name="text">
-               <string>Genre</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="meta_info_type">
-              <property name="toolTip">
-               <string>Genre musicale</string>
-              </property>
-              <property name="text">
-               <string>-</string>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
               </property>
              </widget>
             </item>
@@ -131,11 +104,26 @@
            <layout class="QHBoxLayout" name="meta_info_album_layout">
             <item>
              <widget class="QLabel" name="label_album">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
               <property name="toolTip">
                <string>Album</string>
               </property>
               <property name="text">
                <string>Album</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
               </property>
              </widget>
             </item>
@@ -147,6 +135,93 @@
               <property name="text">
                <string>-</string>
               </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="meta_info_author_layout">
+            <item>
+             <widget class="QLabel" name="label_author">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Artiste(s)</string>
+              </property>
+              <property name="text">
+               <string>Artiste(s)</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="meta_info_author">
+              <property name="toolTip">
+               <string>Artiste(s)</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="meta_info_type_layout">
+            <item>
+             <widget class="QLabel" name="label_type">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Genre musicale</string>
+              </property>
+              <property name="text">
+               <string>Genre</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="meta_info_type">
+              <property name="toolTip">
+               <string>Genre musicale</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
+              </property>
              </widget>
             </item>
            </layout>
@@ -155,11 +230,26 @@
            <layout class="QHBoxLayout" name="meta_info_year_layout">
             <item>
              <widget class="QLabel" name="label_year">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
               <property name="toolTip">
                <string>Année de production</string>
               </property>
               <property name="text">
                <string>Année</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
               </property>
              </widget>
             </item>
@@ -171,6 +261,9 @@
               <property name="text">
                <string>-</string>
               </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
+              </property>
              </widget>
             </item>
            </layout>
@@ -178,16 +271,86 @@
           <item>
            <layout class="QHBoxLayout" name="meta_info_comment_layout">
             <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="label_comment">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Commentaire(s)</string>
+              </property>
               <property name="text">
-               <string>Commentaire</string>
+               <string>Commentaire(s)</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QLabel" name="meta_info_comment">
+              <property name="toolTip">
+               <string>Commentaire(s)</string>
+              </property>
               <property name="text">
                <string>-</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::PlainText</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="file_info_layout">
+            <item>
+             <spacer name="horizontal_spacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="meta_file_info">
+              <property name="minimumSize">
+               <size>
+                <width>33</width>
+                <height>29</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>33</width>
+                <height>29</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Informations sur le fichier audio</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="icons/icons.qrc">
+                <normaloff>:/sound/audio.png</normaloff>:/sound/audio.png</iconset>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
