@@ -5,6 +5,7 @@
     <qresource prefix="/sound">
         <file>mute.png</file>
         <file>unmute.png</file>
+        <file>audio.png</file>
     </qresource>
     <qresource prefix="/utility">
         <file>aboutme.png</file>
