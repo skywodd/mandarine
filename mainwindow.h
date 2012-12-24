@@ -19,10 +19,10 @@ class MainWindow : public QMainWindow, protected Ui::MainWindow
     
 protected:
     /** Media player object */
-    QMediaPlayer *player;
+    QMediaPlayer *m_player;
 
     /** Media playlist object */
-    QMediaPlaylist *playlist;
+    QMediaPlaylist *m_playlist;
 
 public:
     /**
@@ -41,8 +41,6 @@ public:
     virtual ~MainWindow();
 
 protected slots:
-    /* TODO add slot for signals from widgets */
-
     void showHelpDialog();
     void showAboutDialog();
     void showQtAboutDialog();
