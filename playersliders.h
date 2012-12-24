@@ -1,12 +1,7 @@
-/**
- * TODO
- */
-
 #ifndef PLAYERSLIDERS_H
 #define PLAYERSLIDERS_H
 
 /* Dependencies */
-#include <QIcon>
 #include "ui_playersliders.h"
 
 /**

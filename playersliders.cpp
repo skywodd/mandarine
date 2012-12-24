@@ -1,5 +1,6 @@
 /* Includes */
 #include <QTime>
+#include <QIcon>
 #include "playersliders.h"
 
 /* Static members initialization */
