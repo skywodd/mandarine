@@ -20,7 +20,8 @@ SOURCES += \
     playercontrols.cpp \
     playersliders.cpp \
     aboutdialog.cpp \
-    qlabelclickable.cpp
+    qlabelclickable.cpp \
+    fileinformationsdialog.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -31,7 +32,8 @@ HEADERS  += \
     playercontrols.h \
     playersliders.h \
     aboutdialog.h \
-    qlabelclickable.h
+    qlabelclickable.h \
+    fileinformationsdialog.h
 
 FORMS    += \
     mainwindow.ui \
@@ -41,7 +43,8 @@ FORMS    += \
     playlistcontrols.ui \
     playercontrols.ui \
     playersliders.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    fileinformationsdialog.ui
 
 RESOURCES += \
     icons/icons.qrc
