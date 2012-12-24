@@ -175,6 +175,18 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QTabWidget" name="dock_tab">
+       <property name="minimumSize">
+        <size>
+         <width>311</width>
+         <height>423</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>311</width>
+         <height>423</height>
+        </size>
+       </property>
        <property name="currentIndex">
         <number>1</number>
        </property>
