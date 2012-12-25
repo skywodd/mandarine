@@ -173,6 +173,13 @@ public slots:
      */
     void setSeekable(bool seekable);
 
+    /**
+     * Handle volume mute "clicked" signal
+     *
+     * @brief handleVolumeMute
+     */
+    void setToggleVolumeMute();
+
 protected slots:
     /**
      * Handle time slider "moved" signal
@@ -195,12 +202,6 @@ protected slots:
      */
     void handleTotalTimeLabel();
 
-    /**
-     * Handle volume mute "clicked" signal
-     *
-     * @brief handleVolumeMute
-     */
-    void handleVolumeMute();
 };
 
 #endif // PLAYERSLIDERS_H

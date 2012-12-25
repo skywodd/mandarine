@@ -23,7 +23,7 @@ PlayerSliders::PlayerSliders(QWidget *parent) :
     connect(player_sliders_time_slider, &QSlider::sliderMoved, this, &PlayerSliders::handleTimeSlider);
     connect(player_sliders_volume_slider, &QSlider::sliderMoved, this, &PlayerSliders::handleVolumeSlider);
     connect(player_sliders_total_time_label, &QLabelClickable::clicked, this, &PlayerSliders::handleTotalTimeLabel);
-    connect(player_sliders_volume_mute, &QAbstractButton::clicked, this, &PlayerSliders::handleVolumeMute);
+    connect(player_sliders_volume_mute, &QAbstractButton::clicked, this, &PlayerSliders::setToggleVolumeMute);
 }
 
 PlayerSliders::~PlayerSliders()
@@ -189,7 +189,7 @@ void PlayerSliders::handleTotalTimeLabel()
     updateTimeLabels();
 }
 
-void PlayerSliders::handleVolumeMute()
+void PlayerSliders::setToggleVolumeMute()
 {
     /* Set the new mute status */
     setMute(!m_isMuted);

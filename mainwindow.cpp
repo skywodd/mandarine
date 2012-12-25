@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     /* Setup UI */
     setupUi(this);
     m_player->setPlaylist(m_playlist);
+    player_controls->setEnabled(false);
 
     /* Connect PlayerSliders signals to slots */
     connect(player_slides, &PlayerSliders::muteChanged, m_player, &QMediaPlayer::setMuted);
@@ -27,7 +28,23 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(player_controls, &PlayerControls::playModeChanged, m_playlist, &QMediaPlaylist::setPlaybackMode);
     connect(player_controls, &PlayerControls::speedChanged, m_player, &QMediaPlayer::setPlaybackRate);
 
-    /* Connect menu signals to slots */
+    /* Connect menu player signals to slots */
+    connect(action_play, &QAction::triggered, player_controls, &PlayerControls::setTogglePlayPause);
+    connect(action_stop, &QAction::triggered, player_controls, &PlayerControls::setStop);
+    connect(action_next_music, &QAction::triggered, player_controls, &PlayerControls::setNext);
+    connect(action_previous_music, &QAction::triggered, player_controls, &PlayerControls::setPrevious);
+    connect(action_mute, &QAction::triggered, player_slides, &PlayerSliders::setToggleVolumeMute);
+
+    /* Connect menu library signals to slots */
+
+
+    /* Connect menu playlist signals to slots */
+
+
+    /* Connect menu tools signals to slots */
+
+
+    /* Connect menu help signals to slots */
     connect(action_show_help, &QAction::triggered, this, &MainWindow::showHelpDialog);
     connect(action_show_about, &QAction::triggered, this, &MainWindow::showAboutDialog);
     connect(action_show_aboutqt, &QAction::triggered, this, &MainWindow::showQtAboutDialog);
