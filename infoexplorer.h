@@ -10,6 +10,8 @@ class InfoExplorer : public QWidget, protected Ui::InfoExplorer
 public:
     explicit InfoExplorer(QWidget *parent = 0);
     ~InfoExplorer();
+
+    void showInformation(const QString &album);
 };
 
 #endif // INFOEXPLORER_H
