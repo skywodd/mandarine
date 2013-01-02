@@ -21,7 +21,8 @@ SOURCES += \
     playersliders.cpp \
     aboutdialog.cpp \
     qlabelclickable.cpp \
-    fileinformationsdialog.cpp
+    fileinformationsdialog.cpp \
+    playlisttablemodel.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -33,7 +34,8 @@ HEADERS  += \
     playersliders.h \
     aboutdialog.h \
     qlabelclickable.h \
-    fileinformationsdialog.h
+    fileinformationsdialog.h \
+    playlisttablemodel.h
 
 FORMS    += \
     mainwindow.ui \
