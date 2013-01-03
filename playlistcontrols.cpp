@@ -1,3 +1,6 @@
+/* Includes */
+#include <QUrl>
+#include <QFileDialog>
 #include "playlistcontrols.h"
 
 PlaylistControls::PlaylistControls(QWidget *parent) :
@@ -10,27 +13,10 @@ PlaylistControls::PlaylistControls(QWidget *parent) :
     connect(playlist_controls_new, &QAbstractButton::clicked, this, &PlaylistControls::handleNewPlaylist);
     connect(playlist_controls_load, &QAbstractButton::clicked, this, &PlaylistControls::handleLoadPlaylist);
     connect(playlist_controls_save, &QAbstractButton::clicked, this, &PlaylistControls::handleSavePlaylist);
-    connect(playlist_controls_search, &QAbstractButton::clicked, this, &PlaylistControls::handleSearchPlaylist);
+    connect(playlist_controls_search, &QLineEdit::textEdited, this, &PlaylistControls::handleSearchPlaylist);
 
-    playlist_controls_list->setModel( &m_playlistTableModel );
-
-
-    QStringList musique1, musique2;
-    musique1.push_back(QString("titre1"));
-    musique1.push_back(QString("album1"));
-    musique1.push_back(QString("artistre1"));
-    musique1.push_back(QString("genre1"));
-    musique1.push_back(QString("durée1"));
-    musique2.push_back(QString("titre2"));
-    musique2.push_back(QString("album2"));
-    musique2.push_back(QString("artistre2"));
-    musique2.push_back(QString("genre2"));
-    musique2.push_back(QString("durée2"));
-    m_playlistTableModel.addRow(0,musique1);
-    m_playlistTableModel.addRow(1,musique2);
-    m_playlistTableModel.setCurrentIndex(0);
-    m_playlistTableModel.swapRow(0,1);
-
+    /* Set TableView source data's model */
+    playlist_controls_view->setModel(&m_playlistTableModel);
 }
 
 PlaylistControls::~PlaylistControls()
@@ -39,31 +25,55 @@ PlaylistControls::~PlaylistControls()
 
 void PlaylistControls::handleNewPlaylist()
 {
+    /* Flush playlist view and model */
     m_playlistTableModel.flush();
-    //TODO : réactualisation de la vue
 
+    /* Warm parent for new playlist */
+    emit newPlaylist();
 }
 
 void PlaylistControls::handleLoadPlaylist()
 {
+    /* Prompt user */
+    QString filename = QFileDialog::getOpenFileName(this, tr("Ouvrir une playlist ..."), "", tr("Ficher de playlist (*.*)"));
 
+    /* check if user has selected a file or not */
+    if(filename.isEmpty())
+        return;
+
+    /* Warm parent for load playlist */
+    emit loadPlaylist(QUrl(filename));
 }
 
 void PlaylistControls::handleSavePlaylist()
 {
+    /* Prompt user */
+    QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder une playlist ..."), "", tr("Ficher de playlist (*.*)"));
 
+    /* check if user has selected a file or not */
+    if(filename.isEmpty())
+        return;
+
+    /* Warm parent for load playlist */
+    emit savePlaylist(QUrl(filename));
 }
 
-void PlaylistControls::handleSearchPlaylist()
+void PlaylistControls::goToCurrentIndex()
 {
-    QString recherche = playlist_controls_search_input->text();
-    for(int i=0; i <m_playlistTableModel.rowCount(); ++i)
+    /* Select the currently played row */
+    playlist_controls_view->selectRow(m_playlistTableModel.getCurrentIndex());
+}
+
+void PlaylistControls::handleSearchPlaylist(const QString& text)
+{
+    /* Process each rows */
+    for(int i = 0; i < m_playlistTableModel.rowCount(); ++i)
     {
-        QString str = m_playlistTableModel.getLine(i);
-        if(str.contains(recherche, Qt::CaseInsensitive))
-            playlist_controls_list->showRow(i);
+        /* Check if row need to be hidden or not */
+        if(m_playlistTableModel.hasToBeHidden(i, text))
+            playlist_controls_view->hideRow(i);
         else
-            playlist_controls_list->hideRow(i);
+            playlist_controls_view->showRow(i);
     }
 }
 

@@ -1,6 +1,6 @@
+/* Includes */
+#include <QFont>
 #include <QPixmap>
-#include <QStandardItem>
-
 #include "playlisttablemodel.h"
 
 /* Static members initialization */
@@ -15,122 +15,212 @@ PlaylistTableModel::~PlaylistTableModel()
 {
 }
 
-int PlaylistTableModel::rowCount(const QModelIndex &parent) const
+int PlaylistTableModel::rowCount(const QModelIndex&) const
 {
+    /* Return row count (dynamic) */
     return m_data.size();
 }
 
-int PlaylistTableModel::columnCount(const QModelIndex &parent ) const
+int PlaylistTableModel::columnCount(const QModelIndex&) const
 {
+    /* Return column count (static) */
     return 5;
 }
 
 QVariant PlaylistTableModel::data(const QModelIndex &index, int role) const
 {
+    /* Switch according role */
     switch(role)
     {
-    case Qt::DisplayRole :
+    case Qt::DisplayRole: /* Ask for data */
 
-            return m_data[index.row()][index.column()];
+        /* Return data */
+        switch(index.column()) {
+        case 0:
+            return m_data[index.row()].title;
             break;
-    case Qt::FontRole:
-        if( index.row() == m_currentIndex )
+
+        case 1:
+            return m_data[index.row()].album;
+            break;
+
+        case 2:
+            return m_data[index.row()].authors;
+            break;
+
+        case 3:
+            return m_data[index.row()].genre;
+            break;
+
+        case 4:
+            return m_data[index.row()].duration;
+            break;
+        }
+        break;
+
+    case Qt::FontRole: /* Ask for font */
+
+        /* If the specified row is currently played */
+        if(index.row() == m_currentIndex)
         {
             QFont font;
+
+            /* Set row text to bold */
             font.setBold(true);
             return font;
         }
         break;
     }
+
+    /* No data available */
     return QVariant();
 }
 
 QVariant PlaylistTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
+    /* Switch according role */
     switch(role)
     {
-    case Qt::DisplayRole :
+    case Qt::DisplayRole: /* Ask for data */
+
+        /* Horizontal header only */
         if(orientation == Qt::Horizontal)
         {
+            /* Return header section data */
             switch(section)
             {
             case 0:
-                return QString( tr("Titre"));
+                return QString(tr("Titre"));
                 break;
+
             case 1:
-                return QString( tr("Album"));
+                return QString(tr("Album"));
                 break;
+
             case 2:
-                return QString( tr("Artiste"));
+                return QString(tr("Artiste"));
                 break;
+
             case 3:
-                return QString( tr("Genre"));
+                return QString(tr("Genre"));
                 break;
+
             case 4:
-                return QString( tr("Durée"));
+                return QString(tr("Durée"));
                 break;
             }
-            break;
-        }
-    case Qt::DecorationRole :
-        if(orientation == Qt::Vertical && section == m_currentIndex)
-        {
-            return QPixmap(m_playingIcon);
-
         }
         break;
+
+    case Qt::DecorationRole: /* Ask for icon */
+
+        /* Vertical header only and if row is currently played */
+        if(orientation == Qt::Vertical && section == m_currentIndex)
+            return QPixmap(m_playingIcon);
+        break;
     }
+
+    /* No data available */
     return QVariant();
 }
 
-QString PlaylistTableModel::getLine(int row) const
+bool PlaylistTableModel::hasToBeHidden(int row, const QString &mask) const
 {
-    return m_data[row].join(" ");
+    /* Check title for match */
+    if(m_data[row].title.contains(mask, Qt::CaseInsensitive))
+        return false; /* Match, line will not be hidden */
+
+    /* Check title for match */
+    if(m_data[row].album.contains(mask, Qt::CaseInsensitive))
+        return false; /* Match, line will not be hidden */
+
+    /* Check title for match */
+    if(m_data[row].authors.contains(mask, Qt::CaseInsensitive))
+        return false; /* Match, line will not be hidden */
+
+    /* Check title for match */
+    if(m_data[row].genre.contains(mask, Qt::CaseInsensitive))
+        return false; /* Match, line will not be hidden */
+
+    /* Nothing match line will be hidden */
+    return true;
 }
 
-void PlaylistTableModel::addRow(int pos, QStringList row)
+int PlaylistTableModel::getCurrentIndex() const
 {
-    // If of out of range
-    if(pos>=m_data.size())
-        //push the row at the end
-        m_data.push_back(row);
-
-    else
-        //insert the row
-        m_data.insert(pos,row);
-
-    emit dataChanged();
-}
-
-void PlaylistTableModel::removeRow(int pos)
-{   
-    m_data.removeAt(pos);
-    emit dataChanged();
-}
-
-void PlaylistTableModel::swapRow(int row1, int row2)
-{
-    // Swap two lines
-    m_data.swap(row1,row2);
-
-    // If the changed is the current playing
-    if( row1 == m_currentIndex )
-        m_currentIndex = row2;
-    else if ( row2 == m_currentIndex )
-        m_currentIndex = row1;
-
-    emit dataChanged();
+    /* Return the current index */
+    return m_currentIndex;
 }
 
 void PlaylistTableModel::setCurrentIndex(int pos)
 {
+    /* Unset previous index */
+    m_currentIndex = -1;
+    emit dataChanged(createIndex(m_currentIndex, 0), createIndex(m_currentIndex, 4));
+
+    /* Store the new index */
     m_currentIndex = pos;
+    emit dataChanged(createIndex(m_currentIndex, 0), createIndex(m_currentIndex, 4));
 }
 
 void PlaylistTableModel::flush()
 {
-    m_currentIndex = -1;
+    /* Warm view for flush */
+    emit modelAboutToBeReset();
+
+    /* Flush data */
     m_data.clear();
 
-    emit dataChanged();
+    /* Force view refresh */
+    emit modelReset();
+}
+
+void PlaylistTableModel::addRow(PlaylistTableModel::RowData_t &data)
+{
+    /* Warm view for new rows */
+    emit rowsAboutToBeInserted(createIndex(m_data.size() + 1, 0), 0, 4);
+
+    /* Add row's data */
+    m_data.append(data);
+
+    /* Force view refresh */
+    emit rowsInserted(createIndex(m_data.size(), 0), 0, 4);
+}
+
+void PlaylistTableModel::removeRow(int pos)
+{
+    /* Warm view for delete */
+    emit rowsAboutToBeRemoved(createIndex(pos, 0), 0, 4);
+
+    /* Delete row's data */
+    m_data.removeAt(pos);
+
+    /* Force view refresh */
+    emit rowsRemoved(createIndex(pos, 0), 0, 4);
+}
+
+void PlaylistTableModel::moveRow(int from, int to)
+{
+    /* Warm view for move */
+    emit rowsAboutToBeMoved(createIndex(from, 0), 0, 4, createIndex(to, 0), to);
+
+    /* Move row's data */
+    RowData_t tmp = m_data[to];
+    m_data[to] = m_data[from];
+    m_data[from] = tmp;
+
+    /* Force view refresh */
+    emit rowsMoved(createIndex(from, 0), 0, 4, createIndex(to, 0), to);
+}
+
+void PlaylistTableModel::editRow(int pos, PlaylistTableModel::EditMode_t how, PlaylistTableModel::RowData_t &data)
+{
+    /* Edit row's data according how */
+    if(how & EDIT_TITLE) m_data[pos].title = data.title;
+    if(how & EDIT_ALBUM) m_data[pos].album = data.album;
+    if(how & EDIT_AUTHORS) m_data[pos].authors = data.authors;
+    if(how & EDIT_GENRE) m_data[pos].genre = data.genre;
+
+    /* Warm view for change */
+    emit dataChanged(createIndex(pos, 0), createIndex(pos, 4));
 }
