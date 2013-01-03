@@ -4,6 +4,10 @@
 /* Dependencies */
 #include "ui_playlistcontrols.h"
 #include "playlisttablemodel.h"
+#include <QMouseEvent>
+#include <QDropEvent>
+#include <QDragEnterEvent>
+#include <QDragMoveEvent>
 
 /**
  * @brief Playlist control's widget
@@ -39,7 +43,8 @@ signals:
     void newPlaylist();
     void loadPlaylist(const QUrl& location);
     void savePlaylist(const QUrl& location);
-    // currentIndexChanged
+    void currentIndexChanged(int pos);
+    void mediaRemoved(int pos);
 
 public slots:
     /**
@@ -70,9 +75,26 @@ public slots:
      */
     void goToCurrentIndex();
 
-    // setCurrentIndex
-    // addMedia
-    // removeMedia
+    /**
+     * Set the current index
+     *
+     * @brief setCurrentIndex
+     */
+    void setCurrentIndex( int pos );
+
+    /**
+     * Add a media to the playlist
+     *
+     * @brief add media
+     */
+    void addMedia(const PlaylistTableModel::RowData_t& media);
+
+    /**
+     * Remove a media in the playlist
+     *
+     * @brief remove media
+     */
+    void removeMedia(int pos);
 
 protected slots:
     /**
@@ -82,9 +104,50 @@ protected slots:
      */
     void handleSearchPlaylist(const QString& text);
 
-    // handleDoubleClick
-    // handleSelectionDelete
-    // handleInternalMove
+    /**
+     * Handle double click on a row to set the current index
+     *
+     * @brief handleDoubleClick
+     */
+    void handleDoubleClick(const QModelIndex & index);
+
+    /**
+     * Handle right click on a row to display menu
+     *
+     * @brief handleRightClick
+     */
+    void handleRightClicked(QContextMenuEvent* event);
+
+    /**
+     * Handle contextual menu play click
+     *
+     * @brief handleContextualMenuPlay
+     */
+    void handleContextualMenuPlay();
+
+    /**
+     * Handle contextual menu remove click
+     *
+     * @brief handleContextualMenuRemove
+     */
+    void handleContextualMenuRemove();
+
+
+
+    void dropEvent(QDropEvent *event);
+
+    void dragMoveEvent(QDragMoveEvent * event);
+
+    void mousePressEvent(QMouseEvent *event);
+
+    void dragEnterEvent(QDragEnterEvent * event);
+
+    /**
+     * Handle Internal move of rows
+     *
+     * @brief handleInternalMove
+     */
+    void handleInternalMove(QDragEnterEvent *event);
 
 };
 

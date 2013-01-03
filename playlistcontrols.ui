@@ -115,7 +115,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QTableView" name="playlist_controls_view">
+      <widget class="QTableViewClickable" name="playlist_controls_view">
        <property name="acceptDrops">
         <bool>true</bool>
        </property>
@@ -127,6 +127,9 @@
        </property>
        <property name="dragDropMode">
         <enum>QAbstractItemView::InternalMove</enum>
+       </property>
+       <property name="defaultDropAction">
+        <enum>Qt::MoveAction</enum>
        </property>
        <property name="alternatingRowColors">
         <bool>true</bool>
@@ -143,6 +146,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QTableViewClickable</class>
+   <extends>QTableView</extends>
+   <header>qtableviewclickable.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="icons/icons.qrc"/>
  </resources>

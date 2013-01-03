@@ -175,7 +175,7 @@ void PlaylistTableModel::flush()
     emit modelReset();
 }
 
-void PlaylistTableModel::addRow(PlaylistTableModel::RowData_t &data)
+void PlaylistTableModel::addRow(const RowData_t &data)
 {
     /* Warm view for new rows */
     emit rowsAboutToBeInserted(createIndex(m_data.size() + 1, 0), 0, 4);

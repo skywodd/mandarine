@@ -155,7 +155,7 @@ public slots:
      * @brief addRow
      * @param data Row's data
      */
-    void addRow(RowData_t& data);
+    void addRow(const RowData_t& data);
 
     /**
      * Remove a row of data from the model
