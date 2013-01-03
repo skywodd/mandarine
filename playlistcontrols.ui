@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>425</width>
+    <height>327</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>425</width>
+    <height>327</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -31,6 +37,9 @@
            <width>33</width>
            <height>29</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Créer un nouvelle playlist ou vider la playlist actuelle.</string>
          </property>
          <property name="text">
           <string/>
@@ -55,6 +64,9 @@
            <height>29</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ouvrir une playlist ...</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -78,6 +90,9 @@
            <height>29</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Sauvegarder la playlist actuelle ...</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -88,35 +103,19 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="playlist_controls_search_input"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="playlist_controls_search">
-         <property name="minimumSize">
-          <size>
-           <width>33</width>
-           <height>29</height>
-          </size>
+        <widget class="QLineEdit" name="playlist_controls_search">
+         <property name="toolTip">
+          <string>Recherche dans la playlist</string>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>33</width>
-           <height>29</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="icons/icons.qrc">
-           <normaloff>:/utility/search.png</normaloff>:/utility/search.png</iconset>
+         <property name="maxLength">
+          <number>255</number>
          </property>
         </widget>
        </item>
       </layout>
      </item>
      <item>
-      <widget class="QTableView" name="playlist_controls_list">
+      <widget class="QTableView" name="playlist_controls_view">
        <property name="acceptDrops">
         <bool>true</bool>
        </property>
@@ -128,6 +127,12 @@
        </property>
        <property name="dragDropMode">
         <enum>QAbstractItemView::InternalMove</enum>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
        </property>
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
