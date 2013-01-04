@@ -11,7 +11,7 @@ QLabelClickable::~QLabelClickable()
 {
 }
 
-void QLabelClickable::mousePressEvent(QMouseEvent * event)
+void QLabelClickable::mousePressEvent(QMouseEvent* event)
 {
     /* Check if user has clicked on the label */
     if(event->type() == QEvent::MouseButtonPress)
@@ -19,5 +19,5 @@ void QLabelClickable::mousePressEvent(QMouseEvent * event)
         emit clicked();
 
     /* Resend event to parent class */
-    QLabel::mousePressEvent(e);
+    QLabel::mousePressEvent(event);
 }

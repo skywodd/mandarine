@@ -34,9 +34,9 @@ protected:
      * "Mouse Press Event" handler
      *
      * @brief mousePressEvent overload
-     * @param ev Received mouse event
+     * @param event Received mouse event
      */
-    virtual void mousePressEvent(QMouseEvent *ev);
+    virtual void mousePressEvent(QMouseEvent* event);
 
 signals:
     /**
