@@ -1,15 +1,42 @@
-
+/**
+ * @file playercontrols.h
+ * @brief Player controls widget
+ * @author Fabien Batteix & Jordan Vertaure
+ * @version 1.0
+ *
+ * @section intro_sec Introduction
+ * This file contain all stuff required to instantiate PlayerControls object.\n
+ * The PlayerControls object is a widget designed to handle all controls of a standard media player.\n
+ * \n
+ * Please report bug to <skywodd at gmail.com>
+ *
+ * @section license_sec License
+ *  This program is free software: you can redistribute it and/or modify\n
+ *  it under the terms of the GNU General Public License as published by\n
+ *  the Free Software Foundation, either version 3 of the License, or\n
+ *  (at your option) any later version.\n
+ * \n
+ *  This program is distributed in the hope that it will be useful,\n
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of\n
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n
+ *  GNU General Public License for more details.\n
+ * \n
+ *  You should have received a copy of the GNU General Public License\n
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.\n
+ */
 #ifndef PLAYERCONTROLS_H
 #define PLAYERCONTROLS_H
 
 /* Dependencies */
+#include <QWidget>
 #include "ui_playercontrols.h"
 #include <QMediaPlaylist>
+#include <QString>
 
 /**
- * @brief Player controls's widget
+ * @brief Player controls widget
  *
- * This class is designed to handle all controls of the media player.
+ * This class is designed as a widget made to handle all controls of the media player.
  */
 class PlayerControls : public QWidget, protected Ui::PlayerControls
 {
@@ -20,40 +47,40 @@ public:
      * Controls modes
      */
     typedef enum {
-        MODE_BEGIN,
-        MODE_RUNNING,
-        MODE_ENDING
+        MODE_BEGIN, /*!< Playlist cursor at beginning */
+        MODE_RUNNING, /*!< Playlist cursor somewhere between beginning and ending */
+        MODE_ENDING /*!< Playlist cursor at ending */
     } Mode_t;
 
     /**
      * Speed modification factor levels
      */
     typedef enum {
-        SPEED_025,
-        SPEED_05,
-        SPEED_NORMAL,
-        SPEED_2,
-        SPEED_4
+        SPEED_025, /*!< /4 factor */
+        SPEED_05, /*!< /2 factor */
+        SPEED_NORMAL, /*!< x1 factor */
+        SPEED_2, /*!< x2 factor */
+        SPEED_4 /*!< x4 factor */
     } Speed_t;
 
     /**
      * Default constructor of the widget
      *
-     * @brief PlayerControls
+     * @brief PlayerControls constructor
      * @param parent Parent widget
      */
     explicit PlayerControls(QWidget *parent = 0);
 
     /**
-     * Default destructor
+     * Default destructor of the widget
      *
-     * @brief ~PlayerControls
+     * @brief PlayerControls destructor
      * @remarks Ready for overload
      */
     virtual ~PlayerControls();
 
 protected:
-    /** True if widget is in "play mode", false if in "pause mode" */
+    /** True if the widget is in "playing mode", false if in "paused mode" */
     bool m_isplaying;
 
     /** Speed modification factor level */
@@ -63,7 +90,7 @@ protected:
     QMediaPlaylist::PlaybackMode m_playMode;
 
     /** Controls display */
-    Mode_t m_mode; // NOTE usefull ?
+    Mode_t m_mode;
 
     /** Play icon ressource location */
     static const QString m_iconPlay;
@@ -95,7 +122,6 @@ public slots:
     void reset();
 
 protected slots:
-    // TODO use bind (if possible)
     void handleSpeedLevel();
     void handleSpeedLevel1();
     void handleSpeedLevel2();
@@ -103,7 +129,6 @@ protected slots:
     void handleSpeedLevel4();
     void handleSpeedLevel5();
 
-    // TODO use bind (if possible)
     void handlePlayMode();
     void handlePlayModeChangeSequential();
     void handlePlayModeChangeLoopItem();
