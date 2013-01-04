@@ -20,8 +20,8 @@ PlayerSliders::PlayerSliders(QWidget *parent) :
     player_sliders_time_slider->setMaximum(m_maximumSliderValue);
 
     /* Connect GUI signals to internal slots */
-    connect(player_sliders_time_slider, &QSlider::sliderMoved, this, &PlayerSliders::handleTimeSlider);
-    connect(player_sliders_volume_slider, &QSlider::sliderMoved, this, &PlayerSliders::handleVolumeSlider);
+    connect(player_sliders_time_slider, &QSlider::valueChanged, this, &PlayerSliders::handleTimeSlider);
+    connect(player_sliders_volume_slider, &QSlider::valueChanged, this, &PlayerSliders::handleVolumeSlider);
     connect(player_sliders_total_time_label, &QLabelClickable::clicked, this, &PlayerSliders::handleTotalTimeLabel);
     connect(player_sliders_volume_mute, &QAbstractButton::clicked, this, &PlayerSliders::setToggleVolumeMute);
 }
