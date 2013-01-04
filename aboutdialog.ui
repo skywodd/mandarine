@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>459</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,10 @@
         <string>A propos de Mandarine</string>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sollicitudin blandit nulla, ac ornare sem fringilla nec. Praesent eu neque tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In iaculis nulla vel nunc euismod cursus. Nullam pulvinar tempor eros. Donec vitae nisi lacus, ut laoreet lorem. Ut fringilla dolor sit amet dolor vehicula rhoncus. Etiam massa risus, mollis ut blandit vehicula, faucibus vitae velit. Nam quis metus non odio cursus pulvinar. Vestibulum id elit arcu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Mandarine est un lecteur de musique écrit en C++ et Qt5 avec l'aide de la surcouche QMultimediaKit et de la bibliothéque TagLib.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Madarine ce veut simple et conviviale, avec un gui minimaliste et des fonctionnalités somme toute basique.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Le but de notre lecteur n'est pas de créer le prochain jukebox star de l'année mais de concevoir un lecteur de musique fonctionnel.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Celui étant le sujet d'un TP noté dans le cadre de notre IUT informatique.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Le code source du programme est disponible sous licence GPLv3 sur le github du projet :&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;a href=&quot;https://github.com/skywodd/mandarine&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/skywodd/mandarine&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Libre à vous de modifier, partager, améliorer notre travail. C'est aussi ça les joies de l'open source !&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;----&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Ce programme a été concu et réalisé par Fabien Batteix et Jordan Vertaure.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Nous vous remercions pour l'intéret que vous portez à notre projet !&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -40,6 +43,9 @@
        </property>
        <property name="text">
         <string>Fermer</string>
+       </property>
+       <property name="shortcut">
+        <string>Esc, Return</string>
        </property>
       </widget>
      </item>
