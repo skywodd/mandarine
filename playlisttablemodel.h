@@ -1,3 +1,30 @@
+/**
+ * @file playlisttablemodel.h
+ * @brief PlaylistTableView data model
+ * @author Fabien Batteix & Jordan Vertaure
+ * @version 1.0
+ *
+ * @section intro_sec Introduction
+ * This file contain all stuff required to instantiate PlaylistTableModel object.\n
+ * The PlaylistTableModel object is a data model design for use with QTableView widget.\n
+ * The PlaylistTableModel object support internal move and currently played row decoration.\n
+ * \n
+ * Please report bug to <skywodd at gmail.com>
+ *
+ * @section license_sec License
+ *  This program is free software: you can redistribute it and/or modify\n
+ *  it under the terms of the GNU General Public License as published by\n
+ *  the Free Software Foundation, either version 3 of the License, or\n
+ *  (at your option) any later version.\n
+ * \n
+ *  This program is distributed in the hope that it will be useful,\n
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of\n
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n
+ *  GNU General Public License for more details.\n
+ * \n
+ *  You should have received a copy of the GNU General Public License\n
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.\n
+ */
 #ifndef PLAYLISTTABLEMODEL_H
 #define PLAYLISTTABLEMODEL_H
 
@@ -8,10 +35,10 @@
 #include <QList>
 
 /**
- * @brief Playlist TableView widget's data model
+ * @brief Playlist QTableView model
  *
  * This class is the TableModel used by the playlist's TableView widget.
- * This class store and allow display of playlist human-readable data.
+ * This class store and allow display of playlist human readable data.
  */
 class PlaylistTableModel : public QAbstractTableModel
 {
@@ -19,15 +46,15 @@ class PlaylistTableModel : public QAbstractTableModel
 
 public:
     /**
-     * Playlist data model constructor
+     * Data model constructor
      *
      * @brief PlaylistTableModel constructor
      * @param parent Parent view
      */
-    PlaylistTableModel(QObject *parent);
+    PlaylistTableModel(QObject *parent = 0);
 
     /**
-     * Playlist data model destructor
+     * Data model destructor
      *
      * @brief PlaylistTableModel destructor
      * @remarks Ready for overload
@@ -122,13 +149,8 @@ protected:
     static const QString m_playingIcon;
 
 signals:
+    void headerDataChanged(Qt::Orientation orientation, int first, int last);
     void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles = QVector<int>());
-    void rowsAboutToBeInserted(const QModelIndex& parent, int start, int end);
-    void rowsAboutToBeMoved(const QModelIndex& sourceParent, int sourceStart, int sourceEnd, const QModelIndex& destinationParent, int destinationRow);
-    void rowsAboutToBeRemoved(const QModelIndex& parent, int start, int end);
-    void rowsInserted(const QModelIndex& parent, int start, int end);
-    void rowsMoved(const QModelIndex& sourceParent, int sourceStart, int sourceEnd, const QModelIndex& destinationParent, int destinationRow);
-    void rowsRemoved(const QModelIndex& parent, int start, int end);
     void modelAboutToBeReset();
     void modelReset();
 

@@ -1,3 +1,20 @@
+/*
+ * See header file for details
+ *
+ *  This program is free software: you can redistribute it and/or modify\n
+ *  it under the terms of the GNU General Public License as published by\n
+ *  the Free Software Foundation, either version 3 of the License, or\n
+ *  (at your option) any later version.\n
+ *
+ *  This program is distributed in the hope that it will be useful,\n
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of\n
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n
+ *  GNU General Public License for more details.\n
+ *
+ *  You should have received a copy of the GNU General Public License\n
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.\n
+ */
+
 /* Includes */
 #include <QFont>
 #include <QPixmap>
@@ -63,9 +80,8 @@ QVariant PlaylistTableModel::data(const QModelIndex &index, int role) const
         /* If the specified row is currently played */
         if(index.row() == m_currentIndex)
         {
-            QFont font;
-
             /* Set row text to bold */
+            QFont font;
             font.setBold(true);
             return font;
         }
@@ -155,12 +171,15 @@ int PlaylistTableModel::getCurrentIndex() const
 void PlaylistTableModel::setCurrentIndex(int pos)
 {
     /* Unset previous index */
+    int tmp = m_currentIndex;
     m_currentIndex = -1;
-    emit dataChanged(createIndex(m_currentIndex, 0), createIndex(m_currentIndex, 4));
+    emit dataChanged(createIndex(tmp, 0), createIndex(tmp, 4));
+    emit headerDataChanged(Qt::Vertical, tmp, tmp);
 
     /* Store the new index */
     m_currentIndex = pos;
-    emit dataChanged(createIndex(m_currentIndex, 0), createIndex(m_currentIndex, 4));
+    emit dataChanged(createIndex(pos, 0), createIndex(pos, 4));
+    emit headerDataChanged(Qt::Vertical, pos, pos);
 }
 
 void PlaylistTableModel::flush()
@@ -178,31 +197,31 @@ void PlaylistTableModel::flush()
 void PlaylistTableModel::addRow(const RowData_t &data)
 {
     /* Warm view for new rows */
-    emit rowsAboutToBeInserted(createIndex(m_data.size() + 1, 0), 0, 4);
+    emit beginInsertRows(QModelIndex(), m_data.size() + 1, m_data.size() + 1);
 
     /* Add row's data */
     m_data.append(data);
 
     /* Force view refresh */
-    emit rowsInserted(createIndex(m_data.size(), 0), 0, 4);
+    emit endInsertRows();
 }
 
 void PlaylistTableModel::removeRow(int pos)
 {
     /* Warm view for delete */
-    emit rowsAboutToBeRemoved(createIndex(pos, 0), 0, 4);
+    emit beginRemoveRows(QModelIndex(), pos, pos);
 
     /* Delete row's data */
     m_data.removeAt(pos);
 
     /* Force view refresh */
-    emit rowsRemoved(createIndex(pos, 0), 0, 4);
+    emit endRemoveRows();
 }
 
 void PlaylistTableModel::moveRow(int from, int to)
 {
     /* Warm view for move */
-    emit rowsAboutToBeMoved(createIndex(from, 0), 0, 4, createIndex(to, 0), to);
+    emit beginMoveRows(QModelIndex(), from, from, QModelIndex(), to);
 
     /* Move row's data */
     RowData_t tmp = m_data[to];
@@ -210,7 +229,7 @@ void PlaylistTableModel::moveRow(int from, int to)
     m_data[from] = tmp;
 
     /* Force view refresh */
-    emit rowsMoved(createIndex(from, 0), 0, 4, createIndex(to, 0), to);
+    emit endMoveRows();
 }
 
 void PlaylistTableModel::editRow(int pos, PlaylistTableModel::EditMode_t how, PlaylistTableModel::RowData_t &data)
