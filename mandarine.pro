@@ -23,7 +23,8 @@ SOURCES += \
     qlabelclickable.cpp \
     fileinformationsdialog.cpp \
     playlisttablemodel.cpp \
-    qtableviewclickable.cpp
+    qtableviewclickable.cpp \
+    qtreeviewclickable.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -37,7 +38,8 @@ HEADERS  += \
     qlabelclickable.h \
     fileinformationsdialog.h \
     playlisttablemodel.h \
-    qtableviewclickable.h
+    qtableviewclickable.h \
+    qtreeviewclickable.h
 
 FORMS    += \
     mainwindow.ui \

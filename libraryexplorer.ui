@@ -20,8 +20,17 @@
       <layout class="QHBoxLayout" name="library_search_layout">
        <item>
         <widget class="QLineEdit" name="library_search_input">
+         <property name="minimumSize">
+          <size>
+           <width>294</width>
+           <height>22</height>
+          </size>
+         </property>
          <property name="toolTip">
           <string>Recherche dans la Bibliothèque</string>
+         </property>
+         <property name="maxLength">
+          <number>255</number>
          </property>
         </widget>
        </item>
@@ -40,7 +49,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>Rechercher</string>
+          <string>Rechercher dans la bibliothéque</string>
          </property>
          <property name="text">
           <string/>
@@ -51,12 +60,47 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="library_explorer_displaymode">
+         <property name="minimumSize">
+          <size>
+           <width>33</width>
+           <height>29</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>33</width>
+           <height>29</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Mode d'affichage ...</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="icons/icons.qrc">
+           <normaloff>:/utility/setup.png</normaloff>:/utility/setup.png</iconset>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
-      <widget class="QListView" name="library_explorer_tree">
-       <property name="toolTip">
-        <string>Bibliothèque musicale</string>
+      <widget class="QTreeViewClickable" name="library_explorer_tree">
+       <property name="minimumSize">
+        <size>
+         <width>376</width>
+         <height>238</height>
+        </size>
+       </property>
+       <property name="acceptDrops">
+        <bool>true</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DropOnly</enum>
        </property>
       </widget>
      </item>
@@ -64,6 +108,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QTreeViewClickable</class>
+   <extends>QTreeView</extends>
+   <header>qtreeviewclickable.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="icons/icons.qrc"/>
  </resources>
