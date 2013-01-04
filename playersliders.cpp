@@ -133,7 +133,7 @@ void PlayerSliders::setMute(bool muted)
     if (muted) {
 
         /* Display the muted icon */
-        player_sliders_volume_mute->setIcon(QIcon(m_iconMuted));
+        player_sliders_volume_mute->setIcon(QIcon(m_iconUnmuted));
 
         /* Disable the volume slider and label */
         player_sliders_volume_label->setEnabled(false);
@@ -142,7 +142,7 @@ void PlayerSliders::setMute(bool muted)
     } else {
 
         /* Display the unmuted icon */
-        player_sliders_volume_mute->setIcon(QIcon(m_iconUnmuted));
+        player_sliders_volume_mute->setIcon(QIcon(m_iconMuted));
 
         /* Enable the volume slider and label */
         player_sliders_volume_label->setEnabled(true);
