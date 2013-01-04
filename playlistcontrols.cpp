@@ -1,11 +1,10 @@
 /* Includes */
 #include <QUrl>
-#include <QFileDialog>
 #include <QMenu>
+#include <QString>
+#include <QFileDialog>
 #include <QModelIndex>
 #include <QContextMenuEvent>
-#include <QDebug>
-#include <QDrag>
 #include "playlistcontrols.h"
 
 PlaylistControls::PlaylistControls(QWidget *parent) :
@@ -13,8 +12,9 @@ PlaylistControls::PlaylistControls(QWidget *parent) :
 {
     /* Setup UI */
     setupUi(this);
+    m_playlistTableModel = new PlaylistTableModel(this);
 
-    /* Connect button signals to slots */
+    /* Connect buttons signals to slots */
     connect(playlist_controls_new, &QAbstractButton::clicked, this, &PlaylistControls::handleNewPlaylist);
     connect(playlist_controls_load, &QAbstractButton::clicked, this, &PlaylistControls::handleLoadPlaylist);
     connect(playlist_controls_save, &QAbstractButton::clicked, this, &PlaylistControls::handleSavePlaylist);
@@ -25,35 +25,19 @@ PlaylistControls::PlaylistControls(QWidget *parent) :
     connect(playlist_controls_view, &QTableViewClickable::rightClicked, this, &PlaylistControls::handleRightClicked);
 
     /* Set TableView source data's model */
-    playlist_controls_view->setModel(&m_playlistTableModel);
-
-
-    PlaylistTableModel::RowData_t musique1, musique2;
-    musique1.title = QString("titre1");
-    musique1.album = QString("album1");
-    musique1.authors = QString("artistre1");
-    musique1.genre = QString("genre1");
-    musique1.duration = QString("durée1");
-    musique2.title = QString("titre2");
-    musique2.album = QString("album2");
-    musique2.authors = QString("artistre2");
-    musique2.genre = QString("genre2");
-    musique2.duration = QString("durée2");
-    m_playlistTableModel.addRow(musique1);
-    m_playlistTableModel.addRow(musique2);
-    m_playlistTableModel.setCurrentIndex(0);
-    m_playlistTableModel.moveRow(0,1);
-
+    playlist_controls_view->setModel(m_playlistTableModel);
 }
 
 PlaylistControls::~PlaylistControls()
 {
+    /* Free memory */
+    delete m_playlistTableModel;
 }
 
 void PlaylistControls::handleNewPlaylist()
 {
     /* Flush playlist view and model */
-    m_playlistTableModel.flush();
+    m_playlistTableModel->flush();
 
     /* Warm parent for new playlist */
     emit newPlaylist();
@@ -64,7 +48,7 @@ void PlaylistControls::handleLoadPlaylist()
     /* Prompt user */
     QString filename = QFileDialog::getOpenFileName(this, tr("Ouvrir une playlist ..."), "", tr("Ficher de playlist (*.*)"));
 
-    /* check if user has selected a file or not */
+    /* Check if user has selected a file or not */
     if(filename.isEmpty())
         return;
 
@@ -77,7 +61,7 @@ void PlaylistControls::handleSavePlaylist()
     /* Prompt user */
     QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder une playlist ..."), "", tr("Ficher de playlist (*.*)"));
 
-    /* check if user has selected a file or not */
+    /* Check if user has selected a file or not */
     if(filename.isEmpty())
         return;
 
@@ -88,13 +72,13 @@ void PlaylistControls::handleSavePlaylist()
 void PlaylistControls::goToCurrentIndex()
 {
     /* Select the currently played row */
-    playlist_controls_view->selectRow(m_playlistTableModel.getCurrentIndex());
+    playlist_controls_view->selectRow(m_playlistTableModel->getCurrentIndex());
 }
 
 void PlaylistControls::setCurrentIndex(int pos)
 {
     /* Set the currently played row */
-    m_playlistTableModel.setCurrentIndex(pos);
+    m_playlistTableModel->setCurrentIndex(pos);
 
     /* Warm parent for change the current index*/
     emit currentIndexChanged(pos);
@@ -103,29 +87,31 @@ void PlaylistControls::setCurrentIndex(int pos)
 void PlaylistControls::addMedia(const PlaylistTableModel::RowData_t &media)
 {
     /* add the media at the end of the playlist */
-    m_playlistTableModel.addRow(media);
+    m_playlistTableModel->addRow(media);
 }
 
 void PlaylistControls::removeMedia(int pos)
 {
-    /* If the row was current index */
-    if ( pos == m_playlistTableModel.getCurrentIndex())
+    /* If the media is currently played */
+    if(pos == m_playlistTableModel->getCurrentIndex())
     {
-        m_playlistTableModel.setCurrentIndex(-1);
-        emit mediaRemoved(pos);
+        m_playlistTableModel->setCurrentIndex(-1);
     }
 
-    /* remove the media at the pos if it exists */
-    m_playlistTableModel.removeRow(pos);
+    /* Remove the media */
+    m_playlistTableModel->removeRow(pos);
+
+    /* Warm playlist for remove */
+    emit mediaRemoved(pos);
 }
 
 void PlaylistControls::handleSearchPlaylist(const QString& text)
 {
     /* Process each rows */
-    for(int i = 0; i < m_playlistTableModel.rowCount(); ++i)
+    for(int i = 0; i < m_playlistTableModel->rowCount(); ++i)
     {
         /* Check if row need to be hidden or not */
-        if(m_playlistTableModel.hasToBeHidden(i, text))
+        if(m_playlistTableModel->hasToBeHidden(i, text))
             playlist_controls_view->hideRow(i);
         else
             playlist_controls_view->showRow(i);
@@ -134,36 +120,40 @@ void PlaylistControls::handleSearchPlaylist(const QString& text)
 
 void PlaylistControls::handleDoubleClick(const QModelIndex &index)
 {
-    /* set the row double clicked as the current index */
+    /* Play the selected row */
     setCurrentIndex(index.row());
-
 }
 
 void PlaylistControls::handleRightClicked(QContextMenuEvent *event)
 {
+    /* Get the index at the right click position */
     QModelIndex index = playlist_controls_view->indexAt(event->pos());
+
+    /* Check if the index is valid */
     if (index.isValid())
     {
+        /* Select the row associated with the index */
         playlist_controls_view->selectRow(index.row());
 
+        /* Create a contextual menu */
         QMenu contextualMenu(this);
 
-        /* Craft menu items */
+        /* Craft menu's items */
         QAction* setCurrentIndex = contextualMenu.addAction(tr("lire"));
         QAction* deleteIndex = contextualMenu.addAction(tr("supprimer"));
 
-        /* Check the current index */
-        if ( index.row() == m_playlistTableModel.getCurrentIndex())
+        /* Disable "play" entry if the media is currently played */
+        if (index.row() == m_playlistTableModel->getCurrentIndex())
             setCurrentIndex->setEnabled(false);
 
-        /* Connect items signals to slots */
+        /* Connect menu signals to slots */
         connect(setCurrentIndex, &QAction::triggered, this, &PlaylistControls::handleContextualMenuPlay);
         connect(deleteIndex, &QAction::triggered, this, &PlaylistControls::handleContextualMenuRemove);
 
         /* Show menu at the current cursor position */
         contextualMenu.exec(QCursor().pos());
 
-        /* Disconnect signals */
+        /* Disconnect menu signals */
         disconnect(setCurrentIndex, &QAction::triggered, this, &PlaylistControls::handleContextualMenuPlay);
         disconnect(deleteIndex, &QAction::triggered, this, &PlaylistControls::handleContextualMenuRemove);
     }
@@ -171,40 +161,27 @@ void PlaylistControls::handleRightClicked(QContextMenuEvent *event)
 
 void PlaylistControls::handleContextualMenuPlay()
 {
+    /* Get the current selection */
     QItemSelectionModel *select = playlist_controls_view->selectionModel();
-    QModelIndex index = select->selectedRows().front();
-    setCurrentIndex(index.row());
+
+    /* Check if something is selected */
+    if(select->selectedRows().size()) {
+
+        /* Force-play the selected row */
+        setCurrentIndex(select->selectedRows().front().row());
+    }
 }
 
 void PlaylistControls::handleContextualMenuRemove()
 {
+    /* Get the current selection */
     QItemSelectionModel *select = playlist_controls_view->selectionModel();
-    QModelIndex index = select->selectedRows().front();
-    removeMedia(index.row());
+
+    /* Check if something is selected */
+    if(select->selectedRows().size()) {
+
+        /* Force-play the selected row */
+        removeMedia(select->selectedRows().front().row());
+    }
 }
 
-void PlaylistControls::dropEvent(QDropEvent *event)
-{
-     qDebug()<<"dropEvent";
-}
-
-void PlaylistControls::dragMoveEvent(QDragMoveEvent *event)
-{
-    qDebug()<<"dragMoveEvent";
-}
-
-void PlaylistControls::mousePressEvent(QMouseEvent *event)
-{
-    qDebug()<<"mousePressEvent";
-}
-
-void PlaylistControls::dragEnterEvent(QDragEnterEvent *event)
-{
-    qDebug()<<"dragEnter";
-}
-
-void PlaylistControls::handleInternalMove(QDragEnterEvent *event)
-{
-
-
-}

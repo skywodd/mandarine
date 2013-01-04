@@ -1,18 +1,42 @@
+/**
+ * @file playlistcontrols.h
+ * @brief Playlist controls widget
+ * @author Fabien Batteix & Jordan Vertaure
+ * @version 1.0
+ *
+ * @section intro_sec Introduction
+ * This file contain all stuff required to instantiate PlaylistControls object.\n
+ * The PlaylistControls object is a widget designed to handle playlist item display and management.\n
+ * The widget also support internal drag and drop for playlist's item move.\n
+ * \n
+ * Please report bug to <skywodd at gmail.com>
+ *
+ * @section license_sec License
+ *  This program is free software: you can redistribute it and/or modify\n
+ *  it under the terms of the GNU General Public License as published by\n
+ *  the Free Software Foundation, either version 3 of the License, or\n
+ *  (at your option) any later version.\n
+ * \n
+ *  This program is distributed in the hope that it will be useful,\n
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of\n
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n
+ *  GNU General Public License for more details.\n
+ * \n
+ *  You should have received a copy of the GNU General Public License\n
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.\n
+ */
 #ifndef PLAYLISTCONTROLS_H
 #define PLAYLISTCONTROLS_H
 
 /* Dependencies */
+#include <QWidget>
 #include "ui_playlistcontrols.h"
 #include "playlisttablemodel.h"
-#include <QMouseEvent>
-#include <QDropEvent>
-#include <QDragEnterEvent>
-#include <QDragMoveEvent>
 
 /**
- * @brief Playlist control's widget
+ * @brief Playlist controls widget
  *
- * This class is designed to display paylist informations.
+ * This class is designed to display and manage playlist items.
  */
 class PlaylistControls : public QWidget, protected Ui::PlaylistControls
 {
@@ -36,8 +60,8 @@ public:
     virtual ~PlaylistControls();
 
 protected:
-    /** TableModel used to store playlist data */
-    PlaylistTableModel m_playlistTableModel;
+    /** TableModel used to store items data */
+    PlaylistTableModel* m_playlistTableModel;
 
 signals:
     void newPlaylist();
@@ -80,7 +104,7 @@ public slots:
      *
      * @brief setCurrentIndex
      */
-    void setCurrentIndex( int pos );
+    void setCurrentIndex(int pos);
 
     /**
      * Add a media to the playlist
@@ -90,7 +114,7 @@ public slots:
     void addMedia(const PlaylistTableModel::RowData_t& media);
 
     /**
-     * Remove a media in the playlist
+     * Remove a media from the playlist
      *
      * @brief remove media
      */
@@ -109,7 +133,7 @@ protected slots:
      *
      * @brief handleDoubleClick
      */
-    void handleDoubleClick(const QModelIndex & index);
+    void handleDoubleClick(const QModelIndex& index);
 
     /**
      * Handle right click on a row to display menu
@@ -131,24 +155,6 @@ protected slots:
      * @brief handleContextualMenuRemove
      */
     void handleContextualMenuRemove();
-
-
-
-    void dropEvent(QDropEvent *event);
-
-    void dragMoveEvent(QDragMoveEvent * event);
-
-    void mousePressEvent(QMouseEvent *event);
-
-    void dragEnterEvent(QDragEnterEvent * event);
-
-    /**
-     * Handle Internal move of rows
-     *
-     * @brief handleInternalMove
-     */
-    void handleInternalMove(QDragEnterEvent *event);
-
 };
 
 #endif // PLAYLISTCONTROLS_H
