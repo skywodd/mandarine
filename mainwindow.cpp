@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     /* Setup UI */
     setupUi(this);
+
     m_player->setPlaylist(m_playlist);
     player_controls->setEnabled(false);
 
@@ -48,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(action_show_help, &QAction::triggered, this, &MainWindow::showHelpDialog);
     connect(action_show_about, &QAction::triggered, this, &MainWindow::showAboutDialog);
     connect(action_show_aboutqt, &QAction::triggered, this, &MainWindow::showQtAboutDialog);
+
 }
 
 MainWindow::~MainWindow()
@@ -56,16 +58,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::showHelpDialog()
 {
+    /* Display help dialog */
+    // TODO
     QMessageBox::about(this, tr("Aide"), tr("Désolé mais pour le moment vous devez vous démerder tous seul :)"));
 }
 
 void MainWindow::showAboutDialog()
 {
-    AboutDialog about(this);
-    about.exec();
+    /* Display about dialog */
+    AboutDialog(this).exec();
 }
 
 void MainWindow::showQtAboutDialog()
 {
+    /* Display about Qt dialog */
     QMessageBox::aboutQt(this, tr("A propos de Qt"));
 }
