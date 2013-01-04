@@ -24,6 +24,12 @@
        <layout class="QHBoxLayout" name="horizontalLayout_10">
         <item>
          <widget class="QLabel" name="meta_info_cover">
+          <property name="minimumSize">
+           <size>
+            <width>370</width>
+            <height>194</height>
+           </size>
+          </property>
           <property name="toolTip">
            <string>Jaquette de l'album</string>
           </property>
@@ -35,9 +41,6 @@
           </property>
           <property name="pixmap">
            <pixmap resource="icons/icons.qrc">:/cover/img_missing.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>false</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>

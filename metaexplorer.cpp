@@ -4,16 +4,17 @@
 #include <QNetworkReply>
 #include <QMediaResource>
 #include <QMediaMetaData>
-#include <QDebug>
 #include "metaexplorer.h"
 #include "fileinformationsdialog.h"
+#include <QDebug>
 
 /* Static members initialization */
 const QString MetaExplorer::m_noimage(":/cover/image_missing.png");
 const QString MetaExplorer::m_imageloading(":/cover/image_loading.png");
 
 MetaExplorer::MetaExplorer(QWidget *parent) :
-    QWidget(parent), m_isReady(false), m_qressource(0), m_manager(0)
+    QWidget(parent), m_isReady(false), m_coverState(NO_COVER),
+    m_qressource(0), m_manager(0)
 {
     /* Setup UI */
     setupUi(this);
@@ -32,7 +33,7 @@ MetaExplorer::~MetaExplorer()
     delete m_manager;
 }
 
-void MetaExplorer::bindQMediaContent(QMediaResource *ressource)
+void MetaExplorer::bindQMediaRessource(const QMediaResource *ressource)
 {
     /* Store pointer and turn on "ready" flag */
     m_isReady = true;
@@ -41,7 +42,7 @@ void MetaExplorer::bindQMediaContent(QMediaResource *ressource)
 
 void MetaExplorer::displayMetaInfo(const QString& meta, const QVariant& data)
 {
-    /* Switch according received meta information */
+    /* Switch according the received meta key */
     if (meta == QMediaMetaData::Title) { /* Title */
         meta_info_title->setText(data.toString());
 
@@ -61,23 +62,39 @@ void MetaExplorer::displayMetaInfo(const QString& meta, const QVariant& data)
         meta_info_comment->setText(data.toString());
 
     } else if (meta == QMediaMetaData::CoverArtImage) { /* Cover (embedded) */
-        meta_info_cover->setPixmap(QPixmap::fromImage(data.value<QImage>()));
+
+        /* Load the cover only if necessary */
+        if(m_coverState == NO_COVER || m_coverState == SMALL_COVER_OK) {
+            m_coverState = EMBEDDED_COVER_OK;
+            meta_info_cover->setPixmap(QPixmap::fromImage(data.value<QImage>()));
+        }
 
     } else if (meta == QMediaMetaData::CoverArtUrlLarge) { /* Cover (url) */
-        getCoverImage(data.toUrl());
+
+        /* Download cover from web only if necessary */
+        if(m_coverState == NO_COVER || m_coverState == SMALL_COVER_OK) {
+            m_coverState = LARGE_COVER_OK;
+            getCoverImage(data.toUrl());
+        }
 
     } else if (meta == QMediaMetaData::CoverArtUrlSmall) { /* cover (url) */
-        getCoverImage(data.toUrl());
+
+        /* Download cover from web only if necessary */
+        if(m_coverState == NO_COVER) {
+            m_coverState = SMALL_COVER_OK;
+            getCoverImage(data.toUrl());
+        }
 
     } else { /* Other meta (debug) */
-        qDebug() << "Skipped meta: " << meta;
+        qDebug() << "Ignored meta: " << meta;
     }
 }
 
 void MetaExplorer::reset()
 {
-    /* Reset widget state */
+    /* Reset widget to his default state */
     m_isReady = false;
+    m_coverState = NO_COVER;
     meta_info_cover->setPixmap(QPixmap(m_noimage));
     meta_info_title->setText("");
     meta_info_album->setText("");
@@ -87,19 +104,35 @@ void MetaExplorer::reset()
     meta_info_comment->setText("");
 }
 
+void MetaExplorer::displayExternalCover(const QString &path)
+{
+    /* Overwrite cover state */
+    m_coverState = EXTERNAL_COVER_OK;
+
+    /* Display external cover */
+    QPixmap pixmap;
+    if(pixmap.load(path))
+        meta_info_cover->setPixmap(pixmap);
+    else
+    {
+        meta_info_cover->setPixmap(QPixmap(m_noimage));
+        m_coverState = NO_COVER;
+    }
+}
+
 void MetaExplorer::handleFileInfosShow()
 {
-    /* Check if widget can display technical information */
+    /* Check if the widget can display file informations */
     if(m_isReady)
     {
-
-        /* Display the audio file information dialog */
-        FileInformationsDialog infoDialog(m_qressource, this);
+        /* Display the audio file informations dialog */
+        FileInformationsDialog infoDialog(this);
+        infoDialog.displayInfo(m_qressource);
         infoDialog.exec();
     }
 }
 
-void MetaExplorer::getCoverImage(const QUrl &url)
+void MetaExplorer::getCoverImage(const QUrl& url)
 {
     /* Craft network request */
     QNetworkRequest request(url);
@@ -114,21 +147,27 @@ void MetaExplorer::getCoverImage(const QUrl &url)
 
 void MetaExplorer::handleNetworkFinished(QNetworkReply* reply)
 {
-    /* Check for error */
+    /* Check for any error */
     if(reply->error() != QNetworkReply::NoError) {
 
         /* Display the "no image" icon */
         meta_info_cover->setPixmap(QPixmap(m_noimage));
+        m_coverState = NO_COVER;
         return;
     }
 
-    /* Get the data */
+    /* Get the image data */
     QByteArray imgData = reply->readAll();
     QPixmap pixmap;
 
     /* Display the cover */
-    pixmap.loadFromData(imgData);
-    meta_info_cover->setPixmap(pixmap);
+    if(pixmap.loadFromData(imgData))
+        meta_info_cover->setPixmap(pixmap);
+    else
+    {
+        meta_info_cover->setPixmap(QPixmap(m_noimage));
+        m_coverState = NO_COVER;
+    }
 
     /* Close the request */
     reply->close();
