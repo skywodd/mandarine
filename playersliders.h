@@ -1,16 +1,44 @@
+/**
+ * @file playersliders.h
+ * @brief Player sliders widget
+ * @author Fabien Batteix & Jordan Vertaure
+ * @version 1.0
+ *
+ * @section intro_sec Introduction
+ * This file contain all stuff required to instantiate PlayerSliders object.\n
+ * The PlayerSliders object is a widget designed to handle all sliders of a standard media player.\n
+ * This included time seek and volume sliders.\n
+ * \n
+ * Please report bug to <skywodd at gmail.com>
+ *
+ * @section license_sec License
+ *  This program is free software: you can redistribute it and/or modify\n
+ *  it under the terms of the GNU General Public License as published by\n
+ *  the Free Software Foundation, either version 3 of the License, or\n
+ *  (at your option) any later version.\n
+ * \n
+ *  This program is distributed in the hope that it will be useful,\n
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of\n
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n
+ *  GNU General Public License for more details.\n
+ * \n
+ *  You should have received a copy of the GNU General Public License\n
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.\n
+ */
 #ifndef PLAYERSLIDERS_H
 #define PLAYERSLIDERS_H
 
 /* Dependencies */
+#include <QWidget>
 #include "ui_playersliders.h"
 
 /**
- * @brief Player's sliders controls widget
+ * @brief Player sliders widget
  *
- * This class is designed to handle all sliders operation of the media player.
+ * This class is designed to handle all sliders of the media player.
  * \n
- * This widget handle :
- * - Time slider, with current time and total time or remaining time labels
+ * This widget handle :\n
+ * - Time slider, with current time and total time or remaining time labels\n
  * - Volume slider, with volume label and mute button
  */
 class PlayerSliders : public QWidget, protected Ui::PlayerSliders
@@ -201,7 +229,6 @@ protected slots:
      * @brief handleTotalTimeLabel
      */
     void handleTotalTimeLabel();
-
 };
 
 #endif // PLAYERSLIDERS_H

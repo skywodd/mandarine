@@ -113,8 +113,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>:/generic/generic/unmute.png</normaloff>:/generic/generic/unmute.png</iconset>
+        <iconset resource="icons/icons.qrc">
+         <normaloff>:/sound/mute.png</normaloff>:/sound/mute.png</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -191,6 +191,8 @@
    <header>qlabelclickable.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="icons/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
