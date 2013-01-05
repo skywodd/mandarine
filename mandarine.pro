@@ -54,3 +54,10 @@ FORMS    += \
 
 RESOURCES += \
     icons/icons.qrc
+
+win32:INCLUDEPATH += \
+    $$quote(C:/taglib/include)
+
+win32:LIBS += \
+    -L$$quote(C:/taglib/lib) \
+    -ltag
