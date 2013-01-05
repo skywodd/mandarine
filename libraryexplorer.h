@@ -2,6 +2,9 @@
 #define LIBRARYEXPLORER_H
 
 /* Dependencies */
+#include <QWidget>
+#include <QString>
+#include <QStringList>
 #include "ui_libraryexplorer.h"
 
 /**
@@ -16,9 +19,20 @@ class LibraryExplorer : public QWidget, protected Ui::LibraryExplorer
     
 public:
     /**
-     * Default construtor of the widget
+     * Display modes enum
+     */
+    typedef enum
+    {
+        DISPLAY_MUSIC, /*!< Display by music */
+        DISPLAY_ALBUM, /*!< Display by album */
+        DISPLAY_ARTIST, /*!< Display by artist */
+        DISPLAY_GENRE /*!< Display by genre */
+    } DisplayMode_t;
+
+    /**
+     * Default constructor of the widget
      *
-     * @brief LibraryExplorer
+     * @brief LibraryExplorer constructor
      * @param parent Parent widget
      */
     explicit LibraryExplorer(QWidget *parent = 0);
@@ -26,26 +40,72 @@ public:
     /**
      * Default destructor of the widget
      *
-     * @brief ~LibraryExplorer
+     * @brief LibraryExplorer destructor
      * @remarks Ready for overload
      */
     virtual ~LibraryExplorer();
 
-    // setDatabaseLink(link)
+    /**
+     * Open database file
+     *
+     * @brief openDatabase
+     * @param filename Database file path
+     */
+    void openDatabase(const QString& filename = QString("database.db"));
 
 protected:
-    // m_databaseLink
+    /** True when the database is ready */
+    bool m_databaseReady;
+
+    /** Display mode */
+    DisplayMode_t m_displayMode;
 
 signals:
-    // addMediaToPlaylist()
+    /**
+     * Signal emitted when user want to add file to the playlist
+     *
+     * @brief addMediaToPlaylist
+     * @param filename Audio file path to add
+     */
+    void addMediaToPlaylist(const QString& filename);
 
 public slots:
-    // addFiles()
-    // addDirectories()
+    /**
+     * Add a single file to the library
+     *
+     * @brief addFile
+     * @param filename Filename to add
+     */
+    void addFile(const QString& filename);
+
+    /**
+     * Add a bunch of files to the library
+     *
+     * @brief addFiles
+     * @param filenames Filename list to add
+     */
+    void addFiles(const QStringList& filenames);
+
+    /**
+     * Scan a directory and his sub-directory for audio files
+     *
+     * @brief addDirectories
+     * @param path Directory to scan for files
+     */
+    void addDirectories(const QString& path);
+
+    /**
+     * Set the current display mode
+     *
+     * @brief setDisplayMode
+     * @param mode The new display mode
+     */
+    void setDisplayMode(const DisplayMode_t mode);
 
 protected slots:
+    void refresh();
     void handleReseach();
-    void handleRightClick();
+    void handleRightClick(QContextMenuEvent *event);
     void handleDisplayMode();
     void handleDisplayModeMusic();
     void handleDisplayModeAlbum();
