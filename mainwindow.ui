@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>994</width>
-    <height>522</height>
+    <width>1017</width>
+    <height>551</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -81,7 +81,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>994</width>
+     <width>1017</width>
      <height>26</height>
     </rect>
    </property>
@@ -153,12 +153,6 @@
   </widget>
   <widget class="QStatusBar" name="main_status"/>
   <widget class="QDockWidget" name="main_dock">
-   <property name="minimumSize">
-    <size>
-     <width>333</width>
-     <height>471</height>
-    </size>
-   </property>
    <property name="features">
     <set>QDockWidget::DockWidgetFloatable</set>
    </property>
@@ -175,20 +169,8 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QTabWidget" name="dock_tab">
-       <property name="minimumSize">
-        <size>
-         <width>311</width>
-         <height>423</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>311</width>
-         <height>423</height>
-        </size>
-       </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab_library_explorer">
         <attribute name="title">
