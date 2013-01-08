@@ -102,7 +102,10 @@
     <property name="title">
      <string>Liste de lecture</string>
     </property>
-    <widget class="QMenu" name="loop_play_menu">
+    <widget class="QMenu" name="action_playmode">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <property name="title">
       <string>Mode de lecture</string>
      </property>
@@ -115,7 +118,7 @@
     <addaction name="action_open_playlist"/>
     <addaction name="action_save_playlist"/>
     <addaction name="separator"/>
-    <addaction name="loop_play_menu"/>
+    <addaction name="action_playmode"/>
     <addaction name="separator"/>
     <addaction name="action_go_to_playing"/>
     <addaction name="action_mix_playlist"/>
@@ -519,6 +522,26 @@
    </property>
    <property name="text">
     <string>Formats supportés…</string>
+   </property>
+  </action>
+  <action name="action_playmode_normal">
+   <property name="text">
+    <string>Lecture normale</string>
+   </property>
+  </action>
+  <action name="action_playmode_loop_music">
+   <property name="text">
+    <string>Lecture en bouble (morceau en cours)</string>
+   </property>
+  </action>
+  <action name="action_playmode_loop_playlist">
+   <property name="text">
+    <string>Lecture en bouble (playlist)</string>
+   </property>
+  </action>
+  <action name="action_playmode_random">
+   <property name="text">
+    <string>Lecture aléatoire</string>
    </property>
   </action>
  </widget>

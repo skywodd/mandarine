@@ -2,7 +2,12 @@
 #define MAINWINDOW_H
 
 /* Dependencies */
+#include "playlisttablemodel.h"
 #include "ui_mainwindow.h"
+
+/* Forward declaration */
+class QUrl;
+class QString;
 
 /* MultimediaKit (Phonon killer) forward declaration */
 class QMediaPlayer;
@@ -41,6 +46,15 @@ public:
     virtual ~MainWindow();
 
 protected slots:
+    void proxyAddMedia(const QString& path, const PlaylistTableModel::RowData_t& infos);
+    void handleSavePlaylist(const QUrl& location);
+    void handleLoadPlaylist(const QUrl& location);
+    void handleRemoveMedia(int pos);
+    void handlePlaylistMetaChanged();
+    void handleAddFiles();
+    void handleAddDirectories();
+    void handlePlaylistLoaded();
+    void handlePlaylistError();
     void showHelpDialog();
     void showAboutDialog();
     void showQtAboutDialog();

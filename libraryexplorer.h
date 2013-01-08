@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QString>
 #include <QStringList>
+#include "playlisttablemodel.h"
 #include "ui_libraryexplorer.h"
 
 /**
@@ -67,7 +68,7 @@ signals:
      * @brief addMediaToPlaylist
      * @param filename Audio file path to add
      */
-    void addMediaToPlaylist(const QString& filename);
+    void addMediaToPlaylist(const QString& filename, const PlaylistTableModel::RowData_t& infos);
 
 public slots:
     /**
