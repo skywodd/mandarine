@@ -10,20 +10,17 @@
     <height>260</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>390</width>
-    <height>260</height>
-   </size>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
-  <property name="maximumSize">
-   <size>
-    <width>16777215</width>
-    <height>260</height>
-   </size>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>Informations sur le fichier audio</string>
+   <string>Informations sur le fichier audio ...</string>
   </property>
   <property name="windowIcon">
    <iconset resource="icons/icons.qrc">

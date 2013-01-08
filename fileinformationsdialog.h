@@ -62,6 +62,7 @@ public:
      */
     virtual ~FileInformationsDialog();
 
+public slots:
     /**
      * Display informations about the specified QMediaResource object
      *
