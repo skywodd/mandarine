@@ -32,6 +32,9 @@
 #include <QWidget>
 #include "ui_infoexplorer.h"
 
+/* Forward declarations */
+class QString;
+
 /**
  * @brief Wikipedia display widget
  *
@@ -58,13 +61,14 @@ public:
      */
     virtual ~InfoExplorer();
 
+public slots:
     /**
      * Display available informations about the specified terms
      *
-     * @brief showInformation
-     * @param terms The terms to search on wikipedia and display
+     * @brief displayInfo
+     * @param search The terms to search on wikipedia and display
      */
-    void showInformation(const QString& terms);
+    void displayInfo(const QString& search);
 };
 
 #endif // INFOEXPLORER_H
