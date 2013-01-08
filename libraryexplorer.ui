@@ -102,6 +102,9 @@
          <height>238</height>
         </size>
        </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::CustomContextMenu</enum>
+       </property>
        <property name="acceptDrops">
         <bool>true</bool>
        </property>

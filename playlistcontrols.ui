@@ -116,6 +116,9 @@
      </item>
      <item>
       <widget class="QTableViewClickable" name="playlist_controls_view">
+       <property name="contextMenuPolicy">
+        <enum>Qt::CustomContextMenu</enum>
+       </property>
        <property name="acceptDrops">
         <bool>true</bool>
        </property>
