@@ -108,10 +108,6 @@ void PlayerSliders::setTotalTime(qint64 time)
 
 void PlayerSliders::setVolume(int volume)
 {
-    /* Check if volume is in a valid range */
-    if (volume < 0 || volume > 100)
-        return;
-
     /* Unmute if necessary */
     if (m_isMuted)
         setMute(false);

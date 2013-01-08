@@ -30,6 +30,7 @@
 
 /* Dependencies */
 #include <QWidget>
+#include <QString>
 #include "ui_playersliders.h"
 
 /**
