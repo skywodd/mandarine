@@ -21,9 +21,11 @@
 #include <QNetworkReply>
 #include <QMediaResource>
 #include <QMediaMetaData>
+#include <QVariant>
+#include <QDebug>
+#include <QUrl>
 #include "metaexplorer.h"
 #include "fileinformationsdialog.h"
-#include <QDebug>
 
 /* Static members initialization */
 const QString MetaExplorer::m_noimage(":/cover/image_missing.png");
@@ -83,7 +85,7 @@ void MetaExplorer::displayMetaInfo(const QString& meta, const QVariant& data)
         /* Load the cover only if necessary */
         if(m_coverState == NO_COVER || m_coverState == SMALL_COVER_OK) {
             m_coverState = EMBEDDED_COVER_OK;
-            meta_info_cover->setPixmap(QPixmap::fromImage(data.value<QImage>()));
+            meta_info_cover->setPixmap(QPixmap::fromImage(data.value<QImage>()).scaled(meta_info_cover->size(), Qt::KeepAspectRatio));
         }
 
     } else if (meta == QMediaMetaData::CoverArtUrlLarge) { /* Cover (url) */
@@ -123,14 +125,14 @@ void MetaExplorer::reset()
 
 void MetaExplorer::displayExternalCover(const QString &path)
 {
-    /* Overwrite cover state */
-    m_coverState = EXTERNAL_COVER_OK;
-
     /* Display external cover */
     QPixmap pixmap;
     if(pixmap.load(path))
-        meta_info_cover->setPixmap(pixmap);
-    else
+    {
+        meta_info_cover->setPixmap(pixmap.scaled(meta_info_cover->size(), Qt::KeepAspectRatio));
+        m_coverState = EXTERNAL_COVER_OK;
+    }
+        else
     {
         meta_info_cover->setPixmap(QPixmap(m_noimage));
         m_coverState = NO_COVER;
@@ -179,8 +181,10 @@ void MetaExplorer::handleNetworkFinished(QNetworkReply* reply)
 
     /* Display the cover */
     if(pixmap.loadFromData(imgData))
-        meta_info_cover->setPixmap(pixmap);
-    else
+    {
+        meta_info_cover->setPixmap(pixmap.scaled(meta_info_cover->size(), Qt::KeepAspectRatio));
+    }
+        else
     {
         meta_info_cover->setPixmap(QPixmap(m_noimage));
         m_coverState = NO_COVER;

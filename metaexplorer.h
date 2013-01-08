@@ -30,14 +30,14 @@
 /* Dependencies */
 #include <QWidget>
 #include "ui_metaexplorer.h"
-#include <QVariant>
 #include <QString>
-#include <QUrl>
 
 /* Forward declarations */
 class QMediaResource;
 class QNetworkAccessManager;
 class QNetworkReply;
+class QVariant;
+class QUrl;
 
 /**
  * @brief Meta data display widget
@@ -114,19 +114,19 @@ public slots:
     void displayMetaInfo(const QString& meta, const QVariant& data);
 
     /**
-     * Reset the widget in his default state
-     *
-     * @brief reset
-     */
-    void reset();
-
-    /**
      * Display cover from external file
      *
      * @brief displayExternalCover
      * @param path External image file's path
      */
     void displayExternalCover(const QString& path);
+
+    /**
+     * Reset the widget in his default state
+     *
+     * @brief reset
+     */
+    void reset();
 
 protected slots:
 
