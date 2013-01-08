@@ -17,7 +17,7 @@
 
 /* Includes */
 #include <QWidget>
-#include <QContextMenuEvent>
+#include <QStringList>
 #include "qtreeviewclickable.h"
 
 QTreeViewClickable::QTreeViewClickable(QWidget *parent) :
@@ -27,13 +27,4 @@ QTreeViewClickable::QTreeViewClickable(QWidget *parent) :
 
 QTreeViewClickable::~QTreeViewClickable()
 {
-}
-
-void QTreeViewClickable::contextMenuEvent(QContextMenuEvent* event)
-{
-    /* Emit signal for rigth click */
-    emit rightClicked(event);
-
-    /* Resend event to parent */
-    QTreeView::contextMenuEvent(event);
 }

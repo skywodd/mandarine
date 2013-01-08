@@ -32,7 +32,7 @@
 
 /* Forward declarations */
 class QWidget;
-class QContextMenuEvent;
+class QStringList;
 
 /**
  * @brief QTreeView with rigth click support
@@ -61,22 +61,11 @@ public:
     virtual ~QTreeViewClickable();
 
 signals:
-    /**
-     * Signal emitted when user rigth click in the widget
-     *
-     * @brief rightClicked
-     * @param event Requested QContextMenuEvent event
-     */
-    void rightClicked(QContextMenuEvent* event);
+    void dragAddFiles(const QStringList& filenames);
+    void dragAddDirectories(const QStringList& paths);
 
 protected:
-    /**
-     * Overload of the default QTreeView contextMenuEvent() for rigth click support
-     *
-     * @brief contextMenuEvent
-     * @param event Requested QContextMenuEvent event
-     */
-    void contextMenuEvent(QContextMenuEvent* event);
+    // TODO drag 'n drop support for files and directory
 };
 
 #endif // QTREEVIEWCLICKABLE_H
