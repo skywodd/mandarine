@@ -113,6 +113,10 @@
       <iconset resource="icons/icons.qrc">
        <normaloff>:/controls/mode.png</normaloff>:/controls/mode.png</iconset>
      </property>
+     <addaction name="action_playmode_sequencial"/>
+     <addaction name="action_playmode_loopitem"/>
+     <addaction name="action_playmode_loopplaylist"/>
+     <addaction name="action_playmode_random"/>
     </widget>
     <addaction name="action_new_playlist"/>
     <addaction name="action_open_playlist"/>
@@ -246,24 +250,6 @@
     <string>Stop</string>
    </property>
   </action>
-  <action name="action_fast_forward">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/controls/controls/fast_forward.png</normaloff>:/controls/controls/fast_forward.png</iconset>
-   </property>
-   <property name="text">
-    <string>Avance rapide</string>
-   </property>
-  </action>
-  <action name="action_fast_rewind">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/controls/controls/fast_rewind.png</normaloff>:/controls/controls/fast_rewind.png</iconset>
-   </property>
-   <property name="text">
-    <string>Retour rapide</string>
-   </property>
-  </action>
   <action name="action_next_music">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
@@ -318,15 +304,6 @@
     <string>Ajouter un dossier…</string>
    </property>
   </action>
-  <action name="action_add_network">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/playlist/playlist/network.png</normaloff>:/playlist/playlist/network.png</iconset>
-   </property>
-   <property name="text">
-    <string>Ajouter un flux…</string>
-   </property>
-  </action>
   <action name="action_new_playlist">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
@@ -363,15 +340,6 @@
     <string>Aller au morceau en cours</string>
    </property>
   </action>
-  <action name="action_flush_playlist">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/playlist/playlist/flush.png</normaloff>:/playlist/playlist/flush.png</iconset>
-   </property>
-   <property name="text">
-    <string>Vider la playlist</string>
-   </property>
-  </action>
   <action name="action_mix_playlist">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
@@ -379,38 +347,6 @@
    </property>
    <property name="text">
     <string>Mélanger la playlist</string>
-   </property>
-  </action>
-  <action name="action_show_equalizer">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/generic/generic/equalizer.png</normaloff>:/generic/generic/equalizer.png</iconset>
-   </property>
-   <property name="text">
-    <string>Égaliseur graphique…</string>
-   </property>
-  </action>
-  <action name="action_enable_fft">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Affichage FFT</string>
-   </property>
-  </action>
-  <action name="action_show_covers_manager">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/other/other/manager.png</normaloff>:/other/other/manager.png</iconset>
-   </property>
-   <property name="text">
-    <string>Gestionnaire de pochette…</string>
    </property>
   </action>
   <action name="action_refresh_database">
@@ -449,94 +385,19 @@
     <string>Aide…</string>
    </property>
   </action>
-  <action name="action_random_disable">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/other/other/dot.png</normaloff>:/other/other/dot.png</iconset>
-   </property>
+  <action name="action_playmode_sequencial">
    <property name="text">
-    <string>Désactiver</string>
+    <string>Lecture normal</string>
    </property>
   </action>
-  <action name="action_random_playlist">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
-   </property>
+  <action name="action_playmode_loopitem">
    <property name="text">
-    <string>Liste de lecture en cours</string>
+    <string>Lecture en boucle du morceau</string>
    </property>
   </action>
-  <action name="action_random_library">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/controls/controls/random.png</normaloff>:/controls/controls/random.png</iconset>
-   </property>
+  <action name="action_playmode_loopplaylist">
    <property name="text">
-    <string>Bibliothèque complète</string>
-   </property>
-  </action>
-  <action name="action_loop_disable">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/other/other/dot.png</normaloff>:/other/other/dot.png</iconset>
-   </property>
-   <property name="text">
-    <string>Désactivé</string>
-   </property>
-  </action>
-  <action name="action_loop_music">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
-   </property>
-   <property name="text">
-    <string>Piste en cours</string>
-   </property>
-  </action>
-  <action name="action_loop_playlist">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/controls/controls/loop.png</normaloff>:/controls/controls/loop.png</iconset>
-   </property>
-   <property name="text">
-    <string>Liste de lecture complète</string>
-   </property>
-  </action>
-  <action name="action_show_hardware">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/generic/generic/hardware.png</normaloff>:/generic/generic/hardware.png</iconset>
-   </property>
-   <property name="text">
-    <string>Interfaces audio…</string>
-   </property>
-  </action>
-  <action name="action_show_formats">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/generic/generic/format.png</normaloff>:/generic/generic/format.png</iconset>
-   </property>
-   <property name="text">
-    <string>Formats supportés…</string>
-   </property>
-  </action>
-  <action name="action_playmode_normal">
-   <property name="text">
-    <string>Lecture normale</string>
-   </property>
-  </action>
-  <action name="action_playmode_loop_music">
-   <property name="text">
-    <string>Lecture en bouble (morceau en cours)</string>
-   </property>
-  </action>
-  <action name="action_playmode_loop_playlist">
-   <property name="text">
-    <string>Lecture en bouble (playlist)</string>
+    <string>Lecture en boucle de la playlist</string>
    </property>
   </action>
   <action name="action_playmode_random">
