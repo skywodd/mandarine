@@ -4,9 +4,13 @@
 /* Dependencies */
 #include <QWidget>
 #include <QString>
-#include <QStringList>
+#include <QSqlDatabase>
 #include "playlisttablemodel.h"
 #include "ui_libraryexplorer.h"
+
+/* Forward declaration */
+class QStringList;
+class QPoint;
 
 /**
  * @brief LibraryExplorer display widget
@@ -61,6 +65,9 @@ protected:
     /** Display mode */
     DisplayMode_t m_displayMode;
 
+    /** Database link */
+    QSqlDatabase m_db;
+
 signals:
     /**
      * Signal emitted when user want to add file to the playlist
@@ -90,10 +97,18 @@ public slots:
     /**
      * Scan a directory and his sub-directory for audio files
      *
-     * @brief addDirectories
-     * @param path Directory to scan for files
+     * @brief addDirectory
+     * @param path Directory path to scan for files
      */
-    void addDirectories(const QString& path);
+    void addDirectory(const QString& path);
+
+    /**
+     * Scan a bunch of directories for audio files
+     *
+     * @brief addDirectories
+     * @param paths Directories path to scan for files
+     */
+    void addDirectories(const QString& paths);
 
     /**
      * Set the current display mode
@@ -103,15 +118,20 @@ public slots:
      */
     void setDisplayMode(const DisplayMode_t mode);
 
+    /**
+     * Search in tree view according specified search terms
+     *
+     * @brief searchBy
+     * @param terms Terms to search
+     * @param mode Display / Search mode
+     */
+    void searchBy(const QString& terms, const DisplayMode_t mode);
+
 protected slots:
     void refresh();
     void handleReseach();
-    void handleRightClick(QContextMenuEvent *event);
+    void handleRightClick(const QPoint& pos);
     void handleDisplayMode();
-    void handleDisplayModeMusic();
-    void handleDisplayModeAlbum();
-    void handleDisplayModeArtist();
-    void handleDisplayModeGenre();
 };
 
 #endif // LIBRARYEXPLORER_H

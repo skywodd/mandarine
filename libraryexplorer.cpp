@@ -1,14 +1,16 @@
 /* Includes */
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QContextMenuEvent>
+#include <QStringList>
 #include <QMessageBox>
-#include <QDir>
 #include <QDirIterator>
-#include <QMenu>
 #include <QCursor>
 #include <QAction>
+#include <QPoint>
+#include <QMenu>
+#include <QDir>
 #include "libraryexplorer.h"
+
+/* Sql */
+#include <QSqlQuery>
 
 /* Taglib includes */
 #include <taglib/taglib.h>
@@ -26,7 +28,7 @@ LibraryExplorer::LibraryExplorer(QWidget *parent) :
     connect(library_search_button, &QAbstractButton::clicked, this, &LibraryExplorer::handleReseach);
     connect(library_search_input, &QLineEdit::returnPressed, this, &LibraryExplorer::handleReseach);
     connect(library_explorer_displaymode, &QAbstractButton::clicked, this, &LibraryExplorer::handleDisplayMode);
-    connect(library_explorer_tree, &QTreeViewClickable::rightClicked, this, &LibraryExplorer::handleRightClick);
+    connect(library_explorer_tree, &QTreeViewClickable::customContextMenuRequested, this, &LibraryExplorer::handleRightClick);
 }
 
 LibraryExplorer::~LibraryExplorer()
@@ -36,14 +38,14 @@ LibraryExplorer::~LibraryExplorer()
 void LibraryExplorer::openDatabase(const QString &filename)
 {
     /* Init. database link */
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setHostName("localhost");
-    db.setDatabaseName(filename);
-    db.setUserName("root");
-    db.setPassword("");
+    m_db = QSqlDatabase::addDatabase("QSQLITE");
+    m_db.setHostName("localhost");
+    m_db.setDatabaseName(filename);
+    m_db.setUserName("root");
+    m_db.setPassword("");
 
     /* Open database */
-    if(!db.open())
+    if(!m_db.open())
     {
         /* Drop error message (critical) and exit */
         QMessageBox::critical(this, QString(tr("Erreur interne")), QString(tr("Impossible d'ouvrir le fichier de base de données !")));
@@ -51,7 +53,7 @@ void LibraryExplorer::openDatabase(const QString &filename)
     }
 
     /* Prepare database structure if freshly created */
-    QSqlQuery query;
+    QSqlQuery query(m_db);
     query.prepare("CREATE TABLE IF NOT EXISTS \"musics\" (\"path\" TEXT PRIMARY KEY, \"title\" TEXT, \"album\" TEXT, \"artist\" TEXT, \"genre\" TEXT, \"year\" TEXT)");
     query.exec();
 
@@ -74,7 +76,7 @@ void LibraryExplorer::addFile(const QString &filename)
     TagLib::uint year = f.tag()->year();
 
     /* Add them to the database */
-    QSqlQuery query;
+    QSqlQuery query(m_db);
     query.prepare(QString("INSERT INTO \"musics\" VALUES(\"%1\", \"%2\", \"%3\", \"%4\", \"%5\", \"%6\")").arg(filename, QString(title.toCString()), QString(album.toCString()), QString(artist.toCString()), QString(genre.toCString())).arg(year));
     query.exec();
 }
@@ -88,7 +90,7 @@ void LibraryExplorer::addFiles(const QStringList &filenames)
     }
 }
 
-void LibraryExplorer::addDirectories(const QString &path)
+void LibraryExplorer::addDirectory(const QString &path)
 {
     /* Open the directory */
     QDirIterator iterator(QDir(path).absolutePath(), QDirIterator::Subdirectories);
@@ -104,6 +106,15 @@ void LibraryExplorer::addDirectories(const QString &path)
     }
 }
 
+void LibraryExplorer::addDirectories(const QString &paths)
+{
+    /* For each directory */
+    foreach(QString path, paths)
+    {
+        addDirectory(path);
+    }
+}
+
 void LibraryExplorer::setDisplayMode(const LibraryExplorer::DisplayMode_t mode)
 {
     /* Set the new display mode */
@@ -113,6 +124,11 @@ void LibraryExplorer::setDisplayMode(const LibraryExplorer::DisplayMode_t mode)
     refresh();
 }
 
+void LibraryExplorer::searchBy(const QString &terms, const LibraryExplorer::DisplayMode_t mode)
+{
+    // TODO
+}
+
 void LibraryExplorer::refresh()
 {
     /* Refresh only if the database is ready */
@@ -120,18 +136,42 @@ void LibraryExplorer::refresh()
         return;
 
     /* Clear the current tree view */
-    //library_explorer_tree->
+    //TODO
 }
 
 void LibraryExplorer::handleReseach()
 {
-    // TODO
+    /* Create a contextual menu */
+    QMenu contextualMenu(this);
+
+    /* Craft menu's items */
+    QAction* displayMusic = contextualMenu.addAction(tr("Recherche par musiques"));
+    QAction* displayAlbum = contextualMenu.addAction(tr("Recherche par albums"));
+    QAction* displayArtist = contextualMenu.addAction(tr("Recherche par artistes"));
+    QAction* displayGenre = contextualMenu.addAction(tr("Recherche par genres"));
+
+    /* Connect menu signals to slots */
+    connect(displayMusic, &QAction::triggered, [this]() {
+        searchBy(library_search_input->text(), DISPLAY_MUSIC);
+    });
+    connect(displayAlbum, &QAction::triggered, [this]() {
+        searchBy(library_search_input->text(), DISPLAY_ALBUM);
+    });
+    connect(displayArtist, &QAction::triggered, [this]() {
+        searchBy(library_search_input->text(), DISPLAY_ARTIST);
+    });
+    connect(displayGenre, &QAction::triggered, [this]() {
+        searchBy(library_search_input->text(), DISPLAY_GENRE);
+    });
+
+    /* Show menu at the current cursor position */
+    contextualMenu.exec(QCursor().pos());
 }
 
-void LibraryExplorer::handleRightClick(QContextMenuEvent *event)
+void LibraryExplorer::handleRightClick(const QPoint& pos)
 {
     /* Get the index at the right click position */
-    QModelIndex index = library_explorer_tree->indexAt(event->pos());
+    QModelIndex index = library_explorer_tree->indexAt(pos);
 
     /* Check if the index is valid */
     if (index.isValid())
@@ -146,47 +186,25 @@ void LibraryExplorer::handleDisplayMode()
     QMenu contextualMenu(this);
 
     /* Craft menu's items */
-    QAction* displayMusic = contextualMenu.addAction(tr("Par musiques"));
-    QAction* displayAlbum = contextualMenu.addAction(tr("Par albums"));
-    QAction* displayArtist = contextualMenu.addAction(tr("Par artistes"));
-    QAction* displayGenre = contextualMenu.addAction(tr("Par genres"));
+    QAction* displayMusic = contextualMenu.addAction(tr("Affichage par musiques"));
+    QAction* displayAlbum = contextualMenu.addAction(tr("Affichage par albums"));
+    QAction* displayArtist = contextualMenu.addAction(tr("Affichage par artistes"));
+    QAction* displayGenre = contextualMenu.addAction(tr("Affichage par genres"));
 
     /* Connect menu signals to slots */
-    connect(displayMusic, &QAction::triggered, this, &LibraryExplorer::handleDisplayModeMusic);
-    connect(displayAlbum, &QAction::triggered, this, &LibraryExplorer::handleDisplayModeAlbum);
-    connect(displayArtist, &QAction::triggered, this, &LibraryExplorer::handleDisplayModeArtist);
-    connect(displayGenre, &QAction::triggered, this, &LibraryExplorer::handleDisplayModeGenre);
+    connect(displayMusic, &QAction::triggered, [this]() {
+        setDisplayMode(DISPLAY_MUSIC);
+    });
+    connect(displayAlbum, &QAction::triggered, [this]() {
+        setDisplayMode(DISPLAY_ALBUM);
+    });
+    connect(displayArtist, &QAction::triggered, [this]() {
+        setDisplayMode(DISPLAY_ARTIST);
+    });
+    connect(displayGenre, &QAction::triggered, [this]() {
+        setDisplayMode(DISPLAY_GENRE);
+    });
 
     /* Show menu at the current cursor position */
     contextualMenu.exec(QCursor().pos());
-
-    /* Disconnect menu signals */
-    disconnect(displayMusic, &QAction::triggered, this, &LibraryExplorer::handleDisplayModeMusic);
-    disconnect(displayAlbum, &QAction::triggered, this, &LibraryExplorer::handleDisplayModeAlbum);
-    disconnect(displayArtist, &QAction::triggered, this, &LibraryExplorer::handleDisplayModeArtist);
-    disconnect(displayGenre, &QAction::triggered, this, &LibraryExplorer::handleDisplayModeGenre);
-}
-
-void LibraryExplorer::handleDisplayModeMusic()
-{
-    /* Set the display mode */
-    setDisplayMode(DISPLAY_MUSIC);
-}
-
-void LibraryExplorer::handleDisplayModeAlbum()
-{
-    /* Set the display mode */
-    setDisplayMode(DISPLAY_ALBUM);
-}
-
-void LibraryExplorer::handleDisplayModeArtist()
-{
-    /* Set the display mode */
-    setDisplayMode(DISPLAY_ARTIST);
-}
-
-void LibraryExplorer::handleDisplayModeGenre()
-{
-    /* Set the display mode */
-    setDisplayMode(DISPLAY_GENRE);
 }
