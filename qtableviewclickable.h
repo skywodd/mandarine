@@ -32,7 +32,6 @@
 
 /* Forward declarations */
 class QWidget;
-class QContextMenuEvent;
 
 /**
  * @brief QTableView with rigth click support
@@ -61,22 +60,10 @@ public:
     virtual ~QTableViewClickable();
     
 signals:
-    /**
-     * Signal emitted when user rigth click in the widget
-     *
-     * @brief rightClicked
-     * @param event Requested QContextMenuEvent event
-     */
-    void rightClicked(QContextMenuEvent* event);
+    void mediaMoved(int from, int to);
 
 protected:
-    /**
-     * Overload of the default QTableView contextMenuEvent() for rigth click support
-     *
-     * @brief contextMenuEvent
-     * @param event Requested QContextMenuEvent event
-     */
-    void contextMenuEvent(QContextMenuEvent* event);
+    // TODO internal move by drag 'n drop
 };
 
 #endif // QTABLEVIEWCLICKABLE_H
