@@ -28,10 +28,10 @@
 #define PLAYERCONTROLS_H
 
 /* Dependencies */
-#include <QWidget>
-#include "ui_playercontrols.h"
 #include <QMediaPlaylist>
+#include <QWidget>
 #include <QString>
+#include "ui_playercontrols.h"
 
 /**
  * @brief Player controls widget
@@ -123,17 +123,7 @@ public slots:
 
 protected slots:
     void handleSpeedLevel();
-    void handleSpeedLevel1();
-    void handleSpeedLevel2();
-    void handleSpeedLevel3();
-    void handleSpeedLevel4();
-    void handleSpeedLevel5();
-
     void handlePlayMode();
-    void handlePlayModeChangeSequential();
-    void handlePlayModeChangeLoopItem();
-    void handlePlayModeChangeLoopPlaylist();
-    void handlePlayModeChangeRandom();
 };
 
 #endif // PLAYERCONTROLS_H

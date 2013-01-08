@@ -31,7 +31,7 @@ PlayerControls::PlayerControls(QWidget *parent) :
 {
     /* Setup UI */
     setupUi(this);
-    setMode(MODE_BEGIN);
+    setStatus(false);
 
     /* Connect button signals to slots */
     connect(player_controls_play, &QAbstractButton::clicked, this, &PlayerControls::setTogglePlayPause);
@@ -217,46 +217,24 @@ void PlayerControls::handleSpeedLevel()
     }
 
     /* Connect items signals to slots */
-    connect(level_1, &QAction::triggered, this, &PlayerControls::handleSpeedLevel1);
-    connect(level_2, &QAction::triggered, this, &PlayerControls::handleSpeedLevel2);
-    connect(level_3, &QAction::triggered, this, &PlayerControls::handleSpeedLevel3);
-    connect(level_4, &QAction::triggered, this, &PlayerControls::handleSpeedLevel4);
-    connect(level_5, &QAction::triggered, this, &PlayerControls::handleSpeedLevel5);
+    connect(level_1, &QAction::triggered, [this]() {
+        setSpeed(SPEED_025);
+    });
+    connect(level_2, &QAction::triggered, [this]() {
+        setSpeed(SPEED_05);
+    });
+    connect(level_3, &QAction::triggered, [this]() {
+        setSpeed(SPEED_NORMAL);
+    });
+    connect(level_4, &QAction::triggered, [this]() {
+        setSpeed(SPEED_2);
+    });
+    connect(level_5, &QAction::triggered, [this]() {
+        setSpeed(SPEED_4);
+    });
 
     /* Show menu at the current cursor position */
     changeSpeed.exec(QCursor().pos());
-
-    /* Disconnect signals */
-    disconnect(level_1, &QAction::triggered, this, &PlayerControls::handleSpeedLevel1);
-    disconnect(level_2, &QAction::triggered, this, &PlayerControls::handleSpeedLevel2);
-    disconnect(level_3, &QAction::triggered, this, &PlayerControls::handleSpeedLevel3);
-    disconnect(level_4, &QAction::triggered, this, &PlayerControls::handleSpeedLevel4);
-    disconnect(level_5, &QAction::triggered, this, &PlayerControls::handleSpeedLevel5);
-}
-
-void PlayerControls::handleSpeedLevel1()
-{
-    setSpeed(SPEED_025);
-}
-
-void PlayerControls::handleSpeedLevel2()
-{
-    setSpeed(SPEED_05);
-}
-
-void PlayerControls::handleSpeedLevel3()
-{
-    setSpeed(SPEED_NORMAL);
-}
-
-void PlayerControls::handleSpeedLevel4()
-{
-    setSpeed(SPEED_2);
-}
-
-void PlayerControls::handleSpeedLevel5()
-{
-    setSpeed(SPEED_4);
 }
 
 void PlayerControls::handlePlayMode()
@@ -295,37 +273,20 @@ void PlayerControls::handlePlayMode()
     }
 
     /* Connect items signals to slots */
-    connect(sequential, &QAction::toggled, this, &PlayerControls::handlePlayModeChangeSequential);
-    connect(loopItem, &QAction::toggled, this, &PlayerControls::handlePlayModeChangeLoopItem);
-    connect(loopPlaylist, &QAction::toggled, this, &PlayerControls::handlePlayModeChangeLoopPlaylist);
-    connect(random, &QAction::toggled, this, &PlayerControls::handlePlayModeChangeRandom);
+    connect(sequential, &QAction::toggled, [this]() {
+        setPlayMode(QMediaPlaylist::Sequential);
+    });
+    connect(loopItem, &QAction::toggled, [this]() {
+        setPlayMode(QMediaPlaylist::CurrentItemInLoop);
+    });
+    connect(loopPlaylist, &QAction::toggled, [this]() {
+        setPlayMode(QMediaPlaylist::Loop);
+    });
+    connect(random, &QAction::toggled, [this]() {
+        setPlayMode(QMediaPlaylist::Random);
+    });
 
     /* Show menu at the current cursor position */
     playMode.exec(QCursor().pos());
-
-    /* Disconnect signals */
-    disconnect(sequential, &QAction::toggled, this, &PlayerControls::handlePlayModeChangeSequential);
-    disconnect(loopItem, &QAction::toggled, this, &PlayerControls::handlePlayModeChangeLoopItem);
-    disconnect(loopPlaylist, &QAction::toggled, this, &PlayerControls::handlePlayModeChangeLoopPlaylist);
-    disconnect(random, &QAction::toggled, this, &PlayerControls::handlePlayModeChangeRandom);
 }
 
-void PlayerControls::handlePlayModeChangeSequential()
-{
-    setPlayMode(QMediaPlaylist::Sequential);
-}
-
-void PlayerControls::handlePlayModeChangeLoopItem()
-{
-   setPlayMode(QMediaPlaylist::CurrentItemInLoop);
-}
-
-void PlayerControls::handlePlayModeChangeLoopPlaylist()
-{
-    setPlayMode(QMediaPlaylist::Loop);
-}
-
-void PlayerControls::handlePlayModeChangeRandom()
-{
-    setPlayMode(QMediaPlaylist::Random);
-}
