@@ -1,10 +1,11 @@
 /* Includes */
 #include <QUrl>
 #include <QMenu>
+#include <QPoint>
+#include <QAction>
 #include <QString>
 #include <QFileDialog>
 #include <QModelIndex>
-#include <QContextMenuEvent>
 #include "playlistcontrols.h"
 
 PlaylistControls::PlaylistControls(QWidget *parent) :
@@ -22,7 +23,7 @@ PlaylistControls::PlaylistControls(QWidget *parent) :
 
     /* Connect Tableview signals to slots */
     connect(playlist_controls_view, &QAbstractItemView::doubleClicked, this, &PlaylistControls::handleDoubleClick);
-    connect(playlist_controls_view, &QTableViewClickable::rightClicked, this, &PlaylistControls::handleRightClicked);
+    connect(playlist_controls_view, &QTableViewClickable::customContextMenuRequested, this, &PlaylistControls::handleRightClicked);
 
     /* Set TableView source data's model */
     playlist_controls_view->setModel(m_playlistTableModel);
@@ -124,10 +125,10 @@ void PlaylistControls::handleDoubleClick(const QModelIndex &index)
     setCurrentIndex(index.row());
 }
 
-void PlaylistControls::handleRightClicked(QContextMenuEvent *event)
+void PlaylistControls::handleRightClicked(const QPoint &pos)
 {
     /* Get the index at the right click position */
-    QModelIndex index = playlist_controls_view->indexAt(event->pos());
+    QModelIndex index = playlist_controls_view->indexAt(pos);
 
     /* Check if the index is valid */
     if (index.isValid())

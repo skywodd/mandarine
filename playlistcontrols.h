@@ -33,6 +33,12 @@
 #include "ui_playlistcontrols.h"
 #include "playlisttablemodel.h"
 
+/* Forward declarations */
+class QUrl;
+class QString;
+class QModelIndex;
+class QPoint;
+
 /**
  * @brief Playlist controls widget
  *
@@ -69,6 +75,7 @@ signals:
     void savePlaylist(const QUrl& location);
     void currentIndexChanged(int pos);
     void mediaRemoved(int pos);
+    void mediaMoved(int from, int to); // TODO -> drag 'n drop internal
 
 public slots:
     /**
@@ -140,7 +147,7 @@ protected slots:
      *
      * @brief handleRightClick
      */
-    void handleRightClicked(QContextMenuEvent* event);
+    void handleRightClicked(const QPoint& pos);
 
     /**
      * Handle contextual menu play click
