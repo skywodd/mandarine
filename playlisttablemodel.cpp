@@ -252,3 +252,9 @@ void PlaylistTableModel::editRow(int pos, PlaylistTableModel::EditMode_t how, Pl
     /* Warm view for change */
     emit dataChanged(createIndex(pos, 0), createIndex(pos, 4));
 }
+
+PlaylistTableModel::RowData_t PlaylistTableModel::getRow(int pos) const
+{
+    /* Return row's data */
+    return m_data[pos];
+}

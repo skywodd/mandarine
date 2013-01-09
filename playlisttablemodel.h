@@ -199,6 +199,15 @@ public slots:
      * @param data New data to store
      */
     void editRow(int pos, EditMode_t how, RowData_t& data);
+
+    /**
+     * Get data of a row
+     *
+     * @brief getRow
+     * @param pos Row to retrieve
+     * @return Row's data
+     */
+    RowData_t getRow(int pos) const;
 };
 
 #endif // PLAYLISTTABLEMODEL_H

@@ -139,6 +139,17 @@ public slots:
         m_playlistTableModel->editRow(pos, how, data);
     }
 
+    /**
+     * Passthrought function to get row's data
+     *
+     * @brief getRow
+     * @param pos Row to retrieve
+     * @return  Row's data
+     */
+    inline PlaylistTableModel::RowData_t getRow(int pos) {
+        return m_playlistTableModel->getRow(pos);
+    }
+
 protected slots:
     /**
      * Handle search playlist input trigger
