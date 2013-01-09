@@ -3,6 +3,7 @@
 
 /* Dependencies */
 #include <QMainWindow>
+#include <QMediaPlayer>
 #include "playlisttablemodel.h"
 #include "ui_mainwindow.h"
 
@@ -10,7 +11,6 @@
 class QUrl;
 class Widget;
 class QString;
-class QMediaPlayer;
 class QMediaPlaylist;
 
 /**
@@ -46,13 +46,9 @@ public:
     virtual ~MainWindow();
 
 protected slots:
+    void proxyMediaPlayerError(QMediaPlayer::Error error);
     void proxyAddMedia(const QString& path, const PlaylistTableModel::RowData_t& infos);
-
-    void handleRemoveMedia(int pos);
-    void handlePlaylistMetaChanged();
-
-    void handleSavePlaylist(const QUrl& location);
-    void handleLoadPlaylist(const QUrl& location);
+    void proxyPlaylistMetaChanged(const QString& key, const QVariant& value);
     void handlePlaylistLoaded();
     void handlePlaylistError();
 };
