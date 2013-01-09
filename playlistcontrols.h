@@ -127,6 +127,18 @@ public slots:
      */
     void removeMedia(int pos);
 
+    /**
+     * Passthrought function to edit media row data
+     *
+     * @brief editMedia
+     * @param pos Media index to modify
+     * @param how Edit mode
+     * @param data New data
+     */
+    inline void editMedia(int pos, PlaylistTableModel::EditMode_t how, PlaylistTableModel::RowData_t data) {
+        m_playlistTableModel->editRow(pos, how, data);
+    }
+
 protected slots:
     /**
      * Handle search playlist input trigger
