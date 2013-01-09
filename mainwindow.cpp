@@ -7,6 +7,7 @@
 #include <QString>
 #include <QWidget>
 #include <QDebug>
+#include <QFile>
 #include <QUrl>
 #include "playlisttablemodel.h"
 #include "aboutdialog.h"
@@ -79,42 +80,29 @@ MainWindow::MainWindow(QWidget *parent) :
         row.duration = time; // TODO fix it
         playlist_controls->editMedia(m_playlist->currentIndex(), PlaylistTableModel::EDIT_DURATION, row);
     });
-    connect(m_player, &QMediaPlayer::mediaChanged, [this](const QMediaContent& media) {
-        qDebug() << "m_player::mediaChanged -> music_info::bindQMediaRessource";
-        QMediaResource* rsc = new QMediaResource(media.canonicalResource());
-        music_info->bindQMediaRessource(rsc);
-    });
     connect(m_player, &QMediaPlayer::positionChanged, player_slides, &PlayerSliders::setCurrentTime);
     connect(m_player, &QMediaPlayer::seekableChanged, player_slides, &PlayerSliders::setSeekable);
     connect(m_player, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state) {
         qDebug() << "m_player::stateChanged -> nothing";
         switch(state) {
         case QMediaPlayer::PlayingState:
-            qDebug() << "is playing" ;
+            qDebug() << "QMediaPlayer is playing" ;
             break;
 
         case QMediaPlayer::PausedState:
-            qDebug() << "is paused" ;
+            qDebug() << "QMediaPlayer is paused" ;
             break;
 
         case QMediaPlayer::StoppedState:
-            qDebug() << "is stopped" ;
+            qDebug() << "QMediaPlayer is stopped" ;
             break;
         }
     });
+    connect(m_player, static_cast<void (QMediaPlayer::*)(const QString&, const QVariant&)>(&QMediaPlayer::metaDataChanged), this, &MainWindow::proxyPlaylistMetaChanged);
+    // Ho god ... why !? #uglyCast T_T
 
     /* Connect QMediaPlaylist to slots */
-    connect(m_playlist, &QMediaPlaylist::currentIndexChanged, playlist_controls, &PlaylistControls::setCurrentIndex);
-    connect(m_playlist, &QMediaPlaylist::currentIndexChanged, [this](int) {
-        qDebug() << "m_playlist::currentIndexChanged -> player_controls::setMode";
-        if(m_playlist->currentIndex() == (m_playlist->mediaCount() - 1))
-            player_controls->setMode(PlayerControls::MODE_ENDING);
-        else if(m_playlist->currentIndex() == 0)
-            player_controls->setMode(PlayerControls::MODE_BEGIN);
-        else
-            player_controls->setMode(PlayerControls::MODE_RUNNING);
-        //TODO init webview & meta data
-    });
+    connect(m_playlist, &QMediaPlaylist::currentIndexChanged, this, &MainWindow::proxyRefreshInfo);
     connect(m_playlist, &QMediaPlaylist::loaded, this, &MainWindow::handlePlaylistLoaded);
     connect(m_playlist, &QMediaPlaylist::loadFailed, this, &MainWindow::handlePlaylistError);
     /*connect(m_playlist, &QMediaPlaylist::mediaChanged, [this](int start, int end) {
@@ -199,6 +187,40 @@ MainWindow::~MainWindow()
     delete m_playlist;
 }
 
+void MainWindow::proxyRefreshInfo(int index)
+{
+	qDebug() << "m_playlist::currentIndexChanged -> player_controls::setMode";
+
+	/* Setup player controls */
+	if(index == (m_playlist->mediaCount() - 1))
+		player_controls->setMode(PlayerControls::MODE_ENDING);
+	else if(index == 0)
+		player_controls->setMode(PlayerControls::MODE_BEGIN);
+	else
+		player_controls->setMode(PlayerControls::MODE_RUNNING);
+
+	/* Setup meta info display & web view */
+	if(m_playlist->mediaCount() == 0) return;
+	PlaylistTableModel::RowData_t row = playlist_controls->getRow(index);
+	proxyPlaylistMetaChanged(QMediaMetaData::Title, row.title);
+	proxyPlaylistMetaChanged(QMediaMetaData::AlbumTitle, row.album);
+	proxyPlaylistMetaChanged(QMediaMetaData::Author, row.authors);
+	proxyPlaylistMetaChanged(QMediaMetaData::Genre, row.genre);
+
+	/* Display external cover if possible */
+	QString filepath = m_playlist->media(index).canonicalUrl().toLocalFile();
+	QFileInfo cover(QFileInfo(filepath).absolutePath() + QString("/cover.jpg"));
+	qDebug() << "Cover filepath: " << cover.absoluteFilePath();
+	if(cover.exists())
+		music_info->displayExternalCover(cover.absoluteFilePath());
+
+	/* Display authors info */
+	author_info->displayInfo(row.authors);
+
+	/* Resend signal to parent */
+	playlist_controls->setCurrentIndex(index);
+}
+
 void MainWindow::proxyMediaPlayerError(QMediaPlayer::Error e)
 {
     qDebug() << "-> MainWindow::proxyMediaPlayerError(" << e << ")";
@@ -218,10 +240,6 @@ void MainWindow::proxyPlaylistMetaChanged(const QString& key, const QVariant& va
 {
     qDebug() << "-> MainWindow::proxyPlaylistMetaChanged(" << key << ", ...)";
 
-    /* Display wikipedia informations */
-    if(key == QMediaMetaData::AlbumTitle)
-        author_info->displayInfo(value.toString());
-
     /* Display meta informations */
     music_info->displayMetaInfo(key, value);
 }
@@ -229,9 +247,6 @@ void MainWindow::proxyPlaylistMetaChanged(const QString& key, const QVariant& va
 void MainWindow::handlePlaylistLoaded()
 {
     qDebug() << "-> MainWindow::handlePlaylistLoaded()";
-    //player_controls->setMode(PlayerControls::MODE_BEGIN);
-    //player_controls->setStatus(true);
-    //playlist_controls->setCurrentIndex(0);
 }
 
 void MainWindow::handlePlaylistError()
@@ -239,4 +254,3 @@ void MainWindow::handlePlaylistError()
     qDebug() << "-> MainWindow::handlePlaylistError()";
     QMessageBox::warning(this, QString(tr("Erreur de chargement")), QString(tr("Une erreur est survenue lors du chargement de la playlist !\n%1")).arg(m_playlist->errorString()));
 }
-
