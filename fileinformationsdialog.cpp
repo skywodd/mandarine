@@ -17,8 +17,8 @@
 
 /* Includes */
 #include <QSize>
-#include <QWidget>
 #include <QDebug>
+#include <QWidget>
 #include <QMediaResource>
 #include "fileinformationsdialog.h"
 
@@ -35,9 +35,13 @@ FileInformationsDialog::~FileInformationsDialog()
 
 void FileInformationsDialog::displayInfo(const QMediaResource *source)
 {
+    qDebug() << "-> FileInformationsDialog::displayInfo(" << source << ")";
+
     /* Check if media is null */
     if(source->isNull())
         return;
+
+    qDebug() << "FileInformationsDialog::displayInfo - isNotNull";
 
     /* Display media informations */
     file_info_path->setText(source->url().toLocalFile());

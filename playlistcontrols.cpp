@@ -2,6 +2,7 @@
 #include <QUrl>
 #include <QMenu>
 #include <QPoint>
+#include <QDebug>
 #include <QAction>
 #include <QString>
 #include <QFileDialog>
@@ -25,6 +26,7 @@ PlaylistControls::PlaylistControls(QWidget *parent) :
     connect(playlist_controls_view, &QAbstractItemView::doubleClicked, this, &PlaylistControls::handleDoubleClick);
     connect(playlist_controls_view, &QTableViewClickable::customContextMenuRequested, this, &PlaylistControls::handleRightClicked);
     connect(playlist_controls_view, &QTableViewClickable::mediaMoved, [this](int from, int to) {
+        qDebug() << "-> mediaMoved(" << from << ", " << to << ")";
         emit mediaMoved(from, to);
     });
 
@@ -40,15 +42,20 @@ PlaylistControls::~PlaylistControls()
 
 void PlaylistControls::handleNewPlaylist()
 {
+    qDebug() << "-> PlaylistControls::handleNewPlaylist()";
+
     /* Flush playlist view and model */
     m_playlistTableModel->flush();
 
     /* Warm parent for new playlist */
+    qDebug() << "PlaylistControls -> newPlaylist()";
     emit newPlaylist();
 }
 
 void PlaylistControls::handleLoadPlaylist()
 {
+    qDebug() << "-> PlaylistControls::handleLoadPlaylist()";
+
     /* Prompt user */
     QString filename = QFileDialog::getOpenFileName(this, tr("Ouvrir une playlist ..."), "", tr("Ficher de playlist (*.*)"));
 
@@ -57,11 +64,14 @@ void PlaylistControls::handleLoadPlaylist()
         return;
 
     /* Warm parent for load playlist */
+    qDebug() << "PlaylistControls -> loadPlaylist(" << filename << ")";
     emit loadPlaylist(QUrl(filename));
 }
 
 void PlaylistControls::handleSavePlaylist()
 {
+    qDebug() << "-> PlaylistControls::handleSavePlaylist()";
+
     /* Prompt user */
     QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder une playlist ..."), "", tr("Ficher de playlist (*.*)"));
 
@@ -70,21 +80,27 @@ void PlaylistControls::handleSavePlaylist()
         return;
 
     /* Warm parent for load playlist */
+    qDebug() << "PlaylistControls -> savePlaylist(" << filename << ")";
     emit savePlaylist(QUrl(filename));
 }
 
 void PlaylistControls::goToCurrentIndex()
 {
+    qDebug() << "-> PlaylistControls::goToCurrentIndex()";
+
     /* Select the currently played row */
     playlist_controls_view->selectRow(m_playlistTableModel->getCurrentIndex());
 }
 
 void PlaylistControls::setCurrentIndex(int pos)
 {
+    qDebug() << "-> PlaylistControls::setCurrentIndex(" << pos << ")";
+
     /* Set the currently played row */
     m_playlistTableModel->setCurrentIndex(pos);
 
     /* Warm parent for change the current index*/
+    qDebug() << "PlaylistControls -> currentIndexChanged(" << pos << ")";
     emit currentIndexChanged(pos);
 }
 
@@ -96,6 +112,8 @@ void PlaylistControls::addMedia(const PlaylistTableModel::RowData_t &media)
 
 void PlaylistControls::removeMedia(int pos)
 {
+    qDebug() << "-> PlaylistControls::removeMedia(" << pos << ")";
+
     /* If the media is currently played */
     if(pos == m_playlistTableModel->getCurrentIndex())
     {
@@ -106,11 +124,14 @@ void PlaylistControls::removeMedia(int pos)
     m_playlistTableModel->removeRow(pos);
 
     /* Warm playlist for remove */
+    qDebug() << "PlaylistControls -> mediaRemoved(" << pos << ")";
     emit mediaRemoved(pos);
 }
 
 void PlaylistControls::handleSearchPlaylist(const QString& text)
 {
+    qDebug() << "-> PlaylistControls::handleSearchPlaylist(" << text << ")";
+
     /* Process each rows */
     for(int i = 0; i < m_playlistTableModel->rowCount(); ++i)
     {
@@ -124,18 +145,24 @@ void PlaylistControls::handleSearchPlaylist(const QString& text)
 
 void PlaylistControls::handleDoubleClick(const QModelIndex &index)
 {
+    qDebug() << "-> PlaylistControls::handleDoubleClick(...)";
+
     /* Play the selected row */
     setCurrentIndex(index.row());
 }
 
 void PlaylistControls::handleRightClicked(const QPoint &pos)
 {
+    qDebug() << "-> PlaylistControls::handleRightClicked(...)";
+
     /* Get the index at the right click position */
     QModelIndex index = playlist_controls_view->indexAt(pos);
 
     /* Check if the index is valid */
     if (index.isValid())
     {
+        qDebug() << "-> PlaylistControls::handleRightClicked- isValid";
+
         /* Select the row associated with the index */
         playlist_controls_view->selectRow(index.row());
 
@@ -165,6 +192,8 @@ void PlaylistControls::handleRightClicked(const QPoint &pos)
 
 void PlaylistControls::handleContextualMenuPlay()
 {
+    qDebug() << "-> PlaylistControls::handleContextualMenuPlay()";
+
     /* Get the current selection */
     QItemSelectionModel *select = playlist_controls_view->selectionModel();
 
@@ -178,6 +207,8 @@ void PlaylistControls::handleContextualMenuPlay()
 
 void PlaylistControls::handleContextualMenuRemove()
 {
+    qDebug() << "-> PlaylistControls::handleContextualMenuRemove()";
+
     /* Get the current selection */
     QItemSelectionModel *select = playlist_controls_view->selectionModel();
 

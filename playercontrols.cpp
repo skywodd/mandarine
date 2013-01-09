@@ -49,6 +49,8 @@ PlayerControls::~PlayerControls()
 
 void PlayerControls::setTogglePlayPause()
 {
+    qDebug() << "-> PlayerControls::setTogglePlayPause()";
+
     /* toggle play / pause */
     if (m_isplaying)
         setPause();
@@ -58,33 +60,44 @@ void PlayerControls::setTogglePlayPause()
 
 void PlayerControls::setPlay()
 {
+    qDebug() << "-> PlayerControls::setPlay()";
+
     /* Force widget state to play */
     m_isplaying = true;
     player_controls_play->setIcon(QIcon(m_iconPause));
+
     qDebug() << "PlayerControls -> play()";
     emit play();
 }
 
 void PlayerControls::setPause()
 {
+    qDebug() << "-> PlayerControls::setPause()";
+
     /* Force widget state to pause */
     m_isplaying = false;
     player_controls_play->setIcon(QIcon(m_iconPlay));
+
     qDebug() << "PlayerControls -> pause()";
     emit pause();
 }
 
 void PlayerControls::setStop()
 {
+    qDebug() << "-> PlayerControls::setStop()";
+
     /* Force widget state to stop */
     m_isplaying = false;
     player_controls_play->setIcon(QIcon(m_iconPlay));
+
     qDebug() << "PlayerControls -> stop()";
     emit stop();
 }
 
 void PlayerControls::setSpeed(Speed_t speed)
 {
+    qDebug() << "-> PlayerControls::setSpeed(Speed_t speed)";
+
     /* Store speed modification level */
     m_speedLevel = speed;
 
@@ -117,7 +130,9 @@ void PlayerControls::setSpeed(Speed_t speed)
     }
 }
 
-void PlayerControls::setPlayMode(QMediaPlaylist::PlaybackMode playMode){
+void PlayerControls::setPlayMode(QMediaPlaylist::PlaybackMode playMode)
+{
+    qDebug() << "-> PlayerControls::setPlayMode(" << playMode << ")";
 
     /* Store playback mode */
     m_playMode = playMode;
@@ -129,6 +144,8 @@ void PlayerControls::setPlayMode(QMediaPlaylist::PlaybackMode playMode){
 
 void PlayerControls::setNext()
 {
+    qDebug() << "-> PlayerControls::setNext()";
+
     /* Emit next() signal */
     if(m_mode != MODE_ENDING)
     {
@@ -139,6 +156,8 @@ void PlayerControls::setNext()
 
 void PlayerControls::setPrevious()
 {
+    qDebug() << "-> PlayerControls::setPrevious()";
+
     /* Emit previous() signal */
     if(m_mode != MODE_BEGIN)
     {
@@ -149,6 +168,8 @@ void PlayerControls::setPrevious()
 
 void PlayerControls::setMode(Mode_t mode)
 {
+    qDebug() << "-> PlayerControls::setMode(" << mode << ")";
+
     /* Store mode */
     m_mode = mode;
 
@@ -173,6 +194,8 @@ void PlayerControls::setMode(Mode_t mode)
 
 void PlayerControls::setStatus(bool enabled)
 {
+    qDebug() << "-> PlayerControls::setStatus(" << enabled << ")";
+
     /* Set buttons states */
     player_controls_play->setEnabled(enabled);
     player_controls_stop->setEnabled(enabled);
@@ -188,6 +211,8 @@ void PlayerControls::setStatus(bool enabled)
 
 void PlayerControls::reset()
 {
+    qDebug() << "-> PlayerControls::reset()";
+
     /* Reset widget to his default state */
     setStop();
     setPlayMode(QMediaPlaylist::Sequential);
@@ -197,6 +222,7 @@ void PlayerControls::reset()
 
 void PlayerControls::handleSpeedLevel()
 {
+    qDebug() << "-> PlayerControls::handleSpeedLevel()";
     QMenu changeSpeed(this);
 
     /* Craft menu items */
@@ -234,18 +260,23 @@ void PlayerControls::handleSpeedLevel()
 
     /* Connect items signals to slots */
     connect(level_1, &QAction::triggered, [this]() {
+        qDebug() << "PlayerControls -> setSpeed(0.25)";
         setSpeed(SPEED_025);
     });
     connect(level_2, &QAction::triggered, [this]() {
+        qDebug() << "PlayerControls -> setSpeed(0.5)";
         setSpeed(SPEED_05);
     });
     connect(level_3, &QAction::triggered, [this]() {
+        qDebug() << "PlayerControls -> setSpeed(1.0)";
         setSpeed(SPEED_NORMAL);
     });
     connect(level_4, &QAction::triggered, [this]() {
+        qDebug() << "PlayerControls -> setSpeed(2.0)";
         setSpeed(SPEED_2);
     });
     connect(level_5, &QAction::triggered, [this]() {
+        qDebug() << "PlayerControls -> setSpeed(4.0)";
         setSpeed(SPEED_4);
     });
 
@@ -255,6 +286,7 @@ void PlayerControls::handleSpeedLevel()
 
 void PlayerControls::handlePlayMode()
 {
+    qDebug() << "-> PlayerControls::handlePlayMode()";
     QMenu playMode(this);
 
     /* Craft menu items */
@@ -290,15 +322,19 @@ void PlayerControls::handlePlayMode()
 
     /* Connect items signals to slots */
     connect(sequential, &QAction::toggled, [this]() {
+        qDebug() << "PlayerControls -> setPlayMode(QMediaPlaylist::Sequential)";
         setPlayMode(QMediaPlaylist::Sequential);
     });
     connect(loopItem, &QAction::toggled, [this]() {
+        qDebug() << "PlayerControls -> setPlayMode(QMediaPlaylist::CurrentItemInLoop))";
         setPlayMode(QMediaPlaylist::CurrentItemInLoop);
     });
     connect(loopPlaylist, &QAction::toggled, [this]() {
+        qDebug() << "PlayerControls -> setPlayMode(QMediaPlaylist::Loop)";
         setPlayMode(QMediaPlaylist::Loop);
     });
     connect(random, &QAction::toggled, [this]() {
+        qDebug() << "PlayerControls -> setPlayMode(QMediaPlaylist::Random)";
         setPlayMode(QMediaPlaylist::Random);
     });
 

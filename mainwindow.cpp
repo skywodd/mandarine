@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QDebug>
 #include <QUrl>
+#include "playlisttablemodel.h"
 #include "aboutdialog.h"
 #include "mainwindow.h"
 
@@ -22,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_player = new QMediaPlayer(this);
     m_playlist = new QMediaPlaylist(this);
     m_player->setPlaylist(m_playlist);
+    m_player->setNotifyInterval(1000);
 
     /* Connect menu player signals to slots */
     connect(action_play, &QAction::triggered, player_controls, &PlayerControls::setTogglePlayPause);
@@ -32,11 +34,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* Connect menu library signals to slots */
     connect(action_add_file, &QAction::triggered, [this](){
+        qDebug() << "action_add_file::triggered -> library_explorer::addFile";
         QStringList filenames = QFileDialog::getOpenFileNames(this, QString(tr("Ajouter des fichiers à la bibliothéque ...")));
         if(filenames.size() > 0)
             library_explorer->addFiles(filenames);
     });
     connect(action_add_directory, &QAction::triggered, [this](){
+        qDebug() << "action_add_directory::triggered -> library_explorer::addDirectories";
         QString path = QFileDialog::getExistingDirectory(this, QString(tr("Ajouter des fichiers à la bibliothéque ...")));
         if(path != "")
             library_explorer->addDirectories(path);
@@ -47,34 +51,43 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(action_save_playlist, &QAction::triggered, playlist_controls, &PlaylistControls::handleSavePlaylist);
     connect(action_open_playlist, &QAction::triggered, playlist_controls, &PlaylistControls::handleLoadPlaylist);
     connect(action_playmode_sequencial, &QAction::triggered, [this]() {
+        qDebug() << "action_playmode_sequencial::triggered -> player_controls::setPlayMode";
         player_controls->setPlayMode(QMediaPlaylist::Sequential);
     });
     connect(action_playmode_loopitem, &QAction::triggered, [this]() {
+        qDebug() << "action_playmode_sequencial::triggered -> player_controls::setPlayMode";
         player_controls->setPlayMode(QMediaPlaylist::CurrentItemInLoop);
     });
     connect(action_playmode_loopplaylist, &QAction::triggered, [this]() {
+        qDebug() << "action_playmode_sequencial::triggered -> player_controls::setPlayMode";
         player_controls->setPlayMode(QMediaPlaylist::Loop);
     });
     connect(action_playmode_random, &QAction::triggered, [this]() {
+        qDebug() << "action_playmode_sequencial::triggered -> player_controls::setPlayMode";
         player_controls->setPlayMode(QMediaPlaylist::Random);
     });
     connect(action_mix_playlist, &QAction::triggered, m_playlist, &QMediaPlaylist::shuffle);
     connect(action_go_to_playing, &QAction::triggered, playlist_controls, &PlaylistControls::goToCurrentIndex);
 
-    /* Connect menu tools signals to slots */
-    // TODO
-
     /* Connect QMediaPlayer signal to slots */
     //connect(m_player, &QMediaPlayer::audioAvailableChanged, player_controls, &PlayerControls::setStatus);
     connect(m_player, &QMediaPlayer::bufferStatusChanged, player_slides, &PlayerSliders::setBuffering);
     connect(m_player, &QMediaPlayer::durationChanged, player_slides, &PlayerSliders::setTotalTime);
-    //connect(m_player, &QMediaPlayer::error, this, &MainWindow::proxyMediaPlayerError);
+    connect(m_player, &QMediaPlayer::durationChanged, [this](qint64 time) {
+        qDebug() << "m_player::durationChanged -> update duration display";
+        PlaylistTableModel::RowData_t row;
+        row.duration = time; // TODO fix it
+        playlist_controls->editMedia(m_playlist->currentIndex(), PlaylistTableModel::EDIT_DURATION, row);
+    });
     connect(m_player, &QMediaPlayer::mediaChanged, [this](const QMediaContent& media) {
-        music_info->bindQMediaRessource(&media.canonicalResource());
+        qDebug() << "m_player::mediaChanged -> music_info::bindQMediaRessource";
+        QMediaResource* rsc = new QMediaResource(media.canonicalResource());
+        music_info->bindQMediaRessource(rsc);
     });
     connect(m_player, &QMediaPlayer::positionChanged, player_slides, &PlayerSliders::setCurrentTime);
     connect(m_player, &QMediaPlayer::seekableChanged, player_slides, &PlayerSliders::setSeekable);
     connect(m_player, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state) {
+        qDebug() << "m_player::stateChanged -> nothing";
         switch(state) {
         case QMediaPlayer::PlayingState:
             qDebug() << "is playing" ;
@@ -93,12 +106,14 @@ MainWindow::MainWindow(QWidget *parent) :
     /* Connect QMediaPlaylist to slots */
     connect(m_playlist, &QMediaPlaylist::currentIndexChanged, playlist_controls, &PlaylistControls::setCurrentIndex);
     connect(m_playlist, &QMediaPlaylist::currentIndexChanged, [this](int) {
+        qDebug() << "m_playlist::currentIndexChanged -> player_controls::setMode";
         if(m_playlist->currentIndex() == (m_playlist->mediaCount() - 1))
             player_controls->setMode(PlayerControls::MODE_ENDING);
         else if(m_playlist->currentIndex() == 0)
             player_controls->setMode(PlayerControls::MODE_BEGIN);
         else
             player_controls->setMode(PlayerControls::MODE_RUNNING);
+        //TODO init webview & meta data
     });
     connect(m_playlist, &QMediaPlaylist::loaded, this, &MainWindow::handlePlaylistLoaded);
     connect(m_playlist, &QMediaPlaylist::loadFailed, this, &MainWindow::handlePlaylistError);
@@ -111,7 +126,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* Connect menu help signals to slots */
     connect(action_show_help, &QAction::triggered, [this]() {
-        //QMessageBox::about(this, tr("Aide"), tr("Désolé mais pour le moment vous devez vous démerder tous seul :)"));
+        qDebug() << "action_show_help::triggered-> nothing";
+        //TODO
 
         // Demo
         PlaylistTableModel::RowData_t info;
@@ -127,9 +143,11 @@ MainWindow::MainWindow(QWidget *parent) :
         proxyAddMedia(QString("C:\\Users\\skywodd\\workspace\\github\\Mandarine-build-Desktop\\debug\\test2.mp3"), info);
     });
     connect(action_show_about, &QAction::triggered, [this]() {
+        qDebug() << "action_show_about::triggered -> AboutDialog::exec";
         AboutDialog(this).exec();
     });
     connect(action_show_aboutqt, &QAction::triggered, [this]() {
+        qDebug() << "action_show_aboutqt::triggered -> QMessageBox::aboutQt";
         QMessageBox::aboutQt(this, tr("A propos de Qt"));
     });
 
@@ -147,42 +165,19 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(player_controls, &PlayerControls::playModeChanged, m_playlist, &QMediaPlaylist::setPlaybackMode);
     connect(player_controls, &PlayerControls::speedChanged, m_player, &QMediaPlayer::setPlaybackRate);
 
-    connect(player_controls, &PlayerControls::play, [this]() {
-        qDebug() << "play";
-    });
-    connect(player_controls, &PlayerControls::pause, [this]() {
-        qDebug() << "pause";
-    });
-    connect(player_controls, &PlayerControls::stop, [this]() {
-        qDebug() << "stop";
-    });
-    connect(player_controls, &PlayerControls::next, [this]() {
-        qDebug() << "next";
-    });
-    connect(player_controls, &PlayerControls::previous, [this]() {
-        qDebug() << "previous";
-    });
-    connect(player_controls, &PlayerControls::playModeChanged, [this](QMediaPlaylist::PlaybackMode mode) {
-        qDebug() << "playModeChanged " << mode ;
-    });
-    connect(player_controls, &PlayerControls::speedChanged, [this](qreal speed) {
-        qDebug() << "speedChanged " << speed;
-    });
-
     /* Connect PlaylistControls signals to slots */
     connect(playlist_controls, &PlaylistControls::newPlaylist, m_playlist, &QMediaPlaylist::clear);
     connect(playlist_controls, &PlaylistControls::savePlaylist, [this](const QUrl& location) {
+        qDebug() << "playlist_controls::savePlaylist -> m_playlist->save";
         m_playlist->save(location);
     });
     connect(playlist_controls, &PlaylistControls::loadPlaylist, [this](const QUrl& location) {
+        qDebug() << "playlist_controls::loadPlaylist -> m_playlist->load";
         m_playlist->load(location);
     });
     connect(playlist_controls, &PlaylistControls::currentIndexChanged, m_playlist, &QMediaPlaylist::setCurrentIndex);
-    /*connect(playlist_controls, &PlaylistControls::currentIndexChanged, [this](int pos) {
-        m_playlist->setCurrentIndex(pos);
-        player_controls->setPlay();
-    });*/
     connect(playlist_controls, &PlaylistControls::mediaRemoved, [this] (int pos) {
+        qDebug() << "playlist_controls::mediaRemoved -> m_playlist->removeMedia";
         m_playlist->removeMedia(pos);
     });
 
@@ -191,7 +186,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* Init. player controls */
     player_controls->setMode(PlayerControls::MODE_BEGIN);
-    //player_controls->setStatus(true);
 
     /* Init. library */
     library_explorer->openDatabase();
@@ -205,13 +199,15 @@ MainWindow::~MainWindow()
     delete m_playlist;
 }
 
-void MainWindow::proxyMediaPlayerError(QMediaPlayer::Error)
+void MainWindow::proxyMediaPlayerError(QMediaPlayer::Error e)
 {
+    qDebug() << "-> MainWindow::proxyMediaPlayerError(" << e << ")";
     QMessageBox::critical(this, QString(tr("Erreur interne")), QString(tr("Une erreur est survenue !\n%1")).arg(m_player->errorString()));
 }
 
 void MainWindow::proxyAddMedia(const QString& path, const PlaylistTableModel::RowData_t& infos)
 {
+    qDebug() << "-> MainWindow::proxyAddMedia(" << path << ", ...)";
     QMediaContent media(QUrl::fromLocalFile(path));
     m_playlist->addMedia(media);
     playlist_controls->addMedia(infos);
@@ -220,6 +216,8 @@ void MainWindow::proxyAddMedia(const QString& path, const PlaylistTableModel::Ro
 
 void MainWindow::proxyPlaylistMetaChanged(const QString& key, const QVariant& value)
 {
+    qDebug() << "-> MainWindow::proxyPlaylistMetaChanged(" << key << ", ...)";
+
     /* Display wikipedia informations */
     if(key == QMediaMetaData::AlbumTitle)
         author_info->displayInfo(value.toString());
@@ -230,6 +228,7 @@ void MainWindow::proxyPlaylistMetaChanged(const QString& key, const QVariant& va
 
 void MainWindow::handlePlaylistLoaded()
 {
+    qDebug() << "-> MainWindow::handlePlaylistLoaded()";
     //player_controls->setMode(PlayerControls::MODE_BEGIN);
     //player_controls->setStatus(true);
     //playlist_controls->setCurrentIndex(0);
@@ -237,6 +236,7 @@ void MainWindow::handlePlaylistLoaded()
 
 void MainWindow::handlePlaylistError()
 {
+    qDebug() << "-> MainWindow::handlePlaylistError()";
     QMessageBox::warning(this, QString(tr("Erreur de chargement")), QString(tr("Une erreur est survenue lors du chargement de la playlist !\n%1")).arg(m_playlist->errorString()));
 }
 

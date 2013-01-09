@@ -17,6 +17,7 @@
 
 /* Includes */
 #include <QUrl>
+#include <QDebug>
 #include <QString>
 #include "infoexplorer.h"
 
@@ -33,6 +34,8 @@ InfoExplorer::~InfoExplorer()
 
 void InfoExplorer::displayInfo(const QString& search)
 {
+    qDebug() << "-> InfoExplorer::displayInfo(" << search << ")";
+
     /* Open the mobile version of the Wikipedia page for the specified search terms */
     info_explorer_webview->load(QUrl(QString("http://en.m.wikipedia.org/wiki/Main_Page/?search=%1").arg(search)));
 }
