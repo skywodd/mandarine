@@ -55,6 +55,9 @@
        <property name="toolTip">
         <string>Déplacement temporel</string>
        </property>
+       <property name="pageStep">
+        <number>50</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -146,6 +149,9 @@
        </property>
        <property name="value">
         <number>50</number>
+       </property>
+       <property name="tracking">
+        <bool>false</bool>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>

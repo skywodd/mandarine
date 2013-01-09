@@ -18,6 +18,7 @@
 /* Includes */
 #include <QTime>
 #include <QIcon>
+#include <QDebug>
 #include "playersliders.h"
 
 /* Static members initialization */
@@ -37,7 +38,9 @@ PlayerSliders::PlayerSliders(QWidget *parent) :
     player_sliders_time_slider->setMaximum(m_maximumSliderValue);
 
     /* Connect GUI signals to internal slots */
-    connect(player_sliders_time_slider, &QSlider::valueChanged, this, &PlayerSliders::handleTimeSlider);
+    connect(player_sliders_time_slider, &QSlider::sliderReleased, [this]() {
+        handleTimeSlider(player_sliders_time_slider->value());
+    });
     connect(player_sliders_volume_slider, &QSlider::valueChanged, this, &PlayerSliders::handleVolumeSlider);
     connect(player_sliders_total_time_label, &QLabelClickable::clicked, this, &PlayerSliders::handleTotalTimeLabel);
     connect(player_sliders_volume_mute, &QAbstractButton::clicked, this, &PlayerSliders::setToggleVolumeMute);
@@ -49,6 +52,7 @@ PlayerSliders::~PlayerSliders()
 
 void PlayerSliders::updateTimeLabels()
 {
+    qDebug() << "-> PlayerSliders::updateTimeLabels()";
     int hours, minutes, seconds, millis;
 
     /* Compute current time */
@@ -84,11 +88,15 @@ void PlayerSliders::updateTimeLabels()
 
 void PlayerSliders::setCurrentTime(qint64 time)
 {
+    qDebug() << "-> PlayerSliders::setCurrentTime(" << time << ")";
+
     /* Check if time is in a valid range */
     if (time > m_maximumTimeValue)
         m_currentTimeValue = m_maximumTimeValue;
     else
         m_currentTimeValue = time;
+
+    qDebug() << "-> PlayerSliders::setCurrentTime - effective(" << time << ")";
 
     /* Set slider value */
     player_sliders_time_slider->setValue(AbsoluteTimeToSliderValue(m_currentTimeValue));
@@ -99,6 +107,8 @@ void PlayerSliders::setCurrentTime(qint64 time)
 
 void PlayerSliders::setTotalTime(qint64 time)
 {
+    qDebug() << "-> PlayerSliders::setTotalTime(" << time << ")";
+
     /* Store maximum value */
     m_maximumTimeValue = time;
 
@@ -108,6 +118,8 @@ void PlayerSliders::setTotalTime(qint64 time)
 
 void PlayerSliders::setVolume(int volume)
 {
+    qDebug() << "-> PlayerSliders::setVolume(" << volume<< ")";
+
     /* Unmute if necessary */
     if (m_isMuted)
         setMute(false);
@@ -121,6 +133,8 @@ void PlayerSliders::setVolume(int volume)
 
 void PlayerSliders::setMute(bool muted)
 {
+    qDebug() << "-> PlayerSliders::setMute(" << muted << ")";
+
     /* Check if mute state is already set */
     if (m_isMuted == muted)
         return;
@@ -129,6 +143,7 @@ void PlayerSliders::setMute(bool muted)
     if (muted) {
 
         /* Display the muted icon */
+        qDebug() << "-> PlayerSliders::setMute - unmute";
         player_sliders_volume_mute->setIcon(QIcon(m_iconUnmuted));
 
         /* Disable the volume slider and label */
@@ -138,6 +153,7 @@ void PlayerSliders::setMute(bool muted)
     } else {
 
         /* Display the unmuted icon */
+        qDebug() << "-> PlayerSliders::setMute - mute";
         player_sliders_volume_mute->setIcon(QIcon(m_iconMuted));
 
         /* Enable the volume slider and label */
@@ -149,17 +165,22 @@ void PlayerSliders::setMute(bool muted)
     m_isMuted = muted;
 
     /* Emit the muteChanged signal */
+    qDebug() << "PlayerSliders -> muteChanged(" << m_isMuted << ")";
     emit muteChanged(m_isMuted);
 }
 
 void PlayerSliders::setBuffering(int percent)
 {
+    qDebug() << "-> PlayerSliders::setBuffering(" << percent << ")";
+
     /* Display buffering message */
     player_sliders_current_time_label->setText(QString("%1%").arg(percent));
 }
 
 void PlayerSliders::setSeekable(bool seekable)
 {
+    qDebug() << "-> PlayerSliders::setSeekable(" << seekable << ")";
+
     /* Store the new seekable status */
     m_isSeekable = seekable;
     player_sliders_time_slider->setEnabled(m_isSeekable);
@@ -167,6 +188,8 @@ void PlayerSliders::setSeekable(bool seekable)
 
 void PlayerSliders::handleTimeSlider(int value)
 {
+    qDebug() << "-> PlayerSliders::handleTimeSlider(" << value << ")";
+
     /* Check if slider is seekable */
     if (!m_isSeekable)
         return;
@@ -178,20 +201,26 @@ void PlayerSliders::handleTimeSlider(int value)
     updateTimeLabels();
 
     /* Emit seekChanged signal */
+    qDebug() << "PlayerSliders -> seekChanged(" << value << ")";
     emit seekChanged(m_currentTimeValue);
 }
 
 void PlayerSliders::handleVolumeSlider(int value)
 {
+    qDebug() << "-> PlayerSliders::handleVolumeSlider(" << value << ")";
+
     /* Refresh volume label value */
     player_sliders_volume_label->setText(QString("%1%").arg(value));
 
     /* Emit volumeChanged signal */
+    qDebug() << "PlayerSliders -> volumeChanged(" << value << ")";
     emit volumeChanged(value);
 }
 
 void PlayerSliders::handleTotalTimeLabel()
 {
+    qDebug() << "-> PlayerSliders::handleTotalTimeLabel()";
+
     /* Change total time label display mode */
     if(m_showTimeMode == TIME_TOTAL)
         m_showTimeMode = TIME_REMAIN;
