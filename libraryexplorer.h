@@ -127,8 +127,13 @@ public slots:
      */
     void searchBy(const QString& terms, const DisplayMode_t mode);
 
+    void refresh(const QString& filter);
+
 protected slots:
-    void refresh();
+    void refreshMusic(const QString& music);
+    void refreshAlbum(const QString& album);
+    void refreshArtist(const QString& artist);
+    void refreshGenre(const QString& genre);
     void handleReseach();
     void handleRightClick(const QPoint& pos);
     void handleDisplayMode();

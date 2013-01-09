@@ -11,6 +11,7 @@
 
 /* Sql */
 #include <QSqlQuery>
+#include <QSqlTableModel>
 
 /* Taglib includes */
 #include <taglib/taglib.h>
@@ -19,7 +20,7 @@
 #include <taglib/tpropertymap.h>
 
 LibraryExplorer::LibraryExplorer(QWidget *parent) :
-    QWidget(parent), m_databaseReady(false), m_displayMode(DISPLAY_ALBUM)
+    QWidget(parent), m_databaseReady(false), m_displayMode(DISPLAY_MUSIC)
 {
     /* Setup UI */
     setupUi(this);
@@ -79,6 +80,9 @@ void LibraryExplorer::addFile(const QString &filename)
     QSqlQuery query(m_db);
     query.prepare(QString("INSERT INTO \"musics\" VALUES(\"%1\", \"%2\", \"%3\", \"%4\", \"%5\", \"%6\")").arg(filename, QString(title.toCString()), QString(album.toCString()), QString(artist.toCString()), QString(genre.toCString())).arg(year));
     query.exec();
+
+    /* Refresh display */
+    refresh(QString(""));
 }
 
 void LibraryExplorer::addFiles(const QStringList &filenames)
@@ -121,22 +125,73 @@ void LibraryExplorer::setDisplayMode(const LibraryExplorer::DisplayMode_t mode)
     m_displayMode = mode;
 
     /* Refresh the display */
-    refresh();
+    refresh(QString(""));
 }
 
 void LibraryExplorer::searchBy(const QString &terms, const LibraryExplorer::DisplayMode_t mode)
 {
-    // TODO
+    /* Set the new display mode */
+    m_displayMode = mode;
+
+    /* Refresh the display with filter */
+    refresh(terms);
 }
 
-void LibraryExplorer::refresh()
+void LibraryExplorer::refresh(const QString &filter)
 {
     /* Refresh only if the database is ready */
     if(!m_databaseReady)
         return;
 
-    /* Clear the current tree view */
-    //TODO
+    /* Refresh with the correct display mode */
+    switch(m_displayMode) {
+    case DISPLAY_MUSIC:
+        refreshMusic(filter);
+        break;
+
+    case DISPLAY_ALBUM:
+        refreshAlbum(filter);
+        break;
+
+    case DISPLAY_ARTIST:
+        refreshArtist(filter);
+        break;
+
+    case DISPLAY_GENRE:
+        refreshGenre(filter);
+        break;
+    }
+}
+
+void LibraryExplorer::refreshMusic(const QString &music)
+{
+    QSqlTableModel *model = new QSqlTableModel(this, m_db);
+    model->setTable("musics");
+    if(music != QString(""))
+        model->setFilter(QString("title LIKE \"%%1%\"").arg(music)); // SQl injection TODO
+    model->select();
+    model->setHeaderData(0, Qt::Horizontal, tr("Path"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Title"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Album"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Artist"));
+    model->setHeaderData(4, Qt::Horizontal, tr("Genre"));
+    model->setHeaderData(5, Qt::Horizontal, tr("Year"));
+
+    /* Display the model */
+    library_explorer_tree->setModel(model);
+    library_explorer_tree->hideColumn(0);
+}
+
+void LibraryExplorer::refreshAlbum(const QString &album)
+{
+}
+
+void LibraryExplorer::refreshArtist(const QString &artist)
+{
+}
+
+void LibraryExplorer::refreshGenre(const QString &genre)
+{
 }
 
 void LibraryExplorer::handleReseach()
@@ -190,6 +245,29 @@ void LibraryExplorer::handleDisplayMode()
     QAction* displayAlbum = contextualMenu.addAction(tr("Affichage par albums"));
     QAction* displayArtist = contextualMenu.addAction(tr("Affichage par artistes"));
     QAction* displayGenre = contextualMenu.addAction(tr("Affichage par genres"));
+
+    /* Check current display mode */
+    switch(m_displayMode) {
+    case DISPLAY_MUSIC:
+        displayMusic->setCheckable(true);
+        displayMusic->setChecked(true);
+        break;
+
+    case DISPLAY_ALBUM:
+        displayAlbum->setCheckable(true);
+        displayAlbum->setChecked(true);
+        break;
+
+    case DISPLAY_ARTIST:
+        displayArtist->setCheckable(true);
+        displayArtist->setChecked(true);
+        break;
+
+    case DISPLAY_GENRE:
+        displayGenre->setCheckable(true);
+        displayGenre->setChecked(true);
+        break;
+    }
 
     /* Connect menu signals to slots */
     connect(displayMusic, &QAction::triggered, [this]() {
