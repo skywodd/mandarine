@@ -185,13 +185,13 @@ void PlaylistTableModel::setCurrentIndex(int pos)
 void PlaylistTableModel::flush()
 {
     /* Warm view for flush */
-    emit modelAboutToBeReset();
+    beginResetModel();
 
     /* Flush data */
     m_data.clear();
 
     /* Force view refresh */
-    emit modelReset();
+    endResetModel();
 }
 
 void PlaylistTableModel::addRow(const RowData_t &data)

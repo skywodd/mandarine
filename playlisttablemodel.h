@@ -148,12 +148,6 @@ protected:
     /** Playing icon ressource location */
     static const QString m_playingIcon;
 
-signals:
-    void headerDataChanged(Qt::Orientation orientation, int first, int last);
-    void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles = QVector<int>());
-    void modelAboutToBeReset();
-    void modelReset();
-
 public slots:
 
     /**
