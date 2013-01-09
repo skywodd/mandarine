@@ -18,6 +18,7 @@
 /* Includes */
 #include <QSize>
 #include <QWidget>
+#include <QDebug>
 #include <QMediaResource>
 #include "fileinformationsdialog.h"
 
@@ -26,9 +27,6 @@ FileInformationsDialog::FileInformationsDialog(QWidget* parent) :
 {
     /* Setup UI */
     setupUi(this);
-
-    QMediaResource test(QUrl::fromLocalFile(QString("C:\\toto\\tata\\titi\\plop.mp3")));
-    displayInfo(&test);
 }
 
 FileInformationsDialog::~FileInformationsDialog()
