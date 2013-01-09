@@ -54,6 +54,11 @@ MetaExplorer::~MetaExplorer()
 
 void MetaExplorer::bindQMediaRessource(const QMediaResource *ressource)
 {
+    qDebug() << "-> MetaExplorer::bindQMediaRessource(" << ressource << ")";
+
+    /* Avoid memory leak */
+    delete m_qressource;
+
     /* Store pointer and turn on "ready" flag */
     m_isReady = true;
     m_qressource = ressource;
@@ -61,29 +66,38 @@ void MetaExplorer::bindQMediaRessource(const QMediaResource *ressource)
 
 void MetaExplorer::displayMetaInfo(const QString& meta, const QVariant& data)
 {
+    qDebug() << "-> MetaExplorer::displayMetaInfo(" << meta << ", ...)";
+
     /* Switch according the received meta key */
     if (meta == QMediaMetaData::Title) { /* Title */
         meta_info_title->setText(data.toString());
+        qDebug() << "-> MetaExplorer::displayMetaInfo - Title" << meta_info_title->text();
 
     } else if (meta == QMediaMetaData::AlbumTitle) { /* Album title */
         meta_info_album->setText(data.toString());
+        qDebug() << "-> MetaExplorer::displayMetaInfo - Album title" << meta_info_album->text();
 
     } else if (meta == QMediaMetaData::Author) { /* Author list */
         meta_info_author->setText(data.toStringList().join(", "));
+        qDebug() << "-> MetaExplorer::displayMetaInfo - Author list" << meta_info_author->text();
 
     } else if (meta == QMediaMetaData::Genre) { /* Genre list */
         meta_info_type->setText(data.toStringList().join(", "));
+        qDebug() << "-> MetaExplorer::displayMetaInfo - Genre list" << meta_info_type->text();
 
     } else if (meta == QMediaMetaData::Year) { /* Year */
         meta_info_year->setText(QString("%1").arg(data.toInt()));
+        qDebug() << "-> MetaExplorer::displayMetaInfo - Year" << meta_info_year->text();
 
     } else if (meta == QMediaMetaData::Comment) { /* Comments */
         meta_info_comment->setText(data.toString());
+        qDebug() << "-> MetaExplorer::displayMetaInfo - Comments" << meta_info_comment->text();
 
     } else if (meta == QMediaMetaData::CoverArtImage) { /* Cover (embedded) */
 
         /* Load the cover only if necessary */
         if(m_coverState == NO_COVER || m_coverState == SMALL_COVER_OK) {
+            qDebug() << "-> MetaExplorer::displayMetaInfo - EMBEDDED_COVER";
             m_coverState = EMBEDDED_COVER_OK;
             meta_info_cover->setPixmap(QPixmap::fromImage(data.value<QImage>()).scaled(meta_info_cover->size(), Qt::KeepAspectRatio));
         }
@@ -92,6 +106,7 @@ void MetaExplorer::displayMetaInfo(const QString& meta, const QVariant& data)
 
         /* Download cover from web only if necessary */
         if(m_coverState == NO_COVER || m_coverState == SMALL_COVER_OK) {
+            qDebug() << "-> MetaExplorer::displayMetaInfo - LARGE_COVER" << data.toUrl().toString();
             m_coverState = LARGE_COVER_OK;
             getCoverImage(data.toUrl());
         }
@@ -100,6 +115,7 @@ void MetaExplorer::displayMetaInfo(const QString& meta, const QVariant& data)
 
         /* Download cover from web only if necessary */
         if(m_coverState == NO_COVER) {
+            qDebug() << "-> MetaExplorer::displayMetaInfo - SMALL_COVER" << data.toUrl().toString();
             m_coverState = SMALL_COVER_OK;
             getCoverImage(data.toUrl());
         }
@@ -111,6 +127,8 @@ void MetaExplorer::displayMetaInfo(const QString& meta, const QVariant& data)
 
 void MetaExplorer::reset()
 {
+    qDebug() << "-> MetaExplorer::reset()";
+
     /* Reset widget to his default state */
     m_isReady = false;
     m_coverState = NO_COVER;
@@ -125,15 +143,19 @@ void MetaExplorer::reset()
 
 void MetaExplorer::displayExternalCover(const QString &path)
 {
+    qDebug() << "-> MetaExplorer::displayExternalCover(" << path << ")";
+
     /* Display external cover */
     QPixmap pixmap;
     if(pixmap.load(path))
     {
+        qDebug() << "-> MetaExplorer::displayExternalCover - success";
         meta_info_cover->setPixmap(pixmap.scaled(meta_info_cover->size(), Qt::KeepAspectRatio));
         m_coverState = EXTERNAL_COVER_OK;
     }
         else
     {
+        qDebug() << "-> MetaExplorer::displayExternalCover - failed";
         meta_info_cover->setPixmap(QPixmap(m_noimage));
         m_coverState = NO_COVER;
     }
@@ -141,9 +163,13 @@ void MetaExplorer::displayExternalCover(const QString &path)
 
 void MetaExplorer::handleFileInfosShow()
 {
+    qDebug() << "-> MetaExplorer::handleFileInfosShow()";
+
     /* Check if the widget can display file informations */
     if(m_isReady)
     {
+        qDebug() << "-> MetaExplorer::handleFileInfosShow - isReady";
+
         /* Display the audio file informations dialog */
         FileInformationsDialog infoDialog(this);
         infoDialog.displayInfo(m_qressource);
@@ -153,6 +179,8 @@ void MetaExplorer::handleFileInfosShow()
 
 void MetaExplorer::getCoverImage(const QUrl& url)
 {
+    qDebug() << "-> MetaExplorer::getCoverImage(" << url.toString() << ")";
+
     /* Craft network request */
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, QString("Mozilla/6.0 (Windows NT 6.2; WOW64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1"));
@@ -166,10 +194,13 @@ void MetaExplorer::getCoverImage(const QUrl& url)
 
 void MetaExplorer::handleNetworkFinished(QNetworkReply* reply)
 {
+    qDebug() << "-> MetaExplorer::handleNetworkFinished(...)";
+
     /* Check for any error */
     if(reply->error() != QNetworkReply::NoError) {
 
         /* Display the "no image" icon */
+        qDebug() << "-> MetaExplorer::handleNetworkFinished - failed";
         meta_info_cover->setPixmap(QPixmap(m_noimage));
         m_coverState = NO_COVER;
         return;
@@ -182,10 +213,12 @@ void MetaExplorer::handleNetworkFinished(QNetworkReply* reply)
     /* Display the cover */
     if(pixmap.loadFromData(imgData))
     {
+        qDebug() << "-> MetaExplorer::handleNetworkFinished - success";
         meta_info_cover->setPixmap(pixmap.scaled(meta_info_cover->size(), Qt::KeepAspectRatio));
     }
         else
     {
+        qDebug() << "-> MetaExplorer::handleNetworkFinished - failed";
         meta_info_cover->setPixmap(QPixmap(m_noimage));
         m_coverState = NO_COVER;
     }
