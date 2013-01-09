@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug() << "action_add_directory::triggered -> library_explorer::addDirectories";
         QString path = QFileDialog::getExistingDirectory(this, QString(tr("Ajouter des fichiers à la bibliothéque ...")));
         if(path != "")
-            library_explorer->addDirectories(path);
+            library_explorer->addDirectory(path);
     });
 
     /* Connect menu playlist signals to slots */
