@@ -46,6 +46,7 @@ public:
     virtual ~MainWindow();
 
 protected slots:
+	void proxyRefreshInfo(int index);
     void proxyMediaPlayerError(QMediaPlayer::Error error);
     void proxyAddMedia(const QString& path, const PlaylistTableModel::RowData_t& infos);
     void proxyPlaylistMetaChanged(const QString& key, const QVariant& value);
