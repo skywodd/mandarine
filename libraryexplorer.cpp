@@ -119,12 +119,12 @@ void LibraryExplorer::addDirectory(const QString &path)
 
         /* Try to add the current file */
         if (!iterator.fileInfo().isDir()) {
-            addFile(iterator.fileName());
+            addFile(iterator.filePath());
         }
     }
 }
 
-void LibraryExplorer::addDirectories(const QString &paths)
+void LibraryExplorer::addDirectories(const QStringList &paths)
 {
     qDebug() << "-> LibraryExplorer::addDirectories(...)";
 

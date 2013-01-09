@@ -108,7 +108,7 @@ public slots:
      * @brief addDirectories
      * @param paths Directories path to scan for files
      */
-    void addDirectories(const QString& paths);
+    void addDirectories(const QStringList &paths);
 
     /**
      * Set the current display mode
