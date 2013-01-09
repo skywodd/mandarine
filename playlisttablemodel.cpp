@@ -17,6 +17,7 @@
 
 /* Includes */
 #include <QFont>
+#include <QTime>
 #include <QPixmap>
 #include "playlisttablemodel.h"
 
@@ -70,7 +71,15 @@ QVariant PlaylistTableModel::data(const QModelIndex &index, int role) const
             break;
 
         case 4:
-            return m_data[index.row()].duration;
+        {
+            int hours, minutes, seconds, millis;
+            millis = m_data[index.row()].duration.toLong();
+            seconds = millis / 1000;
+            minutes = seconds / 60;
+            hours = minutes / 60;
+            QTime currentTime(hours % 60, minutes % 60, seconds % 60, millis % 1000);
+            return currentTime.toString("mm:ss");
+        }
             break;
         }
         break;
