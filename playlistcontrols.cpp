@@ -24,6 +24,9 @@ PlaylistControls::PlaylistControls(QWidget *parent) :
     /* Connect Tableview signals to slots */
     connect(playlist_controls_view, &QAbstractItemView::doubleClicked, this, &PlaylistControls::handleDoubleClick);
     connect(playlist_controls_view, &QTableViewClickable::customContextMenuRequested, this, &PlaylistControls::handleRightClicked);
+    connect(playlist_controls_view, &QTableViewClickable::mediaMoved, [this](int from, int to) {
+        emit mediaMoved(from, to);
+    });
 
     /* Set TableView source data's model */
     playlist_controls_view->setModel(m_playlistTableModel);
