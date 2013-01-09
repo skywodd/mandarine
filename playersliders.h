@@ -106,6 +106,8 @@ protected:
      */
     inline int AbsoluteTimeToSliderValue(qint64 time)
     {
+        if(!m_maximumTimeValue) /* Fix div_by_zero crash */
+            return 0;
         return time * m_maximumSliderValue / m_maximumTimeValue;
     }
 
