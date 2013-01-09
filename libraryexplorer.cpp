@@ -126,7 +126,7 @@ void LibraryExplorer::addDirectory(const QString &path)
 
 void LibraryExplorer::addDirectories(const QStringList &paths)
 {
-    qDebug() << "-> LibraryExplorer::addDirectories(...)";
+    qDebug() << "-> LibraryExplorer::addDirectories(" << paths.join(" ") << ")";
 
     /* For each directory */
     foreach(QString path, paths)
