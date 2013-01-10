@@ -131,9 +131,7 @@ public slots:
 
 protected slots:
     void refreshMusic(const QString& music);
-    void refreshAlbum(const QString& album);
-    void refreshArtist(const QString& artist);
-    void refreshGenre(const QString& genre);
+    void refreshFiltered(const QString& filter, const QString& mask);
     void handleReseach();
     void handleRightClick(const QPoint& pos);
     void handleDisplayMode();

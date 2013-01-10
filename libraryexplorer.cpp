@@ -13,6 +13,8 @@
 /* Sql */
 #include <QSqlQuery>
 #include <QSqlTableModel>
+#include <QStandardItemModel>
+#include <QStandardItem>
 
 /* Taglib includes */
 #include <taglib/taglib.h>
@@ -172,15 +174,15 @@ void LibraryExplorer::refresh(const QString &filter)
         break;
 
     case DISPLAY_ALBUM:
-        refreshAlbum(filter);
+        refreshFiltered("album", filter);
         break;
 
     case DISPLAY_ARTIST:
-        refreshArtist(filter);
+        refreshFiltered("artist", filter);
         break;
 
     case DISPLAY_GENRE:
-        refreshGenre(filter);
+        refreshFiltered("genre", filter);
         break;
     }
 }
@@ -204,21 +206,105 @@ void LibraryExplorer::refreshMusic(const QString &music)
     /* Display the model */
     library_explorer_tree->setModel(model);
     library_explorer_tree->hideColumn(0);
+    library_explorer_tree->showColumn(1);
 }
 
-void LibraryExplorer::refreshAlbum(const QString &album)
+void LibraryExplorer::refreshFiltered(const QString &filter, const QString &mask)
 {
-    qDebug() << "-> LibraryExplorer::refreshAlbum(" << album << ")";
-}
+    qDebug() << "-> LibraryExplorer::refreshFiltered(" << filter << ", " << mask << ")";
 
-void LibraryExplorer::refreshArtist(const QString &artist)
-{
-    qDebug() << "-> LibraryExplorer::refreshArtist(" << artist << ")";
-}
+    QSqlQuery query(m_db);
+    QString where;
+    QStandardItemModel* model = new QStandardItemModel(this);
+    QStandardItem *root = model->invisibleRootItem();
 
-void LibraryExplorer::refreshGenre(const QString &genre)
-{
-    qDebug() << "-> LibraryExplorer::refreshGenre(" << genre << ")";
+    if(mask != "")
+        where = QString("WHERE %1 LIKE \"%%2%\"").arg(filter, mask); // SQl injection TODO
+    query.exec(QString("SELECT DISTINCT %1 FROM musics %2").arg(filter, where));
+
+    while (query.next()) {
+             QString name = query.value(0).toString();
+             QStandardItem* node = new QStandardItem(name);
+
+             QSqlQuery subquery(m_db);
+             subquery.exec(QString("SELECT * FROM musics WHERE %1 LIKE \"%2\"").arg(filter, name));
+
+             while (subquery.next()) {
+
+                 QString path = subquery.value(0).toString();
+                 QString title = subquery.value(1).toString();
+                 QString album = subquery.value(2).toString();
+                 QString artist = subquery.value(3).toString();
+                 QString genre = subquery.value(4).toString();
+                 QString year = subquery.value(5).toString();
+
+                 QList<QStandardItem*> preparedCol;
+                 if(filter == "album")
+                 {
+                     preparedCol.append(new QStandardItem(album));
+                     preparedCol.append(new QStandardItem(path));
+                     preparedCol.append(new QStandardItem(title));
+                     preparedCol.append(new QStandardItem(artist));
+                     preparedCol.append(new QStandardItem(genre));
+                     preparedCol.append(new QStandardItem(year));
+                 }
+                    else if(filter == "artist")
+                 {
+                     preparedCol.append(new QStandardItem(artist));
+                     preparedCol.append(new QStandardItem(path));
+                     preparedCol.append(new QStandardItem(title));
+                     preparedCol.append(new QStandardItem(album));
+                     preparedCol.append(new QStandardItem(genre));
+                     preparedCol.append(new QStandardItem(year));
+                 }
+                    else if(filter == "genre")
+                 {
+                     preparedCol.append(new QStandardItem(genre));
+                     preparedCol.append(new QStandardItem(path));
+                     preparedCol.append(new QStandardItem(title));
+                     preparedCol.append(new QStandardItem(album));
+                     preparedCol.append(new QStandardItem(artist));
+                     preparedCol.append(new QStandardItem(year));
+                 }
+                 node->appendRow(preparedCol);
+             }
+
+             root->appendRow(node);
+    }
+
+    /* Display the model */
+    model->setColumnCount(6);
+    if(filter == "album")
+    {
+        model->setHeaderData(0, Qt::Horizontal, tr("Album"));
+        model->setHeaderData(1, Qt::Horizontal, tr("Path"));
+        model->setHeaderData(2, Qt::Horizontal, tr("Title"));
+        model->setHeaderData(3, Qt::Horizontal, tr("Artist"));
+        model->setHeaderData(4, Qt::Horizontal, tr("Genre"));
+        model->setHeaderData(5, Qt::Horizontal, tr("Year"));
+    }
+        else if(filter == "artist")
+    {
+        model->setHeaderData(0, Qt::Horizontal, tr("Artist"));
+        model->setHeaderData(1, Qt::Horizontal, tr("Path"));
+        model->setHeaderData(2, Qt::Horizontal, tr("Title"));
+        model->setHeaderData(3, Qt::Horizontal, tr("Album"));
+        model->setHeaderData(4, Qt::Horizontal, tr("Genre"));
+        model->setHeaderData(5, Qt::Horizontal, tr("Year"));
+    }
+        else if(filter == "genre")
+    {
+        model->setHeaderData(0, Qt::Horizontal, tr("Genre"));
+        model->setHeaderData(1, Qt::Horizontal, tr("Path"));
+        model->setHeaderData(2, Qt::Horizontal, tr("Title"));
+        model->setHeaderData(3, Qt::Horizontal, tr("Album"));
+        model->setHeaderData(4, Qt::Horizontal, tr("Artist"));
+        model->setHeaderData(5, Qt::Horizontal, tr("Year"));
+    }
+    library_explorer_tree->showColumn(0);
+    library_explorer_tree->hideColumn(1);
+    library_explorer_tree->setModel(model);
+    library_explorer_tree->expandAll();
 }
 
 void LibraryExplorer::handleReseach()
@@ -268,7 +354,25 @@ void LibraryExplorer::handleRightClick(const QPoint& pos)
     {
         qDebug() << "-> LibraryExplorer::handleRightClick - isValid";
 
-        // TODO
+        /* Create a contextual menu */
+        QMenu contextualMenu(this);
+
+        /* Craft menu's items */
+        QAction* addPlaylist = contextualMenu.addAction(tr("Ajouter à la playlist"));
+        QAction* removeLibrary = contextualMenu.addAction(tr("Supprimer de la bibliothéque"));
+
+        /* Connect menu signals to slots */
+        connect(addPlaylist, &QAction::triggered, [this]() {
+            qDebug() << "-> LibraryExplorer::handleAddPlaylist()";
+            //TODO
+        });
+        connect(removeLibrary, &QAction::triggered, [this]() {
+            qDebug() << "-> LibraryExplorer::handleRemoveLibrary()";
+            //TODO
+        });
+
+        /* Show menu at the current cursor position */
+        contextualMenu.exec(QCursor().pos());
     }
 }
 
