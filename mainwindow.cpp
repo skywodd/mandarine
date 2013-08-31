@@ -41,8 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
             library_explorer->addFiles(filenames);
     });
     connect(action_add_directory, &QAction::triggered, [this](){
-        qDebug() << "action_add_directory::triggered -> library_explorer::addDirectories";
-        QString path = QFileDialog::getExistingDirectory(this, QString(tr("Ajouter des fichiers à la bibliothéque ...")));
+        qDebug() << "action_add_directory::triggered -> library_explorer::addDirectory";
+        QString path = QFileDialog::getExistingDirectory(this, QString(tr("Ajouter un dossier à la bibliothéque ...")));
         if(path != "")
             library_explorer->addDirectory(path);
     });
@@ -77,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_player, &QMediaPlayer::durationChanged, [this](qint64 time) {
         qDebug() << "m_player::durationChanged -> update duration display";
         PlaylistTableModel::RowData_t row;
-        row.duration = time; // TODO fix it
+        row.duration = QString("%1").arg(time);
         playlist_controls->editMedia(m_playlist->currentIndex(), PlaylistTableModel::EDIT_DURATION, row);
     });
     connect(m_player, &QMediaPlayer::positionChanged, player_slides, &PlayerSliders::setCurrentTime);
@@ -115,20 +115,7 @@ MainWindow::MainWindow(QWidget *parent) :
     /* Connect menu help signals to slots */
     connect(action_show_help, &QAction::triggered, [this]() {
         qDebug() << "action_show_help::triggered-> nothing";
-        //TODO
-
-        // Demo
-        PlaylistTableModel::RowData_t info;
-        info.album = "SAO";
-        info.authors = "LiSA";
-        info.genre = "Jpop";
-        info.duration = "xx:xx";
-
-        info.title = "test1.mp3";
-        proxyAddMedia(QString("C:\\Users\\skywodd\\workspace\\github\\Mandarine-build-Desktop\\debug\\test1.mp3"), info);
-
-        info.title = "test2.mp3";
-        proxyAddMedia(QString("C:\\Users\\skywodd\\workspace\\github\\Mandarine-build-Desktop\\debug\\test2.mp3"), info);
+        //TODO help dialog
     });
     connect(action_show_about, &QAction::triggered, [this]() {
         qDebug() << "action_show_about::triggered -> AboutDialog::exec";

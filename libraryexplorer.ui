@@ -115,7 +115,7 @@
         <enum>QAbstractItemView::DropOnly</enum>
        </property>
        <property name="selectionMode">
-        <enum>QAbstractItemView::ExtendedSelection</enum>
+        <enum>QAbstractItemView::SingleSelection</enum>
        </property>
       </widget>
      </item>

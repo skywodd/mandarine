@@ -22,8 +22,8 @@
 #include "playersliders.h"
 
 /* Static members initialization */
-const QString PlayerSliders::m_iconMuted(":/sound/mute.png");
-const QString PlayerSliders::m_iconUnmuted(":/sound/unmute.png");
+const QString PlayerSliders::m_iconMuted(":/sound/unmute.png");
+const QString PlayerSliders::m_iconUnmuted(":/sound/mute.png");
 const int PlayerSliders::m_maximumSliderValue = 10000;
 
 PlayerSliders::PlayerSliders(QWidget *parent) :

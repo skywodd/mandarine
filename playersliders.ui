@@ -117,7 +117,7 @@
        </property>
        <property name="icon">
         <iconset resource="icons/icons.qrc">
-         <normaloff>:/sound/mute.png</normaloff>:/sound/mute.png</iconset>
+         <normaloff>:/sound/unmute.png</normaloff>:/sound/unmute.png</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>

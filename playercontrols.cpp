@@ -28,7 +28,7 @@ const QString PlayerControls::m_iconPause(":/controls/pause.png");
 PlayerControls::PlayerControls(QWidget *parent) :
     QWidget(parent), m_isplaying(false),
     m_speedLevel(SPEED_NORMAL), m_playMode(QMediaPlaylist::Sequential),
-    m_mode(MODE_BEGIN)
+    m_mode(MODE_BEGIN), m_isEnable(false)
 {
     /* Setup UI */
     setupUi(this);
@@ -63,6 +63,7 @@ void PlayerControls::setPlay()
     qDebug() << "-> PlayerControls::setPlay()";
 
     /* Force widget state to play */
+    if(!m_isEnable) return;
     m_isplaying = true;
     player_controls_play->setIcon(QIcon(m_iconPause));
 
@@ -75,6 +76,7 @@ void PlayerControls::setPause()
     qDebug() << "-> PlayerControls::setPause()";
 
     /* Force widget state to pause */
+    if(!m_isEnable) return;
     m_isplaying = false;
     player_controls_play->setIcon(QIcon(m_iconPlay));
 
@@ -87,6 +89,7 @@ void PlayerControls::setStop()
     qDebug() << "-> PlayerControls::setStop()";
 
     /* Force widget state to stop */
+    if(!m_isEnable) return;
     m_isplaying = false;
     player_controls_play->setIcon(QIcon(m_iconPlay));
 
@@ -99,6 +102,7 @@ void PlayerControls::setSpeed(Speed_t speed)
     qDebug() << "-> PlayerControls::setSpeed(Speed_t speed)";
 
     /* Store speed modification level */
+    if(!m_isEnable) return;
     m_speedLevel = speed;
 
     /* Emit speedChanged signal according factor */
@@ -135,6 +139,7 @@ void PlayerControls::setPlayMode(QMediaPlaylist::PlaybackMode playMode)
     qDebug() << "-> PlayerControls::setPlayMode(" << playMode << ")";
 
     /* Store playback mode */
+    if(!m_isEnable) return;
     m_playMode = playMode;
 
     /* Emit the playModeChanged changed signal */
@@ -147,7 +152,7 @@ void PlayerControls::setNext()
     qDebug() << "-> PlayerControls::setNext()";
 
     /* Emit next() signal */
-    if(m_mode != MODE_ENDING)
+    if(m_mode != MODE_ENDING && m_isEnable)
     {
         qDebug() << "PlayerControls -> next()";
         emit next();
@@ -159,7 +164,7 @@ void PlayerControls::setPrevious()
     qDebug() << "-> PlayerControls::setPrevious()";
 
     /* Emit previous() signal */
-    if(m_mode != MODE_BEGIN)
+    if(m_mode != MODE_BEGIN && m_isEnable)
     {
         qDebug() << "PlayerControls -> previous()";
         emit previous();
@@ -171,6 +176,7 @@ void PlayerControls::setMode(Mode_t mode)
     qDebug() << "-> PlayerControls::setMode(" << mode << ")";
 
     /* Store mode */
+    if(!m_isEnable) return;
     m_mode = mode;
 
     /* Apply display mode */
@@ -203,6 +209,7 @@ void PlayerControls::setStatus(bool enabled)
     player_controls_previous->setEnabled(enabled);
     player_controls_speed->setEnabled(enabled);
     player_controls_play_mode->setEnabled(enabled);
+    m_isEnable = enabled;
 
     /* Restore display mode */
     if(enabled)

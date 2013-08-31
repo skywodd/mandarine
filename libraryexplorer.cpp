@@ -33,9 +33,7 @@ LibraryExplorer::LibraryExplorer(QWidget *parent) :
     connect(library_search_input, &QLineEdit::returnPressed, this, &LibraryExplorer::handleReseach);
     connect(library_explorer_displaymode, &QAbstractButton::clicked, this, &LibraryExplorer::handleDisplayMode);
     connect(library_explorer_tree, &QTreeViewClickable::customContextMenuRequested, this, &LibraryExplorer::handleRightClick);
-    connect(library_explorer_tree, &QTreeViewClickable::customContextMenuRequested, [this]() {
-        qDebug() << "library_explorer_tree::customContextMenuRequested -> LibraryExplorer[this]::handleRightClick";
-    });
+    connect(library_explorer_tree, &QTreeViewClickable::doubleClicked, this, &LibraryExplorer::handleAddMedia);
 }
 
 LibraryExplorer::~LibraryExplorer()
@@ -184,6 +182,72 @@ void LibraryExplorer::refresh(const QString &filter)
     case DISPLAY_GENRE:
         refreshFiltered("genre", filter);
         break;
+    }
+}
+
+void LibraryExplorer::handleAddMedia()
+{
+    qDebug() << "-> LibraryExplorer::handleAddPlaylist()";
+
+    /* Get the current selection */
+    QItemSelectionModel *select = library_explorer_tree->selectionModel();
+
+    /* Check if something is selected */
+    if(select->selectedRows().size()) {
+
+        /* Get index list */
+        QModelIndexList index = select->selectedIndexes();
+
+        /* Check if slected item is album or music row */
+        if(m_displayMode != DISPLAY_MUSIC && index[0].parent() == QModelIndex()) /* album row */
+        {
+            QString album = index[0].model()->data(index[0]).toString();
+            qDebug() << "LibraryExplorer::addPlaylistAlbum(" << album << ")";
+            //TODO
+        }
+        else /* music row */
+        {
+            QString path;
+            if(m_displayMode == DISPLAY_MUSIC)
+                path = index[0].model()->data(index[0]).toString();
+            else
+                path = index[1].model()->data(index[1]).toString();
+            qDebug() << "LibraryExplorer::addPlaylistMusic(" << path << ")";
+
+            PlaylistTableModel::RowData_t row;
+            switch(m_displayMode)
+            {
+            case DISPLAY_MUSIC:
+                row.title = index[1].model()->data(index[1]).toString();
+                row.album = index[2].model()->data(index[2]).toString();
+                row.authors = index[3].model()->data(index[3]).toString();
+                row.genre = index[4].model()->data(index[4]).toString();
+                break;
+
+            case DISPLAY_ALBUM:
+                row.title = index[2].model()->data(index[2]).toString();
+                row.album = index[0].model()->data(index[0]).toString();
+                row.authors = index[3].model()->data(index[3]).toString();
+                row.genre = index[4].model()->data(index[4]).toString();
+                break;
+
+            case DISPLAY_ARTIST:
+                row.title = index[2].model()->data(index[2]).toString();
+                row.album = index[3].model()->data(index[3]).toString();
+                row.authors = index[0].model()->data(index[0]).toString();
+                row.genre = index[4].model()->data(index[4]).toString();
+                break;
+
+            case DISPLAY_GENRE:
+                row.title = index[2].model()->data(index[2]).toString();
+                row.album = index[3].model()->data(index[3]).toString();
+                row.authors = index[4].model()->data(index[4]).toString();
+                row.genre = index[0].model()->data(index[0]).toString();
+                break;
+            }
+            qDebug() << "-> LibraryExplorer::addMediaToPlaylist(" << path << ", ...)";
+            emit addMediaToPlaylist(path, row);
+        }
     }
 }
 
@@ -354,6 +418,13 @@ void LibraryExplorer::handleRightClick(const QPoint& pos)
     {
         qDebug() << "-> LibraryExplorer::handleRightClick - isValid";
 
+        /* Get the current selection */
+        QItemSelectionModel *select = library_explorer_tree->selectionModel();
+
+        /* Check if something is selected */
+        if(select->selectedRows().size() == 0)
+            return;
+
         /* Create a contextual menu */
         QMenu contextualMenu(this);
 
@@ -362,13 +433,44 @@ void LibraryExplorer::handleRightClick(const QPoint& pos)
         QAction* removeLibrary = contextualMenu.addAction(tr("Supprimer de la bibliothéque"));
 
         /* Connect menu signals to slots */
-        connect(addPlaylist, &QAction::triggered, [this]() {
-            qDebug() << "-> LibraryExplorer::handleAddPlaylist()";
-            //TODO
-        });
+        connect(addPlaylist, &QAction::triggered, this, &LibraryExplorer::handleAddMedia);
+
         connect(removeLibrary, &QAction::triggered, [this]() {
             qDebug() << "-> LibraryExplorer::handleRemoveLibrary()";
-            //TODO
+
+            /* Get the current selection */
+            QItemSelectionModel *select = library_explorer_tree->selectionModel();
+
+            /* Check if something is selected */
+            if(select->selectedRows().size()) {
+
+                /* Get index list */
+                QModelIndexList index = select->selectedIndexes();
+
+                /* Check if slected item is album or music row */
+                if(m_displayMode != DISPLAY_MUSIC && index[0].parent() == QModelIndex()) /* album row */
+                {
+                    QString album = index[0].model()->data(index[0]).toString();
+                    qDebug() << "LibraryExplorer::handleDeleteAlbum(" << album << ")";
+
+                    QSqlQuery query(m_db);
+                    query.exec(QString("DELETE FROM musics WHERE album LIKE \"%1\"").arg(album));
+                    refresh("");
+                }
+                else /* music row */
+                {
+                    QString path;
+                    if(m_displayMode == DISPLAY_MUSIC)
+                        path = index[0].model()->data(index[0]).toString();
+                    else
+                        path = index[1].model()->data(index[1]).toString();
+                    qDebug() << "LibraryExplorer::handleDeleteMusic(" << path << ")";
+
+                    QSqlQuery query(m_db);
+                    query.exec(QString("DELETE FROM musics WHERE path LIKE \"%1\"").arg(path));
+                    refresh("");
+                }
+            }
         });
 
         /* Show menu at the current cursor position */

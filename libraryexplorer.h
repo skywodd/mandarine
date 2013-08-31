@@ -130,6 +130,7 @@ public slots:
     void refresh(const QString& filter);
 
 protected slots:
+    void handleAddMedia();
     void refreshMusic(const QString& music);
     void refreshFiltered(const QString& filter, const QString& mask);
     void handleReseach();

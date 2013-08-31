@@ -72,7 +72,7 @@ QVariant PlaylistTableModel::data(const QModelIndex &index, int role) const
 
         case 4:
         {
-            int hours, minutes, seconds, millis;
+            long hours, minutes, seconds, millis;
             millis = m_data[index.row()].duration.toLong();
             seconds = millis / 1000;
             minutes = seconds / 60;
@@ -248,6 +248,7 @@ void PlaylistTableModel::editRow(int pos, PlaylistTableModel::EditMode_t how, Pl
     if(how & EDIT_ALBUM) m_data[pos].album = data.album;
     if(how & EDIT_AUTHORS) m_data[pos].authors = data.authors;
     if(how & EDIT_GENRE) m_data[pos].genre = data.genre;
+    if(how & EDIT_DURATION) m_data[pos].duration = data.duration;
 
     /* Warm view for change */
     emit dataChanged(createIndex(pos, 0), createIndex(pos, 4));

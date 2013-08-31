@@ -92,6 +92,9 @@ protected:
     /** Controls display */
     Mode_t m_mode;
 
+    /** True if controls are enabled */
+    bool m_isEnable;
+
     /** Play icon ressource location */
     static const QString m_iconPlay;
 

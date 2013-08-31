@@ -1,7 +1,3 @@
-/**
- * TODO
- */
-
 /* Includes */
 #include <QtGui>
 #include "mainwindow.h"
